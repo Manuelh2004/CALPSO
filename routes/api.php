@@ -33,15 +33,3 @@ Route::group([
     Route::post('test', [estacionController::class, 'test']);
 });
 
-
-
-Route::group([
-    'prefix' => 'sensor',
-    'middleware' => 'jwt'
-], function () {
-
-	Route::post('ver/{slot_id}', [SlotController::class, 'ver']);
-	Route::post('historico/{slot_id}', [SlotController::class, 'historico']);
-});
-
-Route::post('test', [WebhookController::class, 'test']);

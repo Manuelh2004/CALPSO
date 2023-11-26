@@ -13,15 +13,16 @@ class CreateUsuarioTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_table', function (Blueprint $table) {
-            $table->bigIncrements('user_id');
-            $table->string('name')->unique();
-            $table->string('password');
-            $table->integer('user_status')->nullable();
-            $table->string('user_email')->nullable();
-            $table->timestamp("expiration_date")->nullable();
-            $table->integer('user_creator')->nullable();
-            $table->string("psis_user_role", 7)->nullable()->comment('psis_type_code 000002');
+        Schema::create('usuario', function (Blueprint $table) {
+            $table->bigIncrements('usuario_id');
+            $table->string('usuario_name')->unique();
+            $table->string('usuario_email')->nullable();
+            $table->string('usuario_password');
+            $table->integer('usuario_estado')->nullable();
+            $table->integer('usuario_login_intentos')->nullable();
+            $table->timestamp("usuario_fecha_expiracion")->nullable();
+            $table->integer('usuario_creador')->nullable();
+            $table->string("psis_rol_usuario", 7)->nullable()->comment('psis_type_code 000002');
             $table->timestamp("email_verified_at")->nullable();
             $table->rememberToken();
             $table->timestamps();

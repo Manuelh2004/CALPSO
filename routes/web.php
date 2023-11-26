@@ -14,17 +14,9 @@ use App\Http\Controllers;
 |
 */
 
-use App\Http\Controllers\CWTController;
 use App\Http\Controllers\LogController;
-use App\Http\Controllers\MeasurementUnitController;
-use App\Http\Controllers\ParameterController;
-use App\Http\Controllers\SenderTypeController;
-use App\Http\Controllers\SensorModelController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\BlockController;
 
-Route::post('datacwt', [CWTController::class, 'receive']);
-Route::post('simca-backend/estaciones/indicadores', [CWTController::class, 'receive']);
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
@@ -42,15 +34,6 @@ Route::middleware(["auth:web"])->group(function(){
     Route::get('/inicio', function() { return view('pages.inicio.index.content'); })->name('inicio');
     Route::get('/logs', [LogController::class, 'index'])->name('logs');
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
-    Route::get('/sender_type', [SenderTypeController::class, 'index'])->name('sender_type');
-    Route::get('/measurement_unit', [MeasurementUnitController::class, 'index'])->name('measurement_unit');
-    Route::get('/parameter', [ParameterController::class, 'index'])->name('parameter');
-    Route::get('/sensor_model', [SensorModelController::class, 'index'])->name('sensor_model');
-    
-    // Estaciones
-    Route::get('/block', [SensorModelController::class, 'index'])->name('block');
-    
-    Route::get('/lista_sender_request_ajax', [LogController::class, 'lista_sender_request_ajax']);
     Route::get('/lista_user_ajax', [UserController::class, 'lista_user_ajax']);
     
 });
@@ -67,18 +50,6 @@ Route::group([
     Route::post('create', [UserController::class, 'create']);
 });
 
-Route::group([
-    'prefix' => 'crud/block',
-    'middleware' => 'auth:web'
-], function () {
-
-    Route::post('data', [BlockController::class, 'data']);
-    Route::post('update', [BlockController::class, 'update']);
-    Route::post('dar_baja', [BlockController::class, 'dar_baja']);
-    Route::post('dar_alta', [BlockController::class, 'dar_alta']);
-    Route::post('create', [BlockController::class, 'create']);
-    Route::get('lista_ajax', [BlockController::class, 'lista_ajax']);
-});
 
 if(ENV("APP_DEBUG")){
 
