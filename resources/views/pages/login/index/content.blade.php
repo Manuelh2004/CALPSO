@@ -13,7 +13,8 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">Administrador <span class="brand-name">Waposat</span></h1>
+                        <h1 class=""><span class="brand-name">ASSISTANT</span></h1>
+                        <p>First Assistant No Name Yet</p>
                         <p class="signup-link">¿Eres nuevo? <a href="/registro">Crear una cuenta</a></p>
                         <form id="formulario-autenticacion" class="text-left" >
                             @csrf

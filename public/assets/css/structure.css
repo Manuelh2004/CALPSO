@@ -241,7 +241,7 @@ code {
   align-self: center;
 }
 .navbar .theme-brand li.theme-logo img {
-  width: 34px;
+   /* width: 34px; */
   height: 34px;
   border-radius: 5px;
 }
