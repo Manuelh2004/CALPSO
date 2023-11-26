@@ -22,23 +22,23 @@ class UsuariosIniciales extends Seeder
         User::truncate();
 
 
-        DB::table('user_table')->insert([
+        DB::table('usuario')->insert([
             [
-                // 'user_id' => 1,
+                // 'usuario_id' => 1,
                 'name' => 'admin',
                 'password' => '$2y$10$zESdiGWxQC6A2GF7aS2VXu8tM1v7lVDB.fROSy0zTyXeWeo2M0GKe',//admin
-                'psis_user_role' => '000023',
-                'user_creator' => 1,
-                'user_status' => 1,
+                'psis_rol_usuario' => '000002',
+                'usuario_creador_id' => 1,
+                'usuario_estado' => 1,
                 'created_at' => $now,
                 'updated_at' => $now
             ],[
-                // 'user_id' => 2,
-                'name' => 'free',
+                // 'usuario_id' => 2,
+                'name' => 'jota',
                 'password' => '$2y$10$zESdiGWxQC6A2GF7aS2VXu8tM1v7lVDB.fROSy0zTyXeWeo2M0GKe',//admin
-                'psis_user_role' => '000021',
-                'user_creator' => 1,
-                'user_status' => 1,
+                'psis_rol_usuario' => '000001',
+                'usuario_creador_id' => 1,
+                'usuario_estado' => 1,
                 'created_at' => $now,
                 'updated_at' => $now
             ]

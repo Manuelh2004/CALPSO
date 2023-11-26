@@ -38,16 +38,7 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('sender_type')}}" > Tipos de Transmisor </a>
-                    </li>
-                    <li>
-                        <a href="{{route('measurement_unit')}}" > Unidades de Medición </a>
-                    </li>                           
-                    <li>
-                        <a href="{{route('parameter')}}" > Parametros </a>
-                    </li>                           
-                    <li>
-                        <a href="{{route('sensor_model')}}" > Modelos de Sensor </a>
+                        <a href="" > Tipos de Transmisor </a>
                     </li>
                 </ul>
             </li>

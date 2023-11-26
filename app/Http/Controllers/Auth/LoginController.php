@@ -54,14 +54,12 @@ class LoginController extends Controller
         $password = $request->input('password',"");
         $remember_me = $request->input("remember_me", false);
         $remember_me = ($remember_me)? true : false;
-
+        
         if (Auth::guard('web')->attempt(["name"=> $name, "password" => $password], $remember_me)){
             $usuario = Auth::guard('web')->user();
             return respuesta::ok($usuario);
-            // return redirect('inicio');
         }
         return respuesta::error("Datos no validos para ingresar.");
-        // return redirect('login');
     }
 
     public function logout()

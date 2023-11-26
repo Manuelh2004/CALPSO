@@ -45,10 +45,10 @@ class AuthController extends Controller
     {
         $usuario = auth()->user();
         $user_info = [
-            "id" => $usuario->user_id,
+            "id" => $usuario->usuario_id,
             "name" => $usuario->name,
-            "email" => $usuario->user_email,
-            "roles" => $usuario->psis_user_role
+            "email" => $usuario->usuario_email,
+            "roles" => $usuario->psis_rol_usuario
         ];
         return respuesta::ok($user_info);
     }

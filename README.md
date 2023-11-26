@@ -33,9 +33,6 @@ php artisan jwt:secret
 
 php artisan db:seed --class=PSISSeeder
 php artisan db:seed --class=PSIS_TIPOSeeder
-php artisan db:seed --class=MeasurementUnitSeeder
-php artisan db:seed --class=ParameterSeeder
-php artisan db:seed --class=SensorModelSeeder
-php artisan db:seed --class=WF14ES22_Seeder
+
 
 

@@ -16,8 +16,8 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $primaryKey = 'user_id';
-    protected $table = 'user_table';
+    protected $table = 'usuario';
+    protected $primaryKey = 'usuario_id';
 
     /**
      * The attributes that are mass assignable.
@@ -27,12 +27,13 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'password',
-        'user_state',
-        'user_email',
-        'expiration_date',
-        'user_creator',
-        'psis_user_role',
-        'email_verified_at'
+        'usuario_email',
+        'usuario_estado',
+        'usuario_fecha_expiracion',
+        'email_verified_at',
+        'usuario_login_intentos',
+        'usuario_creador_id',
+        'psis_rol_usuario'
     ];
 
     /**
@@ -90,20 +91,20 @@ class User extends Authenticatable implements JWTSubject
                 ),
                 user_datos as (
                     select
-					u.user_id
+					u.usuario_id
 					,u.name
-					,u.user_status
-					,u.user_email
-					,u.psis_user_role
-					,count(u.user_id) over() as totalrecords
-					from user_table u
+					,u.usuario_estado
+					,u.usuario_email
+					,u.psis_rol_usuario
+					,count(u.usuario_id) over() as totalrecords
+					from usuario u
                 ),
                 user_busqueda as (
-                    select u.* , count(user_id) over() as totalrecordswithfilter
-                    from user_datos u
+                    select u.* , count(usuario_id) over() as totalrecordswithfilter
+                    from usuario u
                     cross join datos_input di
                     where name ilike  '%'||di.palabra||'%'
-                    or user_email ilike  '%'||di.palabra||'%'
+                    or usuario_email ilike  '%'||di.palabra||'%'
                 ),
                 user_paginado as (
                     select
@@ -124,7 +125,7 @@ class User extends Authenticatable implements JWTSubject
             return respuesta::error("Datos no validos para la busqueda.");
         }
 
-        $res = self::where("user_id", $user_id)
+        $res = self::where("usuario_id", $user_id)
                 ->first();
         if(isset($res)){
             return respuesta::ok($res);
@@ -146,7 +147,7 @@ class User extends Authenticatable implements JWTSubject
         
 
         return self::actualizar($user_id,[
-            "user_status" => $estado
+            "usuario_estado" => $estado
         ]);
     }
 
@@ -163,7 +164,7 @@ class User extends Authenticatable implements JWTSubject
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
 
-        $res = self::where("user_id", $user_id)
+        $res = self::where("usuario_id", $user_id)
                 ->update($data);
 
         if(isset($res)){
