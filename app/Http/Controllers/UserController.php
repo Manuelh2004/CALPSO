@@ -55,7 +55,7 @@ class UserController extends Controller
     public function data (Request $request)
     {
         $user_request = Auth::guard('web')->user();
-        if( $user_request["psis_user_role"] != '000023' ){
+        if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
         
@@ -67,7 +67,7 @@ class UserController extends Controller
 
     public function create (Request $request){
         $user_request = Auth::guard('web')->user();
-        if( $user_request["psis_user_role"] != '000023' ){
+        if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
         
@@ -93,10 +93,10 @@ class UserController extends Controller
             return respuesta::error($e->getMessage());
         }
 
-        $data_request = $request->only(['name', 'user_email', 'psis_user_role']);
+        $data_request = $request->only(['name', 'user_email', 'psis_rol_usuario']);
         
         $data_request["name"] = strtolower($data_request['name']);
-        $data_request["user_email"] = strtolower($data_request['user_email']);
+        $data_request["usuario_email"] = strtolower($data_request['user_email']);
         
         $data_request["password"] = Hash::make($request->input("password"));
 
@@ -106,7 +106,7 @@ class UserController extends Controller
     public function update (Request $request){
         $user_request = Auth::guard('web')->user();
         
-        if( $user_request["psis_user_role"] != '000023' ){
+        if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
 
@@ -126,11 +126,11 @@ class UserController extends Controller
             return respuesta::error($e->getMessage());
         }
 
-        $user_id = $request->input("user_id", 0);
-        $data_request = $request->only(['name', 'user_email', 'psis_user_role']);
+        $user_id = $request->input("usuario_id", 0);
+        $data_request = $request->only(['name', 'user_email', 'psis_rol_usuario']);
 
         $data_request["name"] = strtolower($data_request['name']);
-        $data_request["user_email"] = strtolower($data_request['user_email']);
+        $data_request["usuario_email"] = strtolower($data_request['user_email']);
 
         if ($request->filled('password')) {
             $data_request["password"] = Hash::make($request->input("password"));
@@ -141,22 +141,22 @@ class UserController extends Controller
 
     public function dar_baja (Request $request){
         $user_request = Auth::guard('web')->user();
-        if( $user_request["psis_user_role"] != '000023' ){
+        if( $user_request["psis_rol_usuario"] != '000023' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
 
-        $user_id = $request->input("user_id", 0);
+        $user_id = $request->input("usuario_id", 0);
         
         return User::dar_baja($user_id);
     }
 
     public function dar_alta (Request $request){
         $user_request = Auth::guard('web')->user();
-        if( $user_request["psis_user_role"] != '000023' ){
+        if( $user_request["psis_rol_usuario"] != '000023' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
 
-        $user_id = $request->input("user_id", 0);
+        $user_id = $request->input("usuario_id", 0);
         
         return User::dar_alta($user_id);
     }

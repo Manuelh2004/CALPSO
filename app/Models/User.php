@@ -101,7 +101,7 @@ class User extends Authenticatable implements JWTSubject
                 ),
                 user_busqueda as (
                     select u.* , count(usuario_id) over() as totalrecordswithfilter
-                    from usuario u
+                    from user_datos u
                     cross join datos_input di
                     where name ilike  '%'||di.palabra||'%'
                     or usuario_email ilike  '%'||di.palabra||'%'

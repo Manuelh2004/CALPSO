@@ -82,12 +82,12 @@
                 },
             ],
             columns: [
-                { data: 'user_id' },
+                { data: 'usuario_id' },
                 { data: 'name' },
-                { data: 'user_email' },
-                { data: 'psis_user_role' },
+                { data: 'usuario_email' },
+                { data: 'psis_rol_usuario' },
                 { 
-                    data: 'user_status',
+                    data: 'usuario_estado',
                     render: function( data, type, row ) {
                         switch (data) {
                             case 1:
@@ -102,11 +102,11 @@
                     }
                 },
                 { 
-					data: 'user_id',
+					data: 'usuario_id',
 					render: function( data, type, row ) {
 						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
 
-						let marca_estado = row["user_status"];
+						let marca_estado = row["usuario_estado"];
 						let boton_estado = "";
 						if(marca_estado == 1 ){
 							boton_estado = '<span title="Dar Baja" row_id="'+data+'" class="icon-option icon-option-delete btn-dar-baja"><i data-feather="x-circle"></i></span>';
