@@ -8,11 +8,11 @@ $(document).ready(function() {
         fields: [
             "name",
             {
-                name: "psis_user_role",
+                name: "psis_rol_usuario",
                 id_field: "user_rol"
             },
             {
-                name: "user_email",
+                name: "usuario_email",
                 id_field: "user-email",
                 requiere_create: true,
                 requiere_update: false,
@@ -29,7 +29,7 @@ $(document).ready(function() {
             }
         ],
         create_requiere : ["name", "user-email", "password"],
-        pk: "user_id",
+        pk: "usuario_id",
         rutas : {
             crear: "crud/user/create",
             obtener_data: "crud/user/data",

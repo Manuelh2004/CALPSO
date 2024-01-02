@@ -15,7 +15,7 @@ use App\Models\ParameterSystem;
 class UserController extends Controller
 {
     public function index() {
-        $user_roles = ParameterSystem::list_byType('000002');
+        $user_roles = ParameterSystem::list_byType('000001');
 
         return View::make('pages.usuarios.index.content')
             ->with("psis_user_roles", $user_roles);
@@ -59,7 +59,7 @@ class UserController extends Controller
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
         
-        $user_id = $request->input("user_id", 0);
+        $user_id = $request->input("usuario_id", 0);
 
         return User::get($user_id);
 
@@ -74,15 +74,15 @@ class UserController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|min:4',
-                'user_email' => 'required|email:rfc|min:4',
+                'usuario_email' => 'required|email:rfc|min:4',
                 // 'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{6,}$/', // Mayuscula, minuscula, número, caracter [#?!@$%^&*-_]
                 'password' => 'required|string|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z]).*$/', // Mayuscula, minuscula, número, caracter [#?!@$%^&*-_]
             ],[
                 'name.required' => "El usuario es obligatorio",
                 'name.min' => "El nombre de usuario debe ser almenos :min catacteres.",
-                'user_email.required' => "El correo electrónico es obligatorio",
-                'user_email.min' => "El correo electrónico debe tener almenos :min caracteres.",
-                'user_email.email' => "El correo electrónico no es valido.",
+                'usuario_email.required' => "El correo electrónico es obligatorio",
+                'usuario_email.min' => "El correo electrónico debe tener almenos :min caracteres.",
+                'usuario_email.email' => "El correo electrónico no es valido.",
                 'password.required' => "La contraseña es obligatorio.",
                 'password.min' => "La contraseña debe tener almenos :min caracteres.",
                 // 'password.regex' => "La contraseña no es suficientemente segura (Mayuscula, minuscula, número, caracter especial).",
@@ -113,13 +113,13 @@ class UserController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|min:4',
-                'user_email' => 'required|email:rfc|min:4',
+                'usuario_email' => 'required|email:rfc|min:4',
             ],[
                 'name.required' => "El usuario es obligatorio",
                 'name.min' => "El nombre de usuario debe ser almenos :min catacteres.",
-                'user_email.required' => "El correo electrónico es obligatorio",
-                'user_email.min' => "El correo electrónico debe tener almenos :min caracteres.",
-                'user_email.email' => "El correo electrónico no es valido.",
+                'usuario_email.required' => "El correo electrónico es obligatorio",
+                'usuario_email.min' => "El correo electrónico debe tener almenos :min caracteres.",
+                'usuario_email.email' => "El correo electrónico no es valido.",
             ]);
 
         } catch (ValidationException $e) {
@@ -127,10 +127,10 @@ class UserController extends Controller
         }
 
         $user_id = $request->input("usuario_id", 0);
-        $data_request = $request->only(['name', 'user_email', 'psis_rol_usuario']);
+        $data_request = $request->only(['name', 'usuario_email', 'psis_rol_usuario']);
 
         $data_request["name"] = strtolower($data_request['name']);
-        $data_request["usuario_email"] = strtolower($data_request['user_email']);
+        $data_request["usuario_email"] = strtolower($data_request['usuario_email']);
 
         if ($request->filled('password')) {
             $data_request["password"] = Hash::make($request->input("password"));
