@@ -17,7 +17,7 @@ use App\Http\Controllers;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TipoClienteController; //TipoCliente
-
+use App\Http\Controllers\ClienteController; //Cliente
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
@@ -38,7 +38,7 @@ Route::middleware(["auth:web"])->group(function(){
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::get('/lista_user_ajax', [UserController::class, 'lista_user_ajax']);
     Route::get('/tipo_cliente', [TipoClienteController::class, 'index'])->name('tipo_cliente');
-
+    Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
 });
 
 Route::group([
@@ -53,7 +53,18 @@ Route::group([
     Route::post('dar_alta', [TipoClienteController::class, 'dar_alta']);
     Route::post('create', [TipoClienteController::class, 'create']);
 });
+Route::group([
+    'prefix' => 'crud/cliente',
+    'middleware' => 'auth:web'
+], function () {
 
+    Route::get('lista_ajax', [ClienteController::class, 'lista_ajax']);
+    Route::post('data', [ClienteController::class, 'data']);
+    Route::post('update', [ClienteController::class, 'update']);
+    Route::post('dar_baja', [ClienteController::class, 'dar_baja']);
+    Route::post('dar_alta', [ClienteController::class, 'dar_alta']);
+    Route::post('create', [ClienteController::class, 'create']);
+});
 
 Route::group([
     'prefix' => 'crud/user',

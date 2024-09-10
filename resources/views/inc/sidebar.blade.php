@@ -37,7 +37,12 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('tipo_cliente')}}"> Tipos Clientes </a>
+                        <a href="{{route('tipo_cliente')}}"> Tipo Cliente </a>
+                    </li>
+                </ul>
+                <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
+                    <li>
+                        <a href="{{route('cliente')}}"> Clientes </a>
                     </li>
                 </ul>
             </li>
