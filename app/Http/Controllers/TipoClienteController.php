@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\respuesta;
 use App\Models\TipoCliente;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Models\ParameterSystem;
 
 class TipoClienteController extends Controller
 {
     public function index() {
-        $lista_personas = TipoCliente::listar_personas_sin_horario();
+        $lista_tipo_cliente = ParameterSystem::list_byType('000001');
 
         return View::make('pages.tipo_cliente.index.content')
-            ->with("lista_personas", $lista_personas);
+            ->with("psis_user_roles", $lista_tipo_cliente);
     }
     public function lista_ajax (Request $request){
         ## Read value
@@ -54,9 +56,9 @@ class TipoClienteController extends Controller
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
 
-        $horario_id = $request->input("horario_id", 0);
+        $id_tipo_cliente = $request->input("id_tipo_cliente", 0);
 
-        return Horario::get($horario_id);
+        return TipoCliente::get($id_tipo_cliente);
     }
 
     public function update (Request $request){
@@ -65,128 +67,20 @@ class TipoClienteController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
+        $id_tipo_cliente = $request->input("id_tipo_cliente", 0);
+        $data_request = $request->only(['nombre_tipo', 'descuento_asociado', 'descripcion']);
 
-        try {
-            // Definir reglas de validación para los horarios de cada día de la semana
-            $reglasHorarios = [
-                'horario_lunes' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_martes' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_miercoles' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_jueves' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_viernes' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_sabado' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_domingo' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-            ];
-
-            // Agregar regla personalizada para validar el rango (0-24) y el segundo horario
-        Validator::extend('max_horario', function ($attribute, $value, $parameters, $validator) {
-            // Dividir los horarios por la coma
-            $horarios = explode(',', $value);
-
-            // Verificar el segundo horario si existe
-            if (count($horarios) > 1) {
-                $segundoHorario = trim($horarios[1]);
-
-                // Dividir el segundo horario en partes
-                $partesSegundoHorario = explode('-', $segundoHorario);
-                $horaInicioSegundo = (int) explode(':', $partesSegundoHorario[0])[0];
-                $horaFinSegundo = (int) explode(':', $partesSegundoHorario[1])[0];
-
-                // Verificar si el segundo horario es válido (inicio menor que fin)
-                if ($horaInicioSegundo >= $horaFinSegundo) {
-                    return false;
-                }
-            }
-
-            // Validar el formato y rango del primer horario
-            $partes = explode('-', $horarios[0]);
-            $horaInicio = (int) explode(':', $partes[0])[0];
-            $horaFin = (int) explode(':', $partes[1])[0];
-
-            return ($horaInicio < $horaFin);
-        });
-
-        // Validar los datos del request utilizando las reglas definidas
-        $validatedData = $request->validate($reglasHorarios, [
-            'regex' => 'Formato de horario no válido en el campo :attribute',
-            'max_horario' => 'El horario no tiene el formato adecuado en el campo :attribute',
-        ]);
-
-        } catch (ValidationException $e) {
-            // En caso de error de validación, devuelve un error con el mensaje de validación
-            return respuesta::error($e->getMessage());
-        }
-
-        $horario_id = $request->input("horario_id", 0);
-
-        $data_request = $request->only(['horario_lunes', 'horario_martes', 'horario_miercoles', 'horario_jueves', 'horario_viernes', 'horario_sabado', 'horario_domingo']);
-
-
-        return Horario::actualizar($horario_id, $data_request);
+        return TipoCliente::actualizar($id_tipo_cliente, $data_request);
     }
     public function create(Request $request)
     {
         $user_request = Auth::guard('web')->user();
-        if ($user_request["psis_rol_usuario"] != '000002') {
+        if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        try {
-            // Definir reglas de validación para los horarios de cada día de la semana
-            $reglasHorarios = [
-                'usuario_id' => 'required',  // Agregamos la regla 'required' para usuario_id
-                'horario_lunes' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_martes' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_miercoles' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_jueves' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_viernes' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_sabado' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-                'horario_domingo' => ['nullable', 'regex:/^(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?)(,(\d{1,2}(:\d{2})?)-(\d{1,2}(:\d{2})?))*$/', 'max_horario:23'],
-            ];
+        $data_request = $request->only(['nombre_tipo', 'descuento_asociado', 'descripcion']);
 
-        // Agregar regla personalizada para validar el rango (0-24) y el segundo horario
-        Validator::extend('max_horario', function ($attribute, $value, $parameters, $validator) {
-            // Dividir los horarios por la coma
-            $horarios = explode(',', $value);
-
-            // Verificar el segundo horario si existe
-            if (count($horarios) > 1) {
-                $segundoHorario = trim($horarios[1]);
-
-                // Dividir el segundo horario en partes
-                $partesSegundoHorario = explode('-', $segundoHorario);
-                $horaInicioSegundo = (int) explode(':', $partesSegundoHorario[0])[0];
-                $horaFinSegundo = (int) explode(':', $partesSegundoHorario[1])[0];
-
-                // Verificar si el segundo horario es válido (inicio menor que fin)
-                if ($horaInicioSegundo >= $horaFinSegundo) {
-                    return false;
-                }
-            }
-
-            // Validar el formato y rango del primer horario
-            $partes = explode('-', $horarios[0]);
-            $horaInicio = (int) explode(':', $partes[0])[0];
-            $horaFin = (int) explode(':', $partes[1])[0];
-
-            return ($horaInicio < $horaFin);
-        });
-
-        // Validar los datos del request utilizando las reglas definidas
-        $validatedData = $request->validate($reglasHorarios, [
-            'required' => 'Usuario no seleccionado, es de caracter obligatorio',
-            'regex' => 'Formato de horario no válido en el campo :attribute',
-            'max_horario' => 'El horario no tiene el formato adecuado en el campo :attribute',
-        ]);
-
-        } catch (ValidationException $e) {
-            // En caso de error de validación, devuelve un error con el mensaje de validación
-            return respuesta::error($e->getMessage());
-        }
-
-        $data_request = $request->only(['usuario_id', 'horario_lunes', 'horario_martes', 'horario_miercoles', 'horario_jueves', 'horario_viernes', 'horario_sabado', 'horario_domingo']);
-        $data_request["horario_estado"] = 1;
-
-        return Horario::crear_si_no_existe_usuario($data_request);
+        return TipoCliente::crear($data_request);
     }
 
 

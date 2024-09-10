@@ -11,12 +11,12 @@ class TipoCliente extends Model
 {
     use HasFactory;
     protected $table = 'tipo_cliente';
-    protected $primaryKey = 'Id_TipoCliente';
+    protected $primaryKey = 'id_tipo_cliente';
 
     protected $fillable = [
-        'NombreTipo',
-        'Descripcion',
-        'DescuentoAsociado'
+        'nombre_tipo',
+        'descripcion',
+        'descuento_asociado'
     ];
     static public function listado_datatable ($columnName, $columnSortOrder, $searchValue, $start, $rowperpage){
         if($rowperpage < 0){
@@ -26,53 +26,46 @@ class TipoCliente extends Model
         return DB::select(
             DB::raw("
                 with
-                datos_input as (
+                    datos_input as (
+                        select
+                        :skip::int as start,
+                        :rowperpage::int as rowperpage,
+                        :searchvalue::varchar(50) as palabra
+                    ),
+                tipo_cliente_datos as (
                     select
-                    :skip::int as start,
-                    :rowperpage::int as rowperpage,
-                    :searchvalue::varchar(50) as palabra
+                        tp.id_tipo_cliente
+                        ,tp.nombre_tipo
+                        ,tp.descripcion
+                        ,tp.descuento_asociado
+                        ,count(tp.id_tipo_cliente) over() as totalrecords
+                        from tipo_cliente tp
                 ),
-                horario_datos as (
-                    select
-					p.horario_id
-					,CONCAT(pe.persona_nombre,' ',pe.persona_apellido_paterno, ' ', pe.persona_apellido_materno) as nombre_completo
-					,p.horario_lunes
-					,p.horario_martes
-					,p.horario_miercoles
-					,p.horario_jueves
-					,p.horario_viernes
-					,p.horario_sabado
-					,p.horario_domingo
-					,p.horario_estado
-					,count(p.horario_id) over() as totalrecords
-					from horario p
-					JOIN persona pe ON p.usuario_id = pe.usuario_id -- La condición de unión
-                ),
-                horario_busqueda as (
-                    select p.* , count(horario_id) over() as totalrecordswithfilter
-                    from horario_datos p
+                tipo_cliente_busqueda as (
+                    select p.* , count(id_tipo_cliente) over() as totalrecordswithfilter
+                    from tipo_cliente_datos p
                     cross join datos_input di
-                    where nombre_completo ilike  '%'||di.palabra||'%'
+                    where nombre_tipo ilike  '%'||di.palabra||'%'
                 ),
-                horario_paginado as (
+                tipo_cliente_paginado as (
                     select
                     *
-                    from horario_busqueda
+                    from tipo_cliente_busqueda
                     order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )
-                select * from horario_paginado
+                select * from tipo_cliente_paginado
             "),
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );
     }
-    static public function actualizar($Id_TipoCliente, $data){
-        if(empty($Id_TipoCliente) || empty($data)){
+    static public function actualizar($id_tipo_cliente, $data){
+        if(empty($id_tipo_cliente) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
 
-        $res = self::where("Id_TipoCliente", $Id_TipoCliente)
+        $res = self::where("id_tipo_cliente", $id_tipo_cliente)
                 ->update($data);
 
         if(isset($res)){
@@ -87,15 +80,15 @@ class TipoCliente extends Model
             return respuesta::ok($res);
         } else {
             return respuesta::error("No se ha podido registrar");
-        }
+        } 
     }
 
-    static public function get($Id_TipoCliente){
-        if(empty($Id_TipoCliente)){
+    static public function get($id_tipo_cliente){
+        if(empty($id_tipo_cliente)){
             return respuesta::error("Datos no validos para la busqueda.");
         }
 
-        $res = self::where("Id_TipoCliente", $Id_TipoCliente)
+        $res = self::where("id_tipo_cliente", $id_tipo_cliente)
                 ->first();
 
         if(isset($res)){
