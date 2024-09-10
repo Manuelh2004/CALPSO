@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orden', function (Blueprint $table) {
-            $table->id('Id_Orden');
-            $table->integer('Id_Cliente');
-            $table->integer('Id_Empleado');
-            $table->integer('Id_Sucursal');
-            $table->date('FechaOrden');
-            $table->decimal('TotalOrden', 10, 2);
+            $table->id('id_orden');
+            $table->integer('id_cliente');
+            $table->integer('id_empleado');
+            $table->integer('id_sucursal');
+            $table->date('fecha_orden');
+            $table->decimal('total_orden', 10, 2);
             $table->timestamps();
         });
     }

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tipo_cliente', function (Blueprint $table) {
-            $table->id('Id_TipoCliente');
-            $table->string('NombreTipo', 50);
-            $table->text('Descripcion')->nullable();
-            $table->decimal('DescuentoAsociado', 5, 2)->default(0.00);
+            $table->id('id_tipo_cliente');
+            $table->string('nombre_tipo', 50);
+            $table->text('descripcion')->nullable();
+            $table->decimal('descuento_asociado', 5, 2)->default(0.00);
             $table->timestamps();
         });
     }

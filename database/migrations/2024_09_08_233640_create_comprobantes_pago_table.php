@@ -14,16 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comprobantes_pago', function (Blueprint $table) {
-            $table->id('Id_ComprobantePago');
-            $table->integer('Id_Empleado');
-            $table->integer('Id_Sucursal');
-            $table->integer('Id_MetodoEntrega');
-            $table->integer('Id_Promocion');
-            $table->integer('Id_Cliente');
-            $table->integer('Id_TipoComprobante');
-            $table->integer('Id_Orden');
-            $table->date('FechaComprobante');
-            $table->decimal('TotalComprobante', 10, 2)->check('TotalComprobante >= 0'); // Total positivo con dos decimales
+            $table->id('id_comprobante_pago');
+            $table->integer('id_empleado');
+            $table->integer('id_sucursal');
+            $table->integer('id_metodo_entrega');
+            $table->integer('id_promocion');
+            $table->integer('id_cliente');
+            $table->integer('id_tipo_comprobante');
+            $table->integer('id_orden');
+            $table->date('fecha_comprobante');
+            $table->decimal('total_comprobante', 10, 2)->check('TotalComprobante >= 0'); // Total positivo con dos decimales
             $table->timestamps();
         });
     }

@@ -14,17 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('empleado', function (Blueprint $table) {
-            $table->id('Id_Empleado');
-            $table->integer('Id_Cargo');
-            $table->integer('Id_Tipo');
-            $table->integer('Id_Area');
-            $table->integer('Id_Sucursal');
-            $table->string('NombreEmpleado',200);
-            $table->unsignedTinyInteger('Edad');
-            $table->string('CorreoElectronico')->unique();
-            $table->enum('Genero', ['M', 'F']);
-            $table->enum('Estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
-            $table->string('Password');
+            $table->id('id_empleado');
+            $table->integer('id_cargo');
+            $table->integer('id_tipo');
+            $table->integer('id_area');
+            $table->integer('id_sucursal');
+            $table->string('nombre_empleado',200);
+            $table->unsignedTinyInteger('edad');
+            $table->string('correo_electronico')->unique();
+            $table->enum('genero', ['M', 'F']);
+            $table->enum('estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
+            $table->string('password');
             $table->timestamps();
         });
     }

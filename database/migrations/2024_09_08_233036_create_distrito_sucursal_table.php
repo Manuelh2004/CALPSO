@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('distrito_sucursal', function (Blueprint $table) {
-            $table->id('Id_Distrito');
-            $table->string('NombreDistrito');
+            $table->id('id_distrito');
+            $table->string('nombre_distrito');
             $table->timestamps();
         });
     }

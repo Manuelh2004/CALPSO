@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('item_menu', function (Blueprint $table) {
-            $table->id('Id_ItemMenu');
-            $table->integer('Id_Categoria');
-            $table->string('NombreItem', 100)->unique(); // Nombre de item único
-            $table->text('Descripcion')->nullable();
-            $table->decimal('PrecioItem', 10, 2)->check('PrecioItem >= 0'); // Precio positivo
-            $table->enum('Estado', ['activo', 'inactivo'])->default('activo');
+            $table->id('id_item_menu');
+            $table->integer('id_categoria');
+            $table->string('nombre_item', 100)->unique(); // Nombre de item único
+            $table->text('descripcion')->nullable();
+            $table->decimal('precio_item', 10, 2)->check('precio_item >= 0'); // Precio positivo
+            $table->enum('estado', ['activo', 'inactivo'])->default('activo');
             $table->timestamps();
         });
     }

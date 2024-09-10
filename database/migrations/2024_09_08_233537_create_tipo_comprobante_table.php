@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tipo_comprobante', function (Blueprint $table) {
-            $table->id('Id_TipoComprobante');
-            $table->string('NombreComprobante', 100)->unique(); // Nombre único
-            $table->text('Descripcion')->nullable();
+            $table->id('id_tipo_comprobante');
+            $table->string('nombre_comprobante', 100)->unique(); // Nombre único
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

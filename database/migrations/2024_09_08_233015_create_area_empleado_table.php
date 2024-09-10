@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('area_empleado', function (Blueprint $table) {
-            $table->id('Id_Area');
-            $table->string('NombreArea', 50);
-            $table->text('Descripcion')->nullable();
+            $table->id('id_area');
+            $table->string('nombre_area', 50);
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

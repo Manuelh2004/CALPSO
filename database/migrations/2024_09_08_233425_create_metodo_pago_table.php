@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('metodo_pago', function (Blueprint $table) {
-            $table->id('Id_MetodoPago');
-            $table->string('NombreMetodoPago', 100)->unique(); // Método de pago único
-            $table->text('Descripcion')->nullable();
+            $table->id('id_metodo_pago');
+            $table->string('nombre_metodo_pago', 100)->unique(); // Método de pago único
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

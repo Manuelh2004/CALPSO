@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cargo_empleado', function (Blueprint $table) {
-            $table->id('Id_Cargo');
-            $table->string('NombreCargo',100);
-            $table->text('Descripcion')->nullable();
-            $table->decimal('SalarioBase', 10, 2)->default(0.00);
+            $table->id('id_cargo');
+            $table->string('nombre_cargo',100);
+            $table->text('descripcion')->nullable();
+            $table->decimal('salario_base', 10, 2)->default(0.00);
             $table->timestamps();
         });
     }

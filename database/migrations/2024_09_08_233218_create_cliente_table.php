@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cliente', function (Blueprint $table) {
-            $table->id('Id_Cliente');
-            $table->integer('Id_TipoCliente');
-            $table->string('NombreCliente', 100);
-            $table->enum('Genero', ['M', 'F']);
-            $table->unsignedTinyInteger('Edad');
-            $table->string('Telefono', 9)->unique(); // Especifica longitud, por ejemplo, 15 caracteres
-            $table->enum('Estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
-            $table->string('Password');
+            $table->id('id_cliente');
+            $table->integer('id_tipo_cliente')->default(1);
+            $table->string('nombre_cliente', 100);
+            $table->enum('genero', ['M', 'F']);
+            $table->unsignedTinyInteger('edad');
+            $table->string('telefono', 9)->unique(); // Especifica longitud, por ejemplo, 15 caracteres
+            $table->enum('estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
+            $table->string('password');
             $table->timestamps();
         });
     }

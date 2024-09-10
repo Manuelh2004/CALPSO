@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('detalle_metodo_pago', function (Blueprint $table) {
-            $table->id('Id_DetalleMetodoPago');
-            $table->integer('Id_MetodoPago');
-            $table->integer('Id_ComprobantePago');
-            $table->decimal('Monto', 10, 2)->check('Monto > 0'); // Monto positivo
+            $table->id('id_detalle_metodo_pago');
+            $table->integer('id_metodo_pago');
+            $table->integer('id_comprobante_pago');
+            $table->decimal('monto', 10, 2)->check('monto > 0'); // Monto positivo
             $table->timestamps();
         });
     }

@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('promocion_comprobante', function (Blueprint $table) {
-            $table->integer('Id_Comprobante');
-            $table->integer('Id_Promocion');
-            $table->decimal('MontoDescuento', 8, 2)->check('MontoDescuento >= 0'); // Descuento positivo
+            $table->integer('id_comprobante_pago');
+            $table->integer('id_promocion');
+            $table->decimal('monto_descuento', 8, 2)->check('monto_descuento >= 0'); // Descuento positivo
             $table->timestamps();
             // Clave primaria compuesta
-            $table->primary(['Id_Comprobante', 'Id_Promocion']);
+            $table->primary(['id_comprobante_pago', 'id_promocion']);
         });
     }
 

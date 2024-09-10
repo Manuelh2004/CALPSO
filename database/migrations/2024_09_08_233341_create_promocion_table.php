@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('promocion', function (Blueprint $table) {
-            $table->id('Id_Promocion');
-            $table->string('NombrePromocion', 100)->unique(); // Nombre único
-            $table->text('DescripcionPromocion')->nullable();
-            $table->date('FechaInicio');
-            $table->date('FechaFin');
-            $table->enum('EstadoPromocion', ['activo', 'inactivo'])->default('activo');
+            $table->id('id_promocion');
+            $table->string('nombre_promocion', 100)->unique(); // Nombre único
+            $table->text('descripcion_promocion')->nullable();
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
+            $table->enum('estado_promocion', ['activo', 'inactivo'])->default('activo');
             $table->timestamps();
         });
     }
