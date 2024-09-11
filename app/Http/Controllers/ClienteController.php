@@ -11,14 +11,15 @@ use App\Models\Cliente;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\ParameterSystem;
+use App\Models\TipoCliente;
 
 class ClienteController extends Controller
 {
     public function index() {
-        $lista_cliente = ParameterSystem::list_byType('000001');
+        $lista_tipo_cliente = TipoCliente::listar_tipo_cliente();
 
         return View::make('pages.cliente.index.content')
-            ->with("psis_user_roles", $lista_cliente);
+            ->with("lista_tipo_cliente", $lista_tipo_cliente);
     }
     public function lista_ajax (Request $request){
         ## Read value
@@ -68,7 +69,7 @@ class ClienteController extends Controller
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
         $id_cliente = $request->input("id_cliente", 0);
-        $data_request = $request->only(['nombre_tipo', 'nombre_cliente', 'genero','edad','telefono','estado']);
+        $data_request = $request->only(['nombre_tipo', 'nombre_cliente', 'genero','edad','telefono']);
 
         return Cliente::actualizar($id_cliente, $data_request);
     }
@@ -78,10 +79,12 @@ class ClienteController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $data_request = $request->only(['nombre_tipo', 'nombre_cliente', 'genero','edad','telefono','estado']);
-
+        $data_request = $request->only(['id_tipo_cliente', 'nombre_cliente', 'genero','edad','telefono']);
+        $data_request["estado"] = 1;
         return Cliente::crear($data_request);
     }
+
+
     public function dar_baja (Request $request){
         $user_request = Auth::guard('web')->user();
         if( $user_request["psis_rol_usuario"] != '000002' ){

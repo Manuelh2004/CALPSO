@@ -54,7 +54,6 @@ class Cliente extends Model
                     from cliente_datos p
                     cross join datos_input di
                     where nombre_cliente ilike  '%'||di.palabra||'%'
-                    or estado ilike  '%'||di.palabra||'%'
                 ),
                 cliente_paginado as (
                     select
@@ -108,7 +107,7 @@ class Cliente extends Model
     }
     static public function cambiar_estado($id_cliente, $estado){
         return self::actualizar($id_cliente,[
-            "estado " => $estado
+            "estado" => $estado
         ]);
     }
 
@@ -119,4 +118,5 @@ class Cliente extends Model
     static public function dar_alta ($id_cliente){
         return self::cambiar_estado($id_cliente, 1);
     }
+
 }

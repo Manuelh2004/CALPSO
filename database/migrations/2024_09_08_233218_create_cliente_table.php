@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('cliente', function (Blueprint $table) {
             $table->id('id_cliente');
-            $table->integer('id_tipo_cliente')->default(1);
+            $table->integer('id_tipo_cliente');
             $table->string('nombre_cliente', 100);
             $table->enum('genero', ['M', 'F']);
             $table->unsignedTinyInteger('edad');
             $table->string('telefono', 9)->unique(); // Especifica longitud, por ejemplo, 15 caracteres
-            $table->enum('estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
-            $table->string('password');
+            $table->unsignedTinyInteger('estado')->nullable()->default(1);
             $table->timestamps();
         });
     }

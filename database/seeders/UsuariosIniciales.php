@@ -45,7 +45,7 @@ class UsuariosIniciales extends Seeder
             ,[
                 // 'usuario_id' => 3,
                 'name' => 'manu',
-                'password' => 'manu',//admin
+                'password' => '$2y$10$zESdiGWxQC6A2GF7aS2VXu8tM1v7lVDB.fROSy0zTyXeWeo2M0GKe',//admin
                 'psis_rol_usuario' => '000001',
                 'usuario_creador_id' => 1,
                 'usuario_estado' => 1,

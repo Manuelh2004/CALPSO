@@ -11,58 +11,38 @@
             <form id="formulario_registrar_cliente" type="post" autocomplete="off" action="javascript:void(0);">
 
                 <div class="row">
-                    <div class="col-12 col-md-12" id="lista-tipo-cliente">
+
+                    <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Tipo Cliente *</label>
-                            <select class="form-control" name="id_tipo_cliente" id="id_tipo_cliente">
-                                <option value="" disabled>Elije un tipo de cliente</option>
-                                @foreach ($lista_tipo_cliente as $key => $p)
-                                <option value="{{$p->id_tipo_cliente}}" >{{$p->nombre_tipo}}</option>
-                                @endforeach
-                            </select>
+                            <label>Nombre de tipo *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="nombre_tipo" name="nombre_tipo">
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Nombre completo *</label>
+                            <label>Descripcion *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5">@</span>
                                 </div>
-                                <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion">
                             </div>
                         </div>
                     </div>
+
                     <div class="col-12 col-md-4">
                         <div class="form-group">
-                            <label>Genero *</label>
+                            <label>Descuento *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5">@</span>
                                 </div>
-                                <input type="text" class="form-control" id="genero" name="genero">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label>Edad *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
-                                </div>
-                                <input type="text" class="form-control" id="edad" name="edad">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label>Telefono *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
-                                </div>
-                                <input type="text" class="form-control" id="telefono" name="telefono">
+                                <input type="text" class="form-control" id="descuento_asociado" name="descuento_asociado">
                             </div>
                         </div>
                     </div>

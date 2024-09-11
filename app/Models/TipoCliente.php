@@ -80,7 +80,7 @@ class TipoCliente extends Model
             return respuesta::ok($res);
         } else {
             return respuesta::error("No se ha podido registrar");
-        } 
+        }
     }
 
     static public function get($id_tipo_cliente){
@@ -97,7 +97,17 @@ class TipoCliente extends Model
             return respuesta::error("No se ha encontrado data relacionada.");
         }
     }
-
+    static public function listar_tipo_cliente (){
+        return DB::select(
+            DB::raw("
+            SELECT
+                    tc.id_tipo_cliente
+                    , tc.nombre_tipo
+                FROM tipo_cliente tc
+            "),
+            [ ]
+        );
+    }
 
 
 }

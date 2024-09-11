@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('id_ciudad');
             $table->string('direccion',255);
             $table->string('telefono',9);
-            $table->enum('estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
+            $table->unsignedTinyInteger('estado')->nullable()->default(1);
             $table->timestamps();
         });
     }

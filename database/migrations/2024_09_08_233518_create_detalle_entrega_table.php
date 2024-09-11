@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id_detalle_entrega');
             $table->integer('id_metodo_entrega');
             $table->string('direccion_entrega', 255);
-            $table->enum('estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
+            $table->unsignedTinyInteger('estado')->nullable()->default(1);
             $table->text('comentario')->nullable();
             $table->date('fecha');
             $table->time('hora');
