@@ -18,6 +18,7 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TipoClienteController; //TipoCliente
 use App\Http\Controllers\ClienteController; //Cliente
+use App\Http\Controllers\DistritoSucursalController; //Cliente
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
@@ -39,8 +40,18 @@ Route::middleware(["auth:web"])->group(function(){
     Route::get('/lista_user_ajax', [UserController::class, 'lista_user_ajax']);
     Route::get('/tipo_cliente', [TipoClienteController::class, 'index'])->name('tipo_cliente');
     Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
+    Route::get('/distrito_sucursal', [DistritoSucursalController::class, 'index'])->name('distrito_sucursal');
 });
+Route::group([
+    'prefix' => 'crud/distrito_sucursal',
+    'middleware' => 'auth:web'
+], function () {
 
+    Route::get('lista_ajax', [DistritoSucursalController::class, 'lista_ajax']);
+    Route::post('data', [DistritoSucursalController::class, 'data']);
+    Route::post('update', [DistritoSucursalController::class, 'update']);
+    Route::post('create', [DistritoSucursalController::class, 'create']);
+});
 Route::group([
     'prefix' => 'crud/tipo_cliente',
     'middleware' => 'auth:web'
