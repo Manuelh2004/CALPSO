@@ -50,6 +50,11 @@
                         <a href="{{route('distrito_sucursal')}}"> Distrito </a>
                     </li>
                 </ul>
+                <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
+                    <li>
+                        <a href="{{route('sucursal')}}"> Sucursal </a>
+                    </li>
+                </ul>
             </li>
 
             <li class="menu">

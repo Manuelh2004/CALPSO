@@ -23,7 +23,7 @@
             // scrollX: true,
             // ajax: "venta_lista_ajax",
             ajax: {
-                "url": "crud/cliente/lista_ajax",
+                "url": "crud/sucursal/lista_ajax",
                 "data": function (d) {
                         // d.tipo_comprobante_id = $("#tipo-comprobante").val()
                 },
@@ -82,11 +82,9 @@
                 },
             ],
             columns: [
-                { data: 'id_cliente' },
-                { data: 'nombre_tipo' },
-                { data: 'nombre_cliente' },
-                { data: 'genero' },
-                { data: 'edad' },
+                { data: 'id_sucursal' },
+                { data: 'nombre_distrito' },
+                { data: 'direccion' },
                 { data: 'telefono' },
                 {
 					data: 'estado',
@@ -104,7 +102,7 @@
                     }
 				},
                 {
-					data: 'id_cliente',
+					data: 'id_sucursal',
 					render: function( data, type, row ) {
 						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
 
@@ -170,7 +168,7 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.cliente.componentes.administrar_cliente_script');
+        @include('pages.sucursal.componentes.administrar_sucursal_script');
     });
 
 

@@ -27,42 +27,48 @@
                             <label>Nombre completo *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
                                 <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente">
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Genero *</label>
+                            <label>Género *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="genero" name="genero">
+                                <select class="form-control" id="genero" name="genero" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="FEMENINO">FEMENINO</option>
+                                    <option value="MASCULINO">MASCULINO</option>
+                                    <option value="OTRO">OTRO</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+
+                    <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label>Edad *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="edad" name="edad">
+                                <input type="number" class="form-control" id="edad" name="edad">
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label>Telefono *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="telefono" name="telefono">
+                                <input type="number" class="form-control" id="telefono" name="telefono">
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,7 @@ var crud = new crud_administracion();
 
 $(document).ready(function() {
 	crud.iniciar({
-        title: "distrito_sucursal",
+        title: "distrito",
         fields: [
             "id_distrito",
             "nombre_distrito"

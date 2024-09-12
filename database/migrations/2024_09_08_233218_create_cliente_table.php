@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id_cliente');
             $table->integer('id_tipo_cliente');
             $table->string('nombre_cliente', 100);
-            $table->enum('genero', ['M', 'F']);
+            $table->enum('genero', ['FEMENINO', 'MASCULINO', 'OTRO']); // campo para el género
             $table->unsignedTinyInteger('edad');
             $table->string('telefono', 9)->unique(); // Especifica longitud, por ejemplo, 15 caracteres
             $table->unsignedTinyInteger('estado')->nullable()->default(1);

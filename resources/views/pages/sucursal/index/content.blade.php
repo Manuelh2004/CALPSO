@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('titulo','CLIENTE')
+@section('titulo','SUCURSAL')
 
-@include("pages.cliente.index.script")
-@include("pages.cliente.index.head")
+@include("pages.sucursal.index.script")
+@include("pages.sucursal.index.head")
 
 @section('content')
 
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Cliente</h5>
+                        <h5 class="">Sucursal</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -24,10 +24,8 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>TIPO CLIENTE</th>
-                                    <th>NOMBRE</th>
-                                    <th>GENERO</th>
-                                    <th>EDAD</th>
+                                    <th>DISTRITO</th>
+                                    <th>DIRECCION</th>
                                     <th>TELEFONO</th>
                                     <th>ESTADO</th>
                                     <th>OPCIONES</th>
@@ -41,6 +39,6 @@
         </div>
     </div>
 
-    @include("pages.cliente.componentes.modal");
+    @include("pages.sucursal.componentes.modal");
 
 @endsection

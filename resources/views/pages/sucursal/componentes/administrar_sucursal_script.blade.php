@@ -4,24 +4,22 @@ var crud = new crud_administracion();
 
 $(document).ready(function() {
 	crud.iniciar({
-        title: "cliente",
+        title: "sucursal",
         fields: [
-            "id_cliente",
-            "id_tipo_cliente",
-            "nombre_cliente",
-            "genero",
-            "edad",
+            "id_sucursal",
+            "id_distrito",
+            "direccion",
             "telefono",
             "estado",
         ],
         create_requiere : [],
-        pk: "id_cliente",
+        pk: "id_sucursal",
         rutas : {
-            crear: "crud/cliente/create",
-            obtener_data: "crud/cliente/data",
-            guardar_data: "crud/cliente/update",
-            dar_baja: "crud/cliente/dar_baja",
-            dar_alta: "crud/cliente/dar_alta",
+            crear: "crud/sucursal/create",
+            obtener_data: "crud/sucursal/data",
+            guardar_data: "crud/sucursal/update",
+            dar_baja: "crud/sucursal/dar_baja",
+            dar_alta: "crud/sucursal/dar_alta",
         }
     });
 
