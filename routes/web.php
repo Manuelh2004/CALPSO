@@ -23,6 +23,19 @@ Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
 
 
+use App\Http\Controllers\EmpleadoController;
+
+Route::middleware(['auth:web'])->group(function () {
+    Route::get('/empleados', [EmpleadoController::class, 'index'])->name('empleados.index');
+    Route::get('/empleados/create', [EmpleadoController::class, 'create'])->name('empleados.create');
+    Route::post('/empleados', [EmpleadoController::class, 'store'])->name('empleados.store');
+    Route::get('/empleados/{id}', [EmpleadoController::class, 'show'])->name('empleados.show');
+    Route::get('/empleados/{id}/edit', [EmpleadoController::class, 'edit'])->name('empleados.edit');
+    Route::put('/empleados/{id}', [EmpleadoController::class, 'update'])->name('empleados.update');
+    Route::delete('/empleados/{id}', [EmpleadoController::class, 'destroy'])->name('empleados.destroy');
+});
+
+
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [Auth\LoginController::class, 'login'])->name('auth/login');
     Route::get('logout', [Auth\LoginController::class, 'logout']);

@@ -26,6 +26,7 @@ php artisan storage:link
 ### Corremos los migrations para generar la BD, la BD debe estar creada previamente
 php artisan migrate:fresh --seed
 
+
 ### Generamos la llave JWT
 php artisan jwt:secret
 
