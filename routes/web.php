@@ -20,6 +20,7 @@ use App\Http\Controllers\TipoClienteController; //TipoCliente
 use App\Http\Controllers\ClienteController; //Cliente
 use App\Http\Controllers\DistritoSucursalController; //Distrito
 use App\Http\Controllers\SucursalController; //Sucursal
+use App\Http\Controllers\InsumoController; //Sucursal
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
@@ -43,6 +44,18 @@ Route::middleware(["auth:web"])->group(function(){
     Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
     Route::get('/distrito_sucursal',[DistritoSucursalController::class, 'index'])->name('distrito_sucursal');
     Route::get('/sucursal',[SucursalController::class, 'index'])->name('sucursal');
+    Route::get('/insumo',[InsumoController::class, 'index'])->name('insumo');
+    Route::view('/principal','pages.principal.index')->name('principal');
+});
+Route::group([
+    'prefix' => 'crud/insumo',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [InsumoController::class, 'lista_ajax']);
+    Route::post('data', [InsumoController::class, 'data']);
+    Route::post('update', [InsumoController::class, 'update']);
+    Route::post('create', [InsumoController::class, 'create']);
 });
 Route::group([
     'prefix' => 'crud/sucursal',

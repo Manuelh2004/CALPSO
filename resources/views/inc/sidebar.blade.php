@@ -55,6 +55,16 @@
                         <a href="{{route('sucursal')}}"> Sucursal </a>
                     </li>
                 </ul>
+                <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
+                    <li>
+                        <a href="{{route('insumo')}}"> Insumo </a>
+                    </li>
+                </ul>
+                <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
+                    <li>
+                        <a href="{{route('principal')}}"> Principal </a>
+                    </li>
+                </ul>
             </li>
 
             <li class="menu">

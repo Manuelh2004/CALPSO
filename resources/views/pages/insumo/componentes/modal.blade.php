@@ -4,7 +4,7 @@
     <div class="modal-content">
 
         <div class="modal-header" id="ModalLabel">
-            <h4 class="modal-title" id="modal-title">Usuario</h4>
+            <h4 class="modal-title" id="modal-title">Insumo</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
         <div class="modal-body">
@@ -14,59 +14,35 @@
 
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Nombre de usuario *</label>
+                            <label>Nombre de insumo *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <input type="text" class="form-control" id="nombre_insumo" name="nombre_insumo">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Correo electrónico *</label>
+                            <label>Descripcion *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="user-email" name="name">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label>Rol *</label>
-                            <select class="form-control" name="user_rol" id="user_rol">
-                                <option value="" disabled>Elije un rol</option>                                                   
-                                @foreach ($psis_user_roles as $key => $rol)
-                                <option value="{{$rol->psis_code}}" >{{$rol->psis_value}}</option>                                              
-                                @endforeach                                                    
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label>Contraseña *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5"><i data-feather="lock"></i></span>
-                                </div>
-                                <input type="password" class="form-control" id="password" name="name">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion">
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Confirmación Contraseña</label>
+                            <label>Stock *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5"><i data-feather="lock"></i></span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="password" class="form-control" id="password_confirm" name="name">
+                                <input type="number" class="form-control" id="stock" name="stock">
                             </div>
                         </div>
                     </div>
@@ -82,7 +58,7 @@
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal"> <i data-feather="x-circle"></i> Cerrar</button>
             <button type="button" class="btn btn-primary btn-confirmar">Confirmar</button>
-            
+
         </div>
     </div>
     </div>
