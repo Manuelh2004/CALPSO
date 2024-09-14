@@ -7,19 +7,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\respuesta;
-use App\Models\Cliente;
+use App\Models\ItemMenu;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\ParameterSystem;
-use App\Models\TipoCliente;
+use App\Models\Categoria;
 
-class ClienteController extends Controller
+
+class ItemMenuController extends Controller
 {
     public function index() {
-        $lista_tipo_cliente = TipoCliente::listar_tipo_cliente();
+        $lista_categoria = Categoria::listar_categorias();
 
-        return View::make('pages.cliente.index.content')
-            ->with("lista_tipo_cliente", $lista_tipo_cliente);
+        return View::make('pages.item_menu.index.content')
+            ->with("lista_categoria", $lista_categoria);
     }
     public function lista_ajax (Request $request){
         ## Read value
@@ -37,7 +38,7 @@ class ClienteController extends Controller
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = (is_null($search_arr['value'])) ? '' : $search_arr['value']; // Search value
 
-        $lista = Cliente::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
+        $lista = ItemMenu::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
 
         $totalRecords = (count($lista)>0)? $lista[0]->totalrecords: 0;
         $totalRecordswithFilter = (count($lista)>0)? $lista[0]->totalrecordswithfilter: 0;
@@ -56,10 +57,9 @@ class ClienteController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
+        $id_item_menu = $request->input("id_item_menu", 0);
 
-        $id_cliente = $request->input("id_cliente", 0);
-
-        return Cliente::get($id_cliente);
+        return ItemMenu::get($id_item_menu);
     }
 
     public function update (Request $request){
@@ -68,10 +68,10 @@ class ClienteController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $id_cliente = $request->input("id_cliente", 0);
-        $data_request = $request->only(['nombre_tipo', 'nombre_cliente', 'genero','edad','telefono']);
+        $id_item_menu = $request->input("id_item_menu", 0);
+        $data_request = $request->only(['id_categoria', 'nombre_item', 'descripcion','descripcion']);
 
-        return Cliente::actualizar($id_cliente, $data_request);
+        return ItemMenu::actualizar($id_item_menu, $data_request);
     }
     public function create(Request $request)
     {
@@ -79,26 +79,26 @@ class ClienteController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $data_request = $request->only(['id_tipo_cliente', 'nombre_cliente', 'genero','edad','telefono']);
+        $data_request = $request->only(['id_categoria', 'nombre_item', 'descripcion','descripcion']);
         $data_request["estado"] = 1;
-        return Cliente::crear($data_request);
+        return ItemMenu::crear($data_request);
     }
     public function dar_baja (Request $request){
         $user_request = Auth::guard('web')->user();
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $id_cliente = $request->input("id_cliente", 0);
+        $id_item_menu = $request->input("id_item_menu", 0);
 
-        return Cliente::dar_baja($id_cliente);
+        return ItemMenu::dar_baja($id_item_menu);
     }
     public function dar_alta (Request $request){
         $user_request = Auth::guard('web')->user();
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $id_cliente = $request->input("id_cliente", 0);
+        $id_item_menu = $request->input("id_item_menu", 0);
 
-        return Cliente::dar_alta($id_cliente);
+        return ItemMenu::dar_alta($id_item_menu);
     }
 }
