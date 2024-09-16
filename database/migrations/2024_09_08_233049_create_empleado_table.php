@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('edad');
             $table->string('correo_electronico')->unique();
             $table->enum('genero', ['M', 'F']);
-            $table->enum('estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
+            $table->unsignedTinyInteger('estado')->nullable()->default(1);
             $table->string('password');
             $table->timestamps();
         });

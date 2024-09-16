@@ -22,8 +22,7 @@ class DevClienteSeeder extends Seeder
                 'genero' => 'M',
                 'edad' => 30,
                 'telefono' => '987654321',
-                'estado' => 'activo',
-                'password' => "dd",
+                'estado' => '1',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

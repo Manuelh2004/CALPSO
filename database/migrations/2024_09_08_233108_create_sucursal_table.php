@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sucursal', function (Blueprint $table) {
-            $table->id('od_ducursal');
-            $table->integer('id_ciudad');
+            $table->id('id_sucursal');
+            $table->integer('id_distrito');
             $table->string('direccion',255);
             $table->string('telefono',9);
-            $table->enum('estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
+            $table->unsignedTinyInteger('estado')->nullable()->default(1);
             $table->timestamps();
         });
     }

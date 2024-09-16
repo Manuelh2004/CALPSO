@@ -4,63 +4,35 @@
     <div class="modal-content">
 
         <div class="modal-header" id="ModalLabel">
-            <h4 class="modal-title" id="modal-title">Cliente</h4>
+            <h4 class="modal-title" id="modal-title">Sucursal</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
         <div class="modal-body">
             <form id="formulario_registrar_cliente" type="post" autocomplete="off" action="javascript:void(0);">
-
                 <div class="row">
-                    <div class="col-12 col-md-12" id="lista-tipo-cliente">
+                    <div class="col-12 col-md-12" id="lista-personas">
                         <div class="form-group">
-                            <label>Tipo Cliente *</label>
-                            <select class="form-control" name="id_tipo_cliente" id="id_tipo_cliente">
-                                <option value="" disabled>Elije un tipo de cliente</option>
-                                @foreach ($lista_tipo_cliente as $key => $p)
-                                <option value="{{$p->id_tipo_cliente}}" >{{$p->nombre_tipo}}</option>
+                            <label>Distrito *</label>
+                            <select class="form-control" name="id_distrito" id="id_distrito">
+                                <option value="" disabled>Elije un distrito</option>
+                                @foreach ($lista_distrito as $key => $p)
+                                <option value="{{$p->id_distrito}}" >{{$p->nombre_distrito}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Nombre completo *</label>
+                            <label>Dirección *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="form-group">
-                            <label>Género *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
-                                </div>
-                                <select class="form-control" id="genero" name="genero" required>
-                                    <option value="">Seleccione una opción</option>
-                                    <option value="FEMENINO">FEMENINO</option>
-                                    <option value="MASCULINO">MASCULINO</option>
-                                    <option value="OTRO">OTRO</option>
-                                </select>
+                                <input type="text" class="form-control" id="direccion" name="direccion">
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-6">
-                        <div class="form-group">
-                            <label>Edad *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
-                                </div>
-                                <input type="number" class="form-control" id="edad" name="edad">
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label>Telefono *</label>
@@ -68,7 +40,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="number" class="form-control" id="telefono" name="telefono">
+                                <input type="text" class="form-control" id="telefono" name="telefono">
                             </div>
                         </div>
                     </div>

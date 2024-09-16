@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nombre_item', 100)->unique(); // Nombre de item único
             $table->text('descripcion')->nullable();
             $table->decimal('precio_item', 10, 2)->check('precio_item >= 0'); // Precio positivo
-            $table->enum('estado', ['activo', 'inactivo'])->default('activo');
+            $table->unsignedTinyInteger('estado')->nullable()->default(1);
             $table->timestamps();
         });
     }

@@ -1,22 +1,21 @@
 <?php
-
 namespace App\Models;
 
-use App\Http\Controllers\respuesta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\respuesta;
 
-class TipoCliente extends Model
+
+class Cliente extends Model
 {
     use HasFactory;
-    protected $table = 'tipo_cliente';
-    protected $primaryKey = 'id_tipo_cliente';
+    protected $table = 'area_empleado';
+    protected $primaryKey = 'id_area';
 
     protected $fillable = [
-        'nombre_tipo',
-        'descripcion',
-        'descuento_asociado'
+        'nombre_area',
+        'descripcion', 
     ];
     static public function listado_datatable ($columnName, $columnSortOrder, $searchValue, $start, $rowperpage){
         if($rowperpage < 0){
@@ -32,40 +31,41 @@ class TipoCliente extends Model
                         :rowperpage::int as rowperpage,
                         :searchvalue::varchar(50) as palabra
                     ),
-                tipo_cliente_datos as (
+              	    nombre_area_datos as (
                     select
-                        tp.id_tipo_cliente
-                        ,tp.nombre_tipo
-                        ,tp.descripcion
-                        ,tp.descuento_asociado
-                        ,count(tp.id_tipo_cliente) over() as totalrecords
-                        from tipo_cliente tp
+                        c.id_area
+                        ,tp.nombre_area
+                        ,c.descripcion
+                        ,count(c.id_area) over() as totalrecords
+                        from cliente c
+                        JOIN tipo_empleado tp ON c.id_tipo_empleado = tp.id_tipo_empleado
                 ),
-                tipo_cliente_busqueda as (
-                    select p.* , count(id_tipo_cliente) over() as totalrecordswithfilter
-                    from tipo_cliente_datos p
+                area_busqueda as (
+                    select p.* , count(id_area) over() as totalrecordswithfilter
+                    from id_
                     cross join datos_input di
-                    where nombre_tipo ilike  '%'||di.palabra||'%'
+                    where area_empleado ilike  '%'||di.palabra||'%'
                 ),
-                tipo_cliente_paginado as (
+                area_empleado_paginado as (
                     select
                     *
-                    from tipo_cliente_busqueda
+                    from cliente_busqueda
                     order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )
-                select * from tipo_cliente_paginado
+                select * from area_empleado_paginado
             "),
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );
     }
-    static public function actualizar($id_tipo_cliente, $data){
-        if(empty($id_tipo_cliente) || empty($data)){
+    
+    static public function actualizar($id_area, $data){
+        if(empty($id_area) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
 
-        $res = self::where("id_tipo_cliente", $id_tipo_cliente)
+        $res = self::where("id_area", $id_tipo)
                 ->update($data);
 
         if(isset($res)){
@@ -83,12 +83,12 @@ class TipoCliente extends Model
         }
     }
 
-    static public function get($id_tipo_cliente){
-        if(empty($id_tipo_cliente)){
+    static public function get($id_area){
+        if(empty($id_area)){
             return respuesta::error("Datos no validos para la busqueda.");
         }
 
-        $res = self::where("id_tipo_cliente", $id_tipo_cliente)
+        $res = self::where("id_area", $id_area)
                 ->first();
 
         if(isset($res)){
@@ -97,17 +97,17 @@ class TipoCliente extends Model
             return respuesta::error("No se ha encontrado data relacionada.");
         }
     }
-    static public function listar_tipo_cliente (){
+    static public function listar_area_empleado (){
         return DB::select(
             DB::raw("
             SELECT
-                    tc.id_tipo_cliente
-                    , tc.nombre_tipo
-                FROM tipo_cliente tc
+                    tc.id_area
+                    , tc.nombre_area
+                FROM area_empleado tc
             "),
             [ ]
         );
     }
 
 
-}
+}    

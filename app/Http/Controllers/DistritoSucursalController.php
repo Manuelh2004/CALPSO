@@ -7,19 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\respuesta;
-use App\Models\TipoCliente;
+use App\Models\DistritoSucursal;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\ParameterSystem;
 use Illuminate\Support\Facades\DB;
 
-class TipoClienteController extends Controller
+class DistritoSucursalController extends Controller
 {
     public function index() {
-        $user_roles = ParameterSystem::list_byType('000001');
-
-        return View::make('pages.tipo_cliente.index.content')
-            ->with("psis_user_roles", $user_roles);
+        return view('pages.distrito_sucursal.index.content');
     }
     public function lista_ajax (Request $request): bool|string{
        ## Read value
@@ -37,7 +34,7 @@ class TipoClienteController extends Controller
        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
        $searchValue = (is_null($search_arr['value'])) ? '' : $search_arr['value']; // Search value
 
-       $lista = TipoCliente::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
+       $lista = DistritoSucursal::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
 
        $totalRecords = (count($lista)>0)? $lista[0]->totalrecords: 0;
        $totalRecordswithFilter = (count($lista)>0)? $lista[0]->totalrecordswithfilter: 0;
@@ -56,22 +53,21 @@ class TipoClienteController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
+        $id_distrito = $request->input("id_distrito", 0);
 
-        $id_tipo_cliente = $request->input("id_tipo_cliente", 0);
-
-        return TipoCliente::get($id_tipo_cliente);
+        return DistritoSucursal::get($id_distrito);
     }
-
+            
     public function update (Request $request){
         $user_request = Auth::guard('web')->user();
 
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $id_tipo_cliente = $request->input("id_tipo_cliente", 0);
-        $data_request = $request->only(['nombre_tipo', 'descuento_asociado', 'descripcion']);
+        $id_distrito = $request->input("id_distrito", 0);
+        $data_request = $request->only(['nombre_distrito']);
 
-        return TipoCliente::actualizar($id_tipo_cliente, $data_request);
+        return DistritoSucursal::actualizar($id_distrito, $data_request);
     }
     public function create(Request $request)
     {
@@ -79,8 +75,8 @@ class TipoClienteController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $data_request = $request->only(['nombre_tipo', 'descuento_asociado', 'descripcion']);
+        $data_request = $request->only(['nombre_distrito']);
 
-        return TipoCliente::crear($data_request);
+        return DistritoSucursal::crear($data_request);
     }
 }

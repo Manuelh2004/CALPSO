@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\respuesta;
@@ -75,4 +76,10 @@ class OrdenController extends Controller
         $orden->delete();
         return response()->json(null, 204);
     }
+=======
+
+class OrdenController extends Controller
+{
+    //
+>>>>>>> origin/manuel
 }

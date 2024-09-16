@@ -7,21 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\respuesta;
 
-class Cliente extends Model
+class Empleado extends Model
 {
-    use HasFactory;
-    protected $table = 'cliente';
-    protected $primaryKey = 'id_cliente';
+    protected $table ='empleado';
+    protected $primaryKey = 'id_empleado';
 
     protected $fillable = [
-        'id_tipo_cliente',
-        'nombre_cliente',
-        'genero',
+        'id_area',
+        'id_cargo',
+        'id_tipo',
+        'id_sucursal',
+        'nombre_empleado',
         'edad',
-        'telefono',
-        'estado ',
+        'correo_electronico',
+        'genero',
+        'estado',
         'password'
     ];
+
     static public function listado_datatable ($columnName, $columnSortOrder, $searchValue, $start, $rowperpage){
         if($rowperpage < 0){
             $rowperpage = null;
@@ -38,42 +41,44 @@ class Cliente extends Model
                     ),
               			cliente_datos as (
                     select
-                        c.id_cliente
+                        c.id_empleado
                         ,tp.nombre_tipo
-                        ,c.nombre_cliente
-                        ,c.genero
+                        ,c.nombre_empleado
                         ,c.edad
-                        ,c.telefono
+                        ,c.correo_electronico
+                        ,c.genero
                         ,c.estado
-                        ,count(c.id_cliente) over() as totalrecords
-                        from cliente c
-                        JOIN tipo_cliente tp ON c.id_tipo_cliente = tp.id_tipo_cliente
+                        ,c.password
+                        ,count(c.id_empleado) over() as totalrecords
+                        from empleado c
+                        JOIN tipo_empleado tp ON c.id_tipo = tp.id_tipo
                 ),
-                cliente_busqueda as (
-                    select p.* , count(id_cliente) over() as totalrecordswithfilter
+                empleado_busqueda as (
+                    select p.* , count(id_empleado) over() as totalrecordswithfilter
                     from cliente_datos p
                     cross join datos_input di
-                    where nombre_cliente ilike  '%'||di.palabra||'%'
+                    where nombre_empleado ilike  '%'||di.palabra||'%'
                 ),
-                cliente_paginado as (
+                empleado_paginado as (
                     select
                     *
-                    from cliente_busqueda
+                    from empleado_busqueda
                     order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )
-                select * from cliente_paginado
+                select * from empleado_paginado
             "),
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );
     }
-    static public function actualizar($id_cliente, $data){
-        if(empty($id_cliente) || empty($data)){
+
+    static public function actualizar($id_empleado, $data){
+        if(empty($id_empleado) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
 
-        $res = self::where("id_cliente", $id_cliente)
+        $res = self::where("id_cliente", $id_empleado)
                 ->update($data);
 
         if(isset($res)){
@@ -82,41 +87,43 @@ class Cliente extends Model
             return respuesta::error("No se ha logrado hacer el cambio de informacion.");
         }
     }
+
     static public function crear($data){
         $res = self::create($data);
         if(isset($res)){
             return respuesta::ok($res);
         } else {
-            return respuesta::error("No se ha podido registrar");
+            return respuesta::error("Nel perro, brazo de 35 xd");
         }
     }
 
-    static public function get($id_cliente){
+    static public function get($id_empleado){
         if(empty($id_cliente)){
             return respuesta::error("Datos no validos para la busqueda.");
         }
 
-        $res = self::where("id_cliente", $id_cliente)
+        $res = self::where("id_empleado", $id_empleado)
                 ->first();
 
         if(isset($res)){
             return respuesta::ok($res);
         } else {
-            return respuesta::error("No se ha encontrado data relacionada.");
+            return respuesta::error("No se ha encontrado ninguna informacion.");
         }
     }
-    static public function cambiar_estado($id_cliente, $estado){
-        return self::actualizar($id_cliente,[
+
+    static public function cambiar_estado($id_empleado, $estado){
+        return self::actualizar($id_empleado,[
             "estado" => $estado
         ]);
     }
 
-    static public function dar_baja ($id_cliente){
-        return self::cambiar_estado($id_cliente, 0);
+    static public function dar_baja ($id_empleado){
+        return self::cambiar_estado($id_empleado, 0);
     }
 
-    static public function dar_alta ($id_cliente){
-        return self::cambiar_estado($id_cliente, 1);
+    static public function dar_alta ($id_empleado){
+        return self::cambiar_estado($id_empleado, 1);
     }
-
+    
 }

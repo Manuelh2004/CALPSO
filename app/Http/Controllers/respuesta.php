@@ -15,18 +15,16 @@ class respuesta extends Controller
     public static function crear($estado, $mensaje, $status, $payload = NULL)
     {
     	if (isset($payload)){
-    		return ["estado" => $estado, "mensaje" => $mensaje, "status" => $status, "payload" => $payload];	
+    		return ["estado" => $estado, "mensaje" => $mensaje, "status" => $status, "payload" => $payload];
     	} else {
-    		return ["estado" => $estado, "mensaje" => $mensaje, "status" => $status];	
+    		return ["estado" => $estado, "mensaje" => $mensaje, "status" => $status];
     	}
     }
-
     public static function error($mensaje, $status = 500)
     {
         return self::crear(false, $mensaje, $status);
 
     }
-
     public static function ok($payload = NULL, $mensaje = "OK")
     {
     	if (isset($payload)){
@@ -34,7 +32,7 @@ class respuesta extends Controller
     	} else {
     		return self::crear(true, $mensaje, 200);
     	}
-    	
+
 
     }
 }

@@ -1,8 +1,13 @@
 <?php
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/manuel
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\respuesta;
 
@@ -59,4 +64,10 @@ class Orden extends Model
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );
 }
+=======
+
+class Orden extends Model
+{
+    use HasFactory;
+>>>>>>> origin/manuel
 }

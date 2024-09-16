@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\respuesta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\respuesta;
 
-class TipoCliente extends Model
+class Insumo extends Model
 {
     use HasFactory;
-    protected $table = 'tipo_cliente';
-    protected $primaryKey = 'id_tipo_cliente';
+    protected $table = 'insumo';
+    protected $primaryKey = 'id_insumo';
 
     protected $fillable = [
-        'nombre_tipo',
+        'nombre_insumo',
         'descripcion',
-        'descuento_asociado'
+        'stock'
     ];
     static public function listado_datatable ($columnName, $columnSortOrder, $searchValue, $start, $rowperpage){
         if($rowperpage < 0){
@@ -32,40 +32,40 @@ class TipoCliente extends Model
                         :rowperpage::int as rowperpage,
                         :searchvalue::varchar(50) as palabra
                     ),
-                tipo_cliente_datos as (
+                                insumo_datos as (
                     select
-                        tp.id_tipo_cliente
-                        ,tp.nombre_tipo
-                        ,tp.descripcion
-                        ,tp.descuento_asociado
-                        ,count(tp.id_tipo_cliente) over() as totalrecords
-                        from tipo_cliente tp
+                        i.id_insumo
+                        ,i.nombre_insumo
+                        ,i.descripcion
+                        ,i.stock
+                        ,count(i.id_insumo) over() as totalrecords
+                        from insumo i
                 ),
-                tipo_cliente_busqueda as (
-                    select p.* , count(id_tipo_cliente) over() as totalrecordswithfilter
-                    from tipo_cliente_datos p
+               insumo_busqueda as (
+                    select p.* , count(id_insumo) over() as totalrecordswithfilter
+                    from insumo_datos p
                     cross join datos_input di
-                    where nombre_tipo ilike  '%'||di.palabra||'%'
+                    where nombre_insumo ilike  '%'||di.palabra||'%'
                 ),
-                tipo_cliente_paginado as (
+                insumo_paginado as (
                     select
                     *
-                    from tipo_cliente_busqueda
+                    from insumo_busqueda
                     order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )
-                select * from tipo_cliente_paginado
+                select * from insumo_paginado
             "),
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );
     }
-    static public function actualizar($id_tipo_cliente, $data){
-        if(empty($id_tipo_cliente) || empty($data)){
+    static public function actualizar($id_insumo, $data){
+        if(empty($id_insumo) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
 
-        $res = self::where("id_tipo_cliente", $id_tipo_cliente)
+        $res = self::where("id_insumo", $id_insumo)
                 ->update($data);
 
         if(isset($res)){
@@ -82,13 +82,11 @@ class TipoCliente extends Model
             return respuesta::error("No se ha podido registrar");
         }
     }
-
-    static public function get($id_tipo_cliente){
-        if(empty($id_tipo_cliente)){
+    static public function get($id_insumo){
+        if(empty($id_insumo)){
             return respuesta::error("Datos no validos para la busqueda.");
         }
-
-        $res = self::where("id_tipo_cliente", $id_tipo_cliente)
+        $res = self::where("id_insumo", $id_insumo)
                 ->first();
 
         if(isset($res)){
@@ -97,17 +95,4 @@ class TipoCliente extends Model
             return respuesta::error("No se ha encontrado data relacionada.");
         }
     }
-    static public function listar_tipo_cliente (){
-        return DB::select(
-            DB::raw("
-            SELECT
-                    tc.id_tipo_cliente
-                    , tc.nombre_tipo
-                FROM tipo_cliente tc
-            "),
-            [ ]
-        );
-    }
-
-
 }

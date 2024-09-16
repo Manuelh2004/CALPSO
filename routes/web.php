@@ -14,10 +14,14 @@ use App\Http\Controllers;
 |
 */
 
-use App\Http\Controllers\LogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TipoClienteController; //TipoCliente
 use App\Http\Controllers\ClienteController; //Cliente
+use App\Http\Controllers\DistritoSucursalController; //Distrito
+use App\Http\Controllers\SucursalController; //Sucursal
+use App\Http\Controllers\InsumoController; //Insumo
+use App\Http\Controllers\MetodoEntregaController; //MetodoEntrega
+
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
@@ -47,13 +51,61 @@ Route::middleware(["auth:web"])->group(function(){
     });
 
     Route::get('/inicio', function() { return view('pages.inicio.index.content'); })->name('inicio');
-    Route::get('/logs', [LogController::class, 'index'])->name('logs');
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::get('/lista_user_ajax', [UserController::class, 'lista_user_ajax']);
     Route::get('/tipo_cliente', [TipoClienteController::class, 'index'])->name('tipo_cliente');
     Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
+    Route::get('/distrito_sucursal',[DistritoSucursalController::class, 'index'])->name('distrito_sucursal');
+    Route::get('/sucursal',[SucursalController::class, 'index'])->name('sucursal');
+    Route::get('/insumo',[InsumoController::class, 'index'])->name('insumo');
+    //Principal
+    Route::view('/principal','pages.principal.index')->name('principal');
+    //
+    Route::get('/metodo_entrega',[MetodoEntregaController::class, 'index'])->name('metodo_entrega');
 });
 
+Route::group([
+    'prefix' => 'crud/metodo_entrega',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [MetodoEntregaController::class, 'lista_ajax']);
+    Route::post('data', [MetodoEntregaController::class, 'data']);
+    Route::post('update', [MetodoEntregaController::class, 'update']);
+    Route::post('create', [MetodoEntregaController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/insumo',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [InsumoController::class, 'lista_ajax']);
+    Route::post('data', [InsumoController::class, 'data']);
+    Route::post('update', [InsumoController::class, 'update']);
+    Route::post('create', [InsumoController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/sucursal',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [SucursalController::class, 'lista_ajax']);
+    Route::post('data', [SucursalController::class, 'data']);
+    Route::post('update', [SucursalController::class, 'update']);
+    Route::post('dar_baja', [SucursalController::class, 'dar_baja']);
+    Route::post('dar_alta', [SucursalController::class, 'dar_alta']);
+    Route::post('create', [SucursalController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/distrito_sucursal',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [DistritoSucursalController::class, 'lista_ajax']);
+    Route::post('data', [DistritoSucursalController::class, 'data']);
+    Route::post('update', [DistritoSucursalController::class, 'update']);
+    Route::post('create', [DistritoSucursalController::class, 'create']);
+});
 Route::group([
     'prefix' => 'crud/tipo_cliente',
     'middleware' => 'auth:web'
@@ -118,8 +170,6 @@ if(ENV("APP_DEBUG")){
             // $pageName = 'sales';
             return view('dashboard')->with($data);
         });
-
-
 
         // APPS
         Route::prefix('apps')->group(function () {

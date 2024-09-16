@@ -2,21 +2,19 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\respuesta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\respuesta;
 
-class TipoCliente extends Model
+class DistritoSucursal extends Model
 {
     use HasFactory;
-    protected $table = 'tipo_cliente';
-    protected $primaryKey = 'id_tipo_cliente';
+    protected $table = 'distrito_sucursal';
+    protected $primaryKey = 'id_distrito';
 
     protected $fillable = [
-        'nombre_tipo',
-        'descripcion',
-        'descuento_asociado'
+        'nombre_distrito'
     ];
     static public function listado_datatable ($columnName, $columnSortOrder, $searchValue, $start, $rowperpage){
         if($rowperpage < 0){
@@ -32,40 +30,38 @@ class TipoCliente extends Model
                         :rowperpage::int as rowperpage,
                         :searchvalue::varchar(50) as palabra
                     ),
-                tipo_cliente_datos as (
+                             distrito_sucursal_datos as (
                     select
-                        tp.id_tipo_cliente
-                        ,tp.nombre_tipo
-                        ,tp.descripcion
-                        ,tp.descuento_asociado
-                        ,count(tp.id_tipo_cliente) over() as totalrecords
-                        from tipo_cliente tp
+                        ds.id_distrito
+                        ,ds.nombre_distrito
+                        ,count(ds.id_distrito) over() as totalrecords
+                        from distrito_sucursal ds
                 ),
-                tipo_cliente_busqueda as (
-                    select p.* , count(id_tipo_cliente) over() as totalrecordswithfilter
-                    from tipo_cliente_datos p
+                distrito_sucursal_busqueda as (
+                    select p.* , count(id_distrito) over() as totalrecordswithfilter
+                    from distrito_sucursal_datos p
                     cross join datos_input di
-                    where nombre_tipo ilike  '%'||di.palabra||'%'
+                    where nombre_distrito ilike  '%'||di.palabra||'%'
                 ),
-                tipo_cliente_paginado as (
+                distrito_sucursal_paginado as (
                     select
                     *
-                    from tipo_cliente_busqueda
+                    from distrito_sucursal_busqueda
                     order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )
-                select * from tipo_cliente_paginado
+                select * from distrito_sucursal_paginado
             "),
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );
     }
-    static public function actualizar($id_tipo_cliente, $data){
-        if(empty($id_tipo_cliente) || empty($data)){
+    static public function actualizar($id_distrito, $data){
+        if(empty($id_distrito) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
 
-        $res = self::where("id_tipo_cliente", $id_tipo_cliente)
+        $res = self::where("id_distrito", $id_distrito)
                 ->update($data);
 
         if(isset($res)){
@@ -83,12 +79,12 @@ class TipoCliente extends Model
         }
     }
 
-    static public function get($id_tipo_cliente){
-        if(empty($id_tipo_cliente)){
+    static public function get($id_distrito){
+        if(empty($id_distrito)){
             return respuesta::error("Datos no validos para la busqueda.");
         }
 
-        $res = self::where("id_tipo_cliente", $id_tipo_cliente)
+        $res = self::where("id_distrito", $id_distrito)
                 ->first();
 
         if(isset($res)){
@@ -97,13 +93,13 @@ class TipoCliente extends Model
             return respuesta::error("No se ha encontrado data relacionada.");
         }
     }
-    static public function listar_tipo_cliente (){
+    static public function listar_distrito(){
         return DB::select(
             DB::raw("
-            SELECT
-                    tc.id_tipo_cliente
-                    , tc.nombre_tipo
-                FROM tipo_cliente tc
+          SELECT
+                    ds.id_distrito
+                    , ds.nombre_distrito
+                FROM distrito_sucursal ds
             "),
             [ ]
         );
