@@ -17,7 +17,7 @@ class DetalleOrden extends Model
     {
         return $this->belongsTo(Orden::class, 'id_orden');
     }
-
+    
     public function itemMenu()
     {
         return $this->belongsTo(ItemMenu::class, 'id_item_menu');
