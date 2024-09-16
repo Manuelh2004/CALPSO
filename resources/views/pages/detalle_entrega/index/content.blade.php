@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('titulo','USUARIOS')
+@section('titulo','detalle_entrega')
 
-@include("pages.metodo_pago.index.script")
-@include("pages.metodo_pago.index.head")
+@include("pages.detalle_entrega.index.script")
+@include("pages.detalle_entrega.index.head")
 
 @section('content')
 
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Unidades de Medición</h5>
+                        <h5 class="">Detalle_Entrega</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -23,9 +23,13 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombre_Metodo_Pago</th>
-                                    <th>Descripcion</th>
+                                    <th>ID_Detalle_Entrega</th>
+                                    <th>ID_Metodo_Entrega</th>
+                                    <th>Direccion_Entrega</th>
+                                    <th>Estado_Entrega</th>
+                                    <th>Comentarios</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
                                 </tr>
                             </thead>  
                             </table>
@@ -38,6 +42,6 @@
 
     </div>
 
-    @include("pages.metodo_pago.componentes.modal");
+    @include("pages.detalle_entrega.componentes.modal");
 
 @endsection
