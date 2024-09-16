@@ -10,20 +10,20 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <title>@yield('titulo',"") | {{ENV("APP_NAME")}}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset(ENV('APP_FAVICON')) }}"/>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
-    @include('inc.styles')    
+    @include('inc.styles')
     <link href="{{asset('assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
     @yield('head')
 </head>
 <body >
-    
+
     <!-- BEGIN LOADER -->
     <div id="preloader" class="preloader" style="background: #ffffff80">
         <div class="loader">
@@ -34,7 +34,7 @@
     <!--  END LOADER -->
 
     @include('inc.navbar')
-    
+
     <!--  BEGIN MAIN CONTAINER  -->
     <div class="main-container" id="container">
 
@@ -56,7 +56,7 @@
     <!-- END MAIN CONTAINER -->
 
     @include('inc.scripts')
-    
+
     @yield('script')
 </body>
 </html>

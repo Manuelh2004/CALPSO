@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('detalle_entrega', function (Blueprint $table) {
-            $table->id('Id_DetalleEntrega');
-            $table->integer('Id_MetodoEntrega');
-            $table->string('DireccionEntrega', 255);
-            $table->enum('Estado', ['activo', 'inactivo'])->default('activo'); // Valor predeterminado 'activo'
-            $table->text('Comentario')->nullable();
-            $table->date('Fecha');
-            $table->time('Hora');
+            $table->id('id_detalle_entrega');
+            $table->integer('id_metodo_entrega');
+            $table->string('direccion_entrega', 255);
+            $table->unsignedTinyInteger('estado')->nullable()->default(1);
+            $table->text('comentario')->nullable();
+            $table->date('fecha');
+            $table->time('hora');
             $table->timestamps();
         });
     }

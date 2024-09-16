@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('insumo_item', function (Blueprint $table) {
-            $table->integer('Id_ItemMenu');
-            $table->integer('Id_Insumo');
-            $table->integer('Cantidad')->default(0);
+            $table->integer('id_item_menu');
+            $table->integer('id_insumo');
+            $table->integer('cantidad')->default(0);
             $table->timestamps();
             // Clave primaria compuesta
-            $table->primary(['Id_ItemMenu', 'Id_Insumo']);
+            $table->primary(['id_item_menu', 'id_insumo']);
         });
     }
 

@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tipo_empleado', function (Blueprint $table) {
-            $table->id('Id_Tipo');
-            $table->string('NombreTipo',50);
-            $table->text('Descripcion')->nullable(); //Permitir valores nulos
+            $table->id('id_tipo');
+            $table->string('nombre_tipo',50);
+            $table->text('descripcion')->nullable(); //Permitir valores nulos
             $table->timestamps();
         });
     }

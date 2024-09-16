@@ -16,12 +16,17 @@ use App\Http\Controllers;
 
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\TipoClienteController; //TipoCliente
+use App\Http\Controllers\ClienteController; //Cliente
+use App\Http\Controllers\DistritoSucursalController; //Distrito
+use App\Http\Controllers\SucursalController; //Sucursal
+use App\Http\Controllers\InsumoController; //Sucursal
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
 
-Route::group(['prefix' => 'auth'], function () {	
+
+Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [Auth\LoginController::class, 'login'])->name('auth/login');
     Route::get('logout', [Auth\LoginController::class, 'logout']);
 });
@@ -30,12 +35,73 @@ Route::middleware(["auth:web"])->group(function(){
     Route::get('/', function () {
         return view('pages.inicio.index.content');
     });
-    
+
     Route::get('/inicio', function() { return view('pages.inicio.index.content'); })->name('inicio');
     Route::get('/logs', [LogController::class, 'index'])->name('logs');
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::get('/lista_user_ajax', [UserController::class, 'lista_user_ajax']);
-    
+    Route::get('/tipo_cliente', [TipoClienteController::class, 'index'])->name('tipo_cliente');
+    Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
+    Route::get('/distrito_sucursal',[DistritoSucursalController::class, 'index'])->name('distrito_sucursal');
+    Route::get('/sucursal',[SucursalController::class, 'index'])->name('sucursal');
+    Route::get('/insumo',[InsumoController::class, 'index'])->name('insumo');
+    Route::view('/principal','pages.principal.index')->name('principal');
+});
+Route::group([
+    'prefix' => 'crud/insumo',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [InsumoController::class, 'lista_ajax']);
+    Route::post('data', [InsumoController::class, 'data']);
+    Route::post('update', [InsumoController::class, 'update']);
+    Route::post('create', [InsumoController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/sucursal',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [SucursalController::class, 'lista_ajax']);
+    Route::post('data', [SucursalController::class, 'data']);
+    Route::post('update', [SucursalController::class, 'update']);
+    Route::post('dar_baja', [SucursalController::class, 'dar_baja']);
+    Route::post('dar_alta', [SucursalController::class, 'dar_alta']);
+    Route::post('create', [SucursalController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/distrito_sucursal',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [DistritoSucursalController::class, 'lista_ajax']);
+    Route::post('data', [DistritoSucursalController::class, 'data']);
+    Route::post('update', [DistritoSucursalController::class, 'update']);
+    Route::post('create', [DistritoSucursalController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/tipo_cliente',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [TipoClienteController::class, 'lista_ajax']);
+    Route::post('data', [TipoClienteController::class, 'data']);
+    Route::post('update', [TipoClienteController::class, 'update']);
+    Route::post('dar_baja', [TipoClienteController::class, 'dar_baja']);
+    Route::post('dar_alta', [TipoClienteController::class, 'dar_alta']);
+    Route::post('create', [TipoClienteController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/cliente',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [ClienteController::class, 'lista_ajax']);
+    Route::post('data', [ClienteController::class, 'data']);
+    Route::post('update', [ClienteController::class, 'update']);
+    Route::post('dar_baja', [ClienteController::class, 'dar_baja']);
+    Route::post('dar_alta', [ClienteController::class, 'dar_alta']);
+    Route::post('create', [ClienteController::class, 'create']);
 });
 
 Route::group([
@@ -65,7 +131,7 @@ if(ENV("APP_DEBUG")){
             // $pageName = 'analytics';
             return view('dashboard2')->with($data);
         });
-        
+
         Route::get('/sales', function() {
             // $category_name = '';
             $data = [
@@ -77,9 +143,9 @@ if(ENV("APP_DEBUG")){
             // $pageName = 'sales';
             return view('dashboard')->with($data);
         });
-    
-    
-    
+
+
+
         // APPS
         Route::prefix('apps')->group(function () {
             Route::get('/calendar', function() {
@@ -171,7 +237,7 @@ if(ENV("APP_DEBUG")){
                 return view('pages.apps.apps_todoList')->with($data);
             });
         });
-    
+
         // Authentication
         Route::prefix('authentication')->group(function () {
             Route::get('/lockscreen_boxed', function() {
@@ -263,8 +329,8 @@ if(ENV("APP_DEBUG")){
                 return view('pages.authentication.auth_register')->with($data);
             });
         });
-    
-    
+
+
         // Charts
         // Route::prefix('charts')->group(function () {
             Route::get('/charts', function() {
@@ -274,14 +340,14 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'charts',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'charts';
                 return view('pages.charts.charts_apex')->with($data);
             });
         // });
-    
-    
+
+
         // Components
         Route::prefix('components')->group(function () {
             Route::get('/accordions', function() {
@@ -291,7 +357,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'accordions',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'accordion';
                 return view('pages.components.component_accordion')->with($data);
@@ -303,7 +369,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'blockui',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'blockui';
                 return view('pages.components.component_blockui')->with($data);
@@ -315,7 +381,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'bootstrap_carousel',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'bootstrap_carousel';
                 return view('pages.components.component_bootstrap_carousel')->with($data);
@@ -327,7 +393,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'cards',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'cards';
                 return view('pages.components.component_cards')->with($data);
@@ -339,7 +405,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'countdown',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'countdown';
                 return view('pages.components.component_countdown')->with($data);
@@ -351,7 +417,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'counter',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'counter';
                 return view('pages.components.component_counter')->with($data);
@@ -363,7 +429,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'lightbox',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'lightbox';
                 return view('pages.components.component_lightbox')->with($data);
@@ -375,7 +441,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'list_group',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'list_group';
                 return view('pages.components.component_list_group')->with($data);
@@ -387,7 +453,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'media_object',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'media_object';
                 return view('pages.components.component_media_object')->with($data);
@@ -399,7 +465,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'modals',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'modal';
                 return view('pages.components.component_modal')->with($data);
@@ -411,7 +477,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'pricing_table',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'pricing_table';
                 return view('pages.components.component_pricing_table')->with($data);
@@ -423,7 +489,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'session_timeout',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'session_timeout';
                 return view('pages.components.component_session_timeout')->with($data);
@@ -435,7 +501,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'notifications',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'snackbar';
                 return view('pages.components.component_snackbar')->with($data);
@@ -447,7 +513,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'sweet_alerts',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'sweetalert';
                 return view('pages.components.component_sweetalert')->with($data);
@@ -459,7 +525,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'tabs',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'tabs';
                 return view('pages.components.component_tabs')->with($data);
@@ -471,14 +537,14 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'timeline',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'timeline';
                 return view('pages.components.component_timeline')->with($data);
             });
         });
-    
-    
+
+
         // Drag and Drop
         // Route::prefix('drag_n_drop')->group(function () {
         Route::get('/drag_and_drop', function() {
@@ -488,14 +554,14 @@ if(ENV("APP_DEBUG")){
                 'page_name' => 'drag_n_drop',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
             ];
             // $pageName = 'drag_n_drop';
             return view('pages.drag_and_drop.dragndrop_dragula')->with($data);
         });
         // });
-    
-    
+
+
         // Elements
         Route::prefix('elements')->group(function () {
             Route::get('/alerts', function() {
@@ -505,7 +571,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'alerts',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'alerts';
                 return view('pages.elements.element_alerts')->with($data);
@@ -517,7 +583,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'avatars',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'avatars';
                 return view('pages.elements.element_avatar')->with($data);
@@ -529,7 +595,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'badges',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'badges';
                 return view('pages.elements.element_badges')->with($data);
@@ -541,7 +607,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'breadcrumbs',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'breadcrumbs';
                 return view('pages.elements.element_breadcrumbs')->with($data);
@@ -553,7 +619,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'button_group',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'buttons_group';
                 return view('pages.elements.element_buttons_group')->with($data);
@@ -565,7 +631,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'buttons',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'buttons';
                 return view('pages.elements.element_buttons')->with($data);
@@ -577,7 +643,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'color_library',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'color_library';
                 return view('pages.elements.element_color_library')->with($data);
@@ -589,7 +655,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'dropdown',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'dropdown';
                 return view('pages.elements.element_dropdown')->with($data);
@@ -601,7 +667,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'infobox',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'infobox';
                 return view('pages.elements.element_infobox')->with($data);
@@ -613,7 +679,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'jumbotron',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'jumbotron';
                 return view('pages.elements.element_jumbotron')->with($data);
@@ -625,7 +691,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'loaders',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'loader';
                 return view('pages.elements.element_loader')->with($data);
@@ -637,7 +703,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'pagination',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'pagination';
                 return view('pages.elements.element_pagination')->with($data);
@@ -649,7 +715,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'popovers',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'popovers';
                 return view('pages.elements.element_popovers')->with($data);
@@ -661,7 +727,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'progress_bar',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'progress_bar';
                 return view('pages.elements.element_progress_bar')->with($data);
@@ -673,7 +739,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'search',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'search';
                 return view('pages.elements.element_search')->with($data);
@@ -685,7 +751,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'tooltips',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'tooltips';
                 return view('pages.elements.element_tooltips')->with($data);
@@ -697,7 +763,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'treeview',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'treeview';
                 return view('pages.elements.element_treeview')->with($data);
@@ -709,13 +775,13 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'typography',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'typography';
                 return view('pages.elements.element_typography')->with($data);
             });
         });
-    
+
         // Font Icons
         // Route::prefix('fonticons')->group(function () {
         Route::get('/font_icons', function() {
@@ -725,13 +791,13 @@ if(ENV("APP_DEBUG")){
                 'page_name' => 'font_icons',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
             ];
             // $pageName = 'fonticons';
             return view('pages.fonticons.fonticons')->with($data);
         });
         // });
-    
+
         // Forms
         Route::prefix('forms')->group(function () {
             Route::get('/basic', function() {
@@ -741,7 +807,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'basic',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'bootstrap_basic';
                 return view('pages.forms.form_bootstrap_basic')->with($data);
@@ -753,7 +819,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'bootstrap_select',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'bootstrap_select';
                 return view('pages.forms.form_bootstrap_select')->with($data);
@@ -765,7 +831,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'touchspin',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'bootstrap_touchspin';
                 return view('pages.forms.form_bootstrap_touchspin')->with($data);
@@ -777,7 +843,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'checkbox_radio',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'checkbox_radio';
                 return view('pages.forms.form_checkbox_radio')->with($data);
@@ -789,7 +855,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'clipboard',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'clipboard';
                 return view('pages.forms.form_clipboard')->with($data);
@@ -801,7 +867,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'date_range_picker',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'date_range_picker';
                 return view('pages.forms.form_date_range_picker')->with($data);
@@ -813,7 +879,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'file_upload',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'fileupload';
                 return view('pages.forms.form_fileupload')->with($data);
@@ -825,7 +891,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'input_group',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'input_group_basic';
                 return view('pages.forms.form_input_group_basic')->with($data);
@@ -837,7 +903,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'input_mask',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'input_mask';
                 return view('pages.forms.form_input_mask')->with($data);
@@ -849,7 +915,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'layouts',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'layouts';
                 return view('pages.forms.form_layouts')->with($data);
@@ -861,7 +927,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'markdown',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'markdown';
                 return view('pages.forms.form_markdown')->with($data);
@@ -873,7 +939,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'maxlength',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'maxlength';
                 return view('pages.forms.form_maxlength')->with($data);
@@ -885,7 +951,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'quill',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'quill';
                 return view('pages.forms.form_quill')->with($data);
@@ -897,7 +963,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'select2',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'select2';
                 return view('pages.forms.form_select2')->with($data);
@@ -909,7 +975,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'switches',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'switches';
                 return view('pages.forms.form_switches')->with($data);
@@ -921,7 +987,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'typeahead',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'typeahead';
                 return view('pages.forms.form_typeahead')->with($data);
@@ -933,7 +999,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'validation',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'validation';
                 return view('pages.forms.form_validation')->with($data);
@@ -945,13 +1011,13 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'wizards',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 100,
-    
+
                 ];
                 // $pageName = 'wizard';
                 return view('pages.forms.form_wizard')->with($data);
             });
         });
-    
+
         // Maps
         Route::get('/maps', function() {
             // $category_name = '';
@@ -960,13 +1026,13 @@ if(ENV("APP_DEBUG")){
                 'page_name' => 'maps',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
             ];
             // $pageName = 'maps';
             return view('pages.maps.map_jvector')->with($data);
         });
-    
-    
+
+
         // Pages
         Route::prefix('pages')->group(function () {
             Route::get('/coming_soon', function() {
@@ -976,7 +1042,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'coming_soon',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'coming_soon';
                 return view('pages.pages.pages_coming_soon')->with($data);
@@ -988,7 +1054,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'contact_us',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'contact_us';
                 return view('pages.pages.pages_contact_us')->with($data);
@@ -1000,7 +1066,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'error404',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'error404';
                 return view('pages.pages.pages_error404')->with($data);
@@ -1012,7 +1078,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'error500',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'error500';
                 return view('pages.pages.pages_error500')->with($data);
@@ -1024,7 +1090,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'error503',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'error503';
                 return view('pages.pages.pages_error503')->with($data);
@@ -1036,7 +1102,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'faq',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'faq';
                 return view('pages.pages.pages_faq')->with($data);
@@ -1048,7 +1114,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'faq2',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'faq2';
                 return view('pages.pages.pages_faq2')->with($data);
@@ -1060,7 +1126,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'helpdesk',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'helpdesk';
                 return view('pages.pages.pages_helpdesk')->with($data);
@@ -1072,7 +1138,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'maintenence',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'maintenence';
                 return view('pages.pages.pages_maintenence')->with($data);
@@ -1084,13 +1150,13 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'privacy',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'privacy';
                 return view('pages.pages.pages_privacy')->with($data);
             });
         });
-    
+
         // Starter Kit
         Route::prefix('starter-kit')->group(function () {
             Route::get('/alternative_menu', function() {
@@ -1100,7 +1166,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'alt_menu',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'alt_menu';
                 return view('pages.starter-kit.starter_kit_alt_menu')->with($data);
@@ -1112,7 +1178,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'blank_page',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'blank_page';
                 return view('pages.starter-kit.starter_kit_blank_page')->with($data);
@@ -1124,7 +1190,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'boxed',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'boxed';
                 return view('pages.starter-kit.starter_kit_boxed')->with($data);
@@ -1136,14 +1202,14 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'breadcrumb',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'breadcrumb';
                 return view('pages.starter-kit.starter_kit_breadcrumbs')->with($data);
-            });        
+            });
         });
-    
-    
+
+
         // Tables
         Route::prefix('tables')->group(function () {
             Route::get('/bootstrap_basic', function() {
@@ -1153,7 +1219,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'bootstrap_basic_table',
                     'has_scrollspy' => 1,
                     'scrollspy_offset' => 140,
-    
+
                 ];
                 // $pageName = 'bootstrap_basic_table';
                 return view('pages.tables.table_basic')->with($data);
@@ -1166,7 +1232,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'alternative_pagination',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'alternative_pagination';
                     return view('pages.tables.table_dt_alternative_pagination')->with($data);
@@ -1178,7 +1244,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'basic-light',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'basic-light';
                     return view('pages.tables.table_dt_basic-light')->with($data);
@@ -1190,7 +1256,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'basic',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'basic';
                     return view('pages.tables.table_dt_basic')->with($data);
@@ -1202,7 +1268,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'custom',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'custom';
                     return view('pages.tables.table_dt_custom')->with($data);
@@ -1214,7 +1280,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'html5',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'html5';
                     return view('pages.tables.table_dt_html5')->with($data);
@@ -1226,7 +1292,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'live_dom_ordering',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'live_dom_ordering';
                     return view('pages.tables.table_dt_live_dom_ordering')->with($data);
@@ -1238,7 +1304,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'miscellaneous',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'miscellaneous';
                     return view('pages.tables.table_dt_miscellaneous')->with($data);
@@ -1250,7 +1316,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'multi-column_ordering',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'multi-column_ordering';
                     return view('pages.tables.table_dt_multi-column_ordering')->with($data);
@@ -1262,7 +1328,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'multiple_tables',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'multiple_tables';
                     return view('pages.tables.table_dt_multiple_tables')->with($data);
@@ -1274,7 +1340,7 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'ordering_sorting',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'ordering_sorting';
                     return view('pages.tables.table_dt_ordering_sorting')->with($data);
@@ -1286,14 +1352,14 @@ if(ENV("APP_DEBUG")){
                         'page_name' => 'range_search',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                     ];
                     // $pageName = 'range_search';
                     return view('pages.tables.table_dt_range_search')->with($data);
                 });
             });
         });
-    
+
         // Users
         Route::prefix('users')->group(function () {
             Route::get('/account_settings', function() {
@@ -1303,7 +1369,7 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'account_settings',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'account_settings';
                 return view('pages.users.user_account_setting')->with($data);
@@ -1315,13 +1381,13 @@ if(ENV("APP_DEBUG")){
                     'page_name' => 'profile',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
                 ];
                 // $pageName = 'profile';
                 return view('pages.users.user_profile')->with($data);
             });
         });
-    
+
         // Widgets
         Route::get('/widgets', function() {
             // $category_name = '';
@@ -1330,7 +1396,7 @@ if(ENV("APP_DEBUG")){
                 'page_name' => 'widgets',
                     'has_scrollspy' => 0,
                     'scrollspy_offset' => '',
-    
+
             ];
             // $pageName = 'widgets';
             return view('pages.widgets.widgets')->with($data);

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('insumo', function (Blueprint $table) {
-            $table->id('Id_Insumo');
-            $table->string('NombreInsumo', 100)->unique(); // Nombre único
-            $table->text('Descripcion')->nullable();
-            $table->integer('Stock')->unsigned()->default(0)->check('Stock >= 0'); // Stock no negativo
+            $table->id('id_insumo');
+            $table->string('nombre_insumo', 100)->unique(); // Nombre único
+            $table->text('descripcion')->nullable();
+            $table->integer('stock')->unsigned()->default(0)->check('stock >= 0'); // Stock no negativo
             $table->timestamps();
         });
     }

@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('historial_movimientos', function (Blueprint $table) {
-            $table->id('Id_HistorialMovimientos');
-            $table->integer('Id_ComprobantePago');
-            $table->string('Descripcion',200)->nullable();
+            $table->id('id_historial_movimientos');
+            $table->integer('id_comprobante_pago');
+            $table->string('descripcion',200)->nullable();
             $table->timestamps();
         });
     }
