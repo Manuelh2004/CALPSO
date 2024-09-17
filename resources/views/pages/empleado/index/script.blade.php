@@ -23,7 +23,7 @@
             // scrollX: true,
             // ajax: "venta_lista_ajax",
             ajax: {
-                "url": "lista_user_ajax", //"url": "crud/cliente/lista_ajax",
+                "url": "url": "crud/empleado/lista_ajax",
                 "data": function (d) {
                         // d.tipo_comprobante_id = $("#tipo-comprobante").val()
                 },
@@ -82,10 +82,17 @@
                 },
             ],
             columns: [
-                { data: 'user_id' },
-                { data: 'name' },
-                { data: 'user_email' },
-                { data: 'psis_user_role' },
+                { data: 'id_empleado' },
+                { data: 'id_area' },
+                { data: 'id_cargo' },
+                { data: 'id_tipo' },
+                { data: 'id_sucursal' },
+                { data: 'nombre_empleado' },
+                { data: 'edad' },
+                { data: 'correo_electronico' },
+                { data: 'genero' },
+                { data: 'estado' },
+                { data: 'password' },
                 { 
                     data: 'user_status',
                     render: function( data, type, row ) {
@@ -168,7 +175,7 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.usuarios.componentes.administrar_usuarios_script');
+        @include('pages.empleado.componentes.administrar_usuarios_script');
 
     });
 

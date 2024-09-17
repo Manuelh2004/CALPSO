@@ -82,10 +82,10 @@
                 },
             ],
             columns: [
-                { data: 'user_id' },
-                { data: 'name' },
-                { data: 'user_email' },
-                { data: 'psis_user_role' },
+                { data: 'id_detalle_metodo_pago' },
+                { data: 'id_metodo_pago' },
+                { data: 'id_comprbante_pago' },
+                { data: 'monto' },
                 { 
                     data: 'user_status',
                     render: function( data, type, row ) {
@@ -168,7 +168,7 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.usuarios.componentes.administrar_usuarios_script');
+        @include('pages.detalle_metodo_pago.componentes.administrar_usuarios_script');
 
     });
 
