@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\respuesta;
 
 
-class Cliente extends Model
+class areaEmpleado extends Model
 {
     use HasFactory;
     protected $table = 'area_empleado';
