@@ -23,10 +23,10 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Detalle_Metodo_Pago</th>
-                                    <th>ID_Metodo_Pago</th>
-                                    <th>ID_Comprobante_Pago</th>
-                                    <th>Monto</th>
+                                    <th>ID DETALLE METODO DE PAGO</th>
+                                    <th>ID METODO PAGO</th>
+                                    <th>ID COMPROBANTE DE PAGO</th>
+                                    <th>MONTO</th>
                                 </tr>
                             </thead>  
                             </table>

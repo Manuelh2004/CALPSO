@@ -23,9 +23,9 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Tipo</th>
-                                    <th>nombre_tipo</th>
-                                    <th>descripcion</th>
+                                    <th>ID TIPO</th>
+                                    <th>NOMBRE TIPO</th>
+                                    <th>DESCRIPCION</th>
                                 </tr>
                             </thead>  
                             </table>

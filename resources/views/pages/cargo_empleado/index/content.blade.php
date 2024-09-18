@@ -23,10 +23,10 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Cargo</th>
-                                    <th>Nombre_Cargo</th>
-                                    <th>Descripcion</th>
-                                    <th>Salario_Base</th>
+                                    <th>ID CARGO</th>
+                                    <th>NOMBRE CARGO</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>SSALARIO BASE</th>
                                 </tr>
                             </thead>  
                             </table>

@@ -23,12 +23,12 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Promocion</th>
-                                    <th>Nombre_Promocion</th>
-                                    <th>Descripcion_Promocion</th>
-                                    <th>Fecha_Inicio</th>
-                                    <th>Fecha_Fin</th>
-                                    <th>Estado_Promocion</th>
+                                    <th>ID PROMOCION</th>
+                                    <th>NOMBRE PROMOCION</th>
+                                    <th>DESCRIPCION PROMOCION</th>
+                                    <th>FECHA INICIO</th>
+                                    <th>FECHA FIN</th>
+                                    <th>ESTADO PROMOCION</th>
                                 </tr>
                             </thead>  
                             </table>

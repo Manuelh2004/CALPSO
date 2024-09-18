@@ -23,9 +23,9 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Area</th>
-                                    <th>nombre_area</th>
-                                    <th>descripcion</th>
+                                    <th>ID AREAa</th>
+                                    <th>NOMBRE AREA</th>
+                                    <th>DESCRIPCION</th>
                                 </tr>
                             </thead>  
                             </table>
