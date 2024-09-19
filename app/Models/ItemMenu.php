@@ -115,4 +115,16 @@ class ItemMenu extends Model
     static public function dar_alta ($id_item_menu){
         return self::cambiar_estado($id_item_menu, 1);
     }
+    static public function listar_item_menu (){
+        return DB::select(
+            DB::raw("
+             SELECT
+                    im.id_item_menu
+                    , im.nombre_item
+                FROM item_menu im
+            "),
+            [ ]
+        );
+    }
+
 }

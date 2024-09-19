@@ -95,4 +95,15 @@ class Insumo extends Model
             return respuesta::error("No se ha encontrado data relacionada.");
         }
     }
+    static public function listar_insumo (){
+        return DB::select(
+            DB::raw("
+           SELECT
+                    i.id_insumo
+                    , i.nombre_insumo
+                FROM insumo i
+            "),
+            [ ]
+        );
+    }
 }
