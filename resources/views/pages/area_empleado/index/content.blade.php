@@ -23,11 +23,11 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID AREAa</th>
+                                    <th>ID AREA</th>
                                     <th>NOMBRE AREA</th>
                                     <th>DESCRIPCION</th>
                                 </tr>
-                            </thead>  
+                            </thead>
                             </table>
                         </div>
                     </div>

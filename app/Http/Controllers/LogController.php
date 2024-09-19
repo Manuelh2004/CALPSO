@@ -27,7 +27,7 @@ class LogController extends Controller
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = (is_null($search_arr['value'])) ? '' : $search_arr['value']; // Search value
-        
+
         $lista = SenderRequest::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
 
         $totalRecords = (count($lista)>0)? $lista[0]->totalrecords: 0;

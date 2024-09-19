@@ -60,7 +60,6 @@ class Categoria extends Model
         if(empty($id_categoria) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
-
         $res = self::where("id_categoria", $id_categoria)
                 ->update($data);
 
@@ -78,7 +77,6 @@ class Categoria extends Model
             return respuesta::error("No se ha podido registrar");
         }
     }
-
     static public function get($id_categoria){
         if(empty($id_categoria)){
             return respuesta::error("Datos no validos para la busqueda.");

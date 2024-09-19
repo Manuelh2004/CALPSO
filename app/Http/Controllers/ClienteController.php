@@ -83,8 +83,6 @@ class ClienteController extends Controller
         $data_request["estado"] = 1;
         return Cliente::crear($data_request);
     }
-
-
     public function dar_baja (Request $request){
         $user_request = Auth::guard('web')->user();
         if( $user_request["psis_rol_usuario"] != '000002' ){
@@ -94,7 +92,6 @@ class ClienteController extends Controller
 
         return Cliente::dar_baja($id_cliente);
     }
-
     public function dar_alta (Request $request){
         $user_request = Auth::guard('web')->user();
         if( $user_request["psis_rol_usuario"] != '000002' ){

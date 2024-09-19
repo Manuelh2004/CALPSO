@@ -14,13 +14,15 @@ use App\Http\Controllers;
 |
 */
 
-use App\Http\Controllers\LogController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\TipoClienteController; //TipoCliente
 use App\Http\Controllers\ClienteController; //Cliente
 use App\Http\Controllers\DistritoSucursalController; //Distrito
 use App\Http\Controllers\SucursalController; //Sucursal
-use App\Http\Controllers\InsumoController; //Sucursal
+use App\Http\Controllers\InsumoController; //Insumo
+use App\Http\Controllers\MetodoEntregaController; //MetodoEntrega
+
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
@@ -45,7 +47,21 @@ Route::middleware(["auth:web"])->group(function(){
     Route::get('/distrito_sucursal',[DistritoSucursalController::class, 'index'])->name('distrito_sucursal');
     Route::get('/sucursal',[SucursalController::class, 'index'])->name('sucursal');
     Route::get('/insumo',[InsumoController::class, 'index'])->name('insumo');
+    //Principal
     Route::view('/principal','pages.principal.index')->name('principal');
+    //
+    Route::get('/metodo_entrega',[MetodoEntregaController::class, 'index'])->name('metodo_entrega');
+});
+
+Route::group([
+    'prefix' => 'crud/metodo_entrega',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [MetodoEntregaController::class, 'lista_ajax']);
+    Route::post('data', [MetodoEntregaController::class, 'data']);
+    Route::post('update', [MetodoEntregaController::class, 'update']);
+    Route::post('create', [MetodoEntregaController::class, 'create']);
 });
 Route::group([
     'prefix' => 'crud/insumo',
@@ -143,8 +159,6 @@ if(ENV("APP_DEBUG")){
             // $pageName = 'sales';
             return view('dashboard')->with($data);
         });
-
-
 
         // APPS
         Route::prefix('apps')->group(function () {
