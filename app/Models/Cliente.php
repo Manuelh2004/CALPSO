@@ -118,5 +118,15 @@ class Cliente extends Model
     static public function dar_alta ($id_cliente){
         return self::cambiar_estado($id_cliente, 1);
     }
-
+    static public function listar_cliente (){
+        return DB::select(
+            DB::raw("
+            SELECT
+                    c.id_cliente
+                    , c.nombre_cliente
+                FROM cliente c
+            "),
+            [ ]
+        );
+    }
 }

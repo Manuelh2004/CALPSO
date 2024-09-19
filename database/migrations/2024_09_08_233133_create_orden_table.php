@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('id_sucursal');
             $table->date('fecha_orden');
             $table->decimal('total_orden', 10, 2);
+            $table->unsignedTinyInteger('estado')->nullable()->default(1);
             $table->timestamps();
         });
     }

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\respuesta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\respuesta;
 use Illuminate\Support\Facades\DB;
 
 class TipoCliente extends Model
