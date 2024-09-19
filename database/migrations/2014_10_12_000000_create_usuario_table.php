@@ -17,12 +17,8 @@ class CreateUsuarioTable extends Migration
             $table->bigIncrements('usuario_id');
             $table->string('name')->unique();
             $table->string('password');
-            $table->string('usuario_email')->nullable();
-            $table->integer('usuario_estado')->nullable();
             $table->timestamp("usuario_fecha_expiracion")->nullable();
-            $table->timestamp("email_verified_at")->nullable();
             $table->integer('usuario_login_intentos')->nullable();
-            $table->integer('usuario_creador_id')->nullable();
             $table->string("psis_rol_usuario", 7)->nullable()->comment('psis_type_code 000001');
             $table->rememberToken();
             $table->timestamps();

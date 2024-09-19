@@ -19,12 +19,12 @@ return new class extends Migration
             $table->integer('id_tipo');
             $table->integer('id_area');
             $table->integer('id_sucursal');
+            $table->integer('usuario_id');
             $table->string('nombre_empleado',200);
             $table->unsignedTinyInteger('edad');
             $table->string('correo_electronico')->unique();
             $table->enum('genero', ['M', 'F']);
             $table->unsignedTinyInteger('estado')->nullable()->default(1);
-            $table->string('password');
             $table->timestamps();
         });
     }
