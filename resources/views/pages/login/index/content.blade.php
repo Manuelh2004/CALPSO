@@ -5,7 +5,7 @@
 @include("pages.login.index.script")
 @include("pages.login.index.head")
 
-@section('content')    
+@section('content')
 
     <div class="form-container">
         <div class="form-form">
@@ -13,8 +13,7 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class=""><span class="brand-name">ASSISTANT</span></h1>
-                        <p>First Assistant No Name Yet</p>
+                        <h1 class=""><span class="brand-name">INICIAR SESIÓN</span></h1>
                         <p class="signup-link">¿Eres nuevo? <a href="/registro">Crear una cuenta</a></p>
                         <form id="formulario-autenticacion" class="text-left" >
                             @csrf
@@ -40,7 +39,7 @@
                                     <div class="field-wrapper">
                                         <button type="submit" id="boton-login" class="btn btn-primary" value="">Ingresar</button>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="field-wrapper text-center keep-logged-in">
@@ -57,16 +56,13 @@
                                 </div>
 
                             </div>
-                        </form>                        
-                        <p class="terms-conditions">© {{ date('Y') }} Todos los derechos reservados. Producto diseñado por <a href="index.html">Waposat Negocios</a>.</p>
-
-                    </div>                    
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="form-image">
-            <div class="l-image">
-            </div>
+            <img src="/assets/img/fondo.jpg" alt="">
         </div>
     </div>
 

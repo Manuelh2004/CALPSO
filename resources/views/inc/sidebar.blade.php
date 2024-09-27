@@ -5,26 +5,6 @@
         <div class="shadow-bottom"></div>
 
         <ul class="list-unstyled menu-categories" id="accordionExample">
-
-            <li class="menu">
-                <a href="#submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
-                        <span>Estaciones</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu list-unstyled" id="submenu" data-parent="#accordionExample">
-                    <li>
-                        <a href="javascript:void(0);"> Submenu 1 </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);"> Submenu 2 </a>
-                    </li>
-                </ul>
-            </li>
             <li class="menu">
                 <a href="#componentes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -66,24 +46,7 @@
                     </li>
                 </ul>
             </li>
-
-            <li class="menu">
-                <a href="#componentes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                        <span>Componentes</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
-                    <li>
-                        <a href="" > Tipos de Transmisor </a>
-                    </li>
-                </ul>
-            </li>
-
+            {{--
             <li class="menu">
                 <a href="{{route('logs')}}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -101,14 +64,14 @@
                     </div>
                 </a>
             </li>
-
+            --}}
 
             {{-- INICIO DE MENU DE MUESTRA --}}
             @php
                 $category_name = (!empty($category_name))? $category_name : '';
                 $page_name = (!empty($page_name))? $page_name : '';
             @endphp
-
+            {{--
             @if (ENV("APP_DEBUG") )
             <li class="menu {{ ($category_name === 'dashboard') ? 'active' : '' }}">
                 <a href="#dashboard" data-active="{{ ($category_name === 'dashboard') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'dashboard') ? 'true' : 'false' }}" class="dropdown-toggle">
@@ -608,9 +571,9 @@
                     </div>
                 </a>
             </li>
-            {{-- FIN DE MENU DE MUESTRA --}}
+            {{-- FIN DE MENU DE MUESTRA
             @endif
-
+            --}}
         </ul>
 
     </nav>
