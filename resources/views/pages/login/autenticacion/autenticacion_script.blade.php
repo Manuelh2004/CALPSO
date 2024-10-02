@@ -16,7 +16,7 @@ function Autenticacion(){
         password: "",
         remember_me: false
     };
-    
+
     this.inicio = () => {
         let self = this;
         $('#'+self.elem.form).on('submit', (event) => {
@@ -84,6 +84,4 @@ var autenticacion = new Autenticacion();
 
 $(document).ready(function () {
     autenticacion.inicio();
-
-
 });

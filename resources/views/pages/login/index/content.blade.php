@@ -5,16 +5,22 @@
 @include("pages.login.index.script")
 @include("pages.login.index.head")
 
-@section('content')
+<style>
+   img {
+    width: 100%; /* Ajusta el tamaño proporcionalmente al contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    }
 
+</style>
+
+@section('content')
     <div class="form-container">
         <div class="form-form">
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
-
                         <h1 class=""><span class="brand-name">INICIAR SESIÓN</span></h1>
-                        <p class="signup-link">¿Eres nuevo? <a href="/registro">Crear una cuenta</a></p>
+                        <br>
                         <form id="formulario-autenticacion" class="text-left" >
                             @csrf
                             <div class="form">
@@ -39,9 +45,7 @@
                                     <div class="field-wrapper">
                                         <button type="submit" id="boton-login" class="btn btn-primary" value="">Ingresar</button>
                                     </div>
-
                                 </div>
-
                                 <div class="field-wrapper text-center keep-logged-in">
                                     <div class="n-chk new-checkbox checkbox-outline-primary">
                                         <label class="new-control new-checkbox checkbox-outline-primary">
@@ -62,7 +66,7 @@
             </div>
         </div>
         <div class="form-image">
-            <img src="/assets/img/fondo.jpg" alt="">
+            <img id="img" src="/assets/img/prueba_2.jpg" alt="">
         </div>
     </div>
 
