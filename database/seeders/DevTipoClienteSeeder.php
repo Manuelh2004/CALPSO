@@ -18,7 +18,7 @@ class DevTipoClienteSeeder extends Seeder
         DB::table('tipo_cliente')->insert([
             [
                 'nombre_tipo' => 'Regular',
-                'descripcion' => 'Cliente habitual sin descuento especial',
+                'descripcion' => 'Cliente habitual',
                 'descuento_asociado' => 0.00,
                 'created_at' => now(),
                 'updated_at' => now(),

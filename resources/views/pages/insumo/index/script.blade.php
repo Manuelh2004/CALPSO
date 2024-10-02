@@ -84,8 +84,8 @@
             columns: [
                 { data: 'id_insumo' },
                 { data: 'nombre_insumo' },
-                { data: 'descripcion' },
                 { data: 'stock' },
+                { data: 'descripcion' },
                 {
 					data: 'id_insumo',
 					render: function( data, type, row ) {

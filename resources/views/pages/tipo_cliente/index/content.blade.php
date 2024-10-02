@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo','TIPO CLIENTE')
+@section('titulo','TIPOS DE CLIENTE')
 
 @include("pages.tipo_cliente.index.script")
 @include("pages.tipo_cliente.index.head")
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Tipo Cliente</h5>
+                        <h5 class="">TIPOS DE CLIENTE</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>

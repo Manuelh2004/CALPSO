@@ -4,7 +4,7 @@ var crud = new crud_administracion();
 
 $(document).ready(function() {
 	crud.iniciar({
-        title: "tipo_cliente",
+        title: "tipo cliente",
         fields: [
             "id_tipo_cliente",
             "nombre_tipo",
@@ -27,7 +27,7 @@ $(document).ready(function() {
     }
 
     crud.validation_before_update = function(){
-        return true; 
+        return true;
     }
 
 	$("body").on("click", ".btn-editar", function () {

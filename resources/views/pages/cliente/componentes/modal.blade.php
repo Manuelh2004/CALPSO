@@ -42,9 +42,9 @@
                                 </div>
                                 <select class="form-control" id="genero" name="genero" required>
                                     <option value="">Seleccione una opción</option>
-                                    <option value="FEMENINO">FEMENINO</option>
-                                    <option value="MASCULINO">MASCULINO</option>
-                                    <option value="OTRO">OTRO</option>
+                                    <option value="FEMENINO">Femenino</option>
+                                    <option value="MASCULINO">Masculino</option>
+                                    <option value="OTRO">Otro</option>
                                 </select>
                             </div>
                         </div>
