@@ -22,7 +22,10 @@ use App\Http\Controllers\DistritoSucursalController; //Distrito
 use App\Http\Controllers\SucursalController; //Sucursal
 use App\Http\Controllers\InsumoController; //Insumo
 use App\Http\Controllers\MetodoEntregaController; //MetodoEntrega
-
+use App\Http\Controllers\AreaEmpleadoController; //AreaEmpleado
+use App\Http\Controllers\CargoEmpleadoController; //CargolEmpleado
+use App\Http\Controllers\TipoEmpleadoController; //TipoEmpleado
+use App\Http\Controllers\EmpleadoController; //Empleado
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
@@ -47,12 +50,63 @@ Route::middleware(["auth:web"])->group(function(){
     Route::get('/distrito_sucursal',[DistritoSucursalController::class, 'index'])->name('distrito_sucursal');
     Route::get('/sucursal',[SucursalController::class, 'index'])->name('sucursal');
     Route::get('/insumo',[InsumoController::class, 'index'])->name('insumo');
+    Route::get('/metodo_entrega',[MetodoEntregaController::class, 'index'])->name('metodo_entrega');
+    Route::get('/area_empleado',[AreaEmpleadoController::class, 'index'])->name('area_empleado');
+    Route::get('/cargo_empleado',[CargoEmpleadoController::class, 'index'])->name('cargo_empleado');
+    Route::get('/tipo_empleado',[TipoEmpleadoController::class, 'index'])->name('tipo_empleado');
+    Route::get('/empleado',[EmpleadoController::class, 'index'])->name('empleado');
+
+
+
+
     //Principal
     Route::view('/principal','pages.principal.index')->name('principal');
     //
-    Route::get('/metodo_entrega',[MetodoEntregaController::class, 'index'])->name('metodo_entrega');
+
 });
 
+Route::group([
+    'prefix' => 'crud/empleado',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [EmpleadoController::class, 'lista_ajax']);
+    Route::post('data', [EmpleadoController::class, 'data']);
+    Route::post('update', [EmpleadoController::class, 'update']);
+    Route::post('dar_baja', [EmpleadoController::class, 'dar_baja']);
+    Route::post('dar_alta', [EmpleadoController::class, 'dar_alta']);
+    Route::post('create', [EmpleadoController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/area_empleado',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [AreaEmpleadoController::class, 'lista_ajax']);
+    Route::post('data', [AreaEmpleadoController::class, 'data']);
+    Route::post('update', [AreaEmpleadoController::class, 'update']);
+    Route::post('create', [AreaEmpleadoController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/cargo_empleado',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [CargoEmpleadoController::class, 'lista_ajax']);
+    Route::post('data', [CargoEmpleadoController::class, 'data']);
+    Route::post('update', [CargoEmpleadoController::class, 'update']);
+    Route::post('create', [CargoEmpleadoController::class, 'create']);
+});
+Route::group([
+    'prefix' => 'crud/tipo_empleado',
+    'middleware' => 'auth:web'
+], function () {
+
+    Route::get('lista_ajax', [TipoEmpleadoController::class, 'lista_ajax']);
+    Route::post('data', [TipoEmpleadoController::class, 'data']);
+    Route::post('update', [TipoEmpleadoController::class, 'update']);
+    Route::post('create', [TipoEmpleadoController::class, 'create']);
+});
 Route::group([
     'prefix' => 'crud/metodo_entrega',
     'middleware' => 'auth:web'

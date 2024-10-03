@@ -84,7 +84,14 @@
             columns: [
                 { data: 'id_area' },
                 { data: 'nombre_area' },
-                { data: 'descripcion' }
+                { data: 'descripcion' },
+                {
+					data: 'id_area',
+					render: function( data, type, row ) {
+						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
+						return boton_editar;
+					}
+				}
             ],
             "drawCallback": function( settings ) {
                 feather.replace();

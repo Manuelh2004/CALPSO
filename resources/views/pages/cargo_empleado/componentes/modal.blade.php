@@ -14,67 +14,43 @@
 
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Nombre de usuario *</label>
+                            <label>Nombre de cargo *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <input type="text" class="form-control" id="nombre_cargo" name="nombre_cargo">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Correo electrónico *</label>
+                            <label>Salario Base (S/) *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="user-email" name="name">
+                                <input type="number" class="form-control" id="salario_base" name="salario_base">
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-12">
                         <div class="form-group">
-                            <label>Rol *</label>
-                            <select class="form-control" name="user_rol" id="user_rol">
-                                <option value="" disabled>Elije un rol</option>                                                   
-                                @foreach ($psis_user_roles as $key => $rol)
-                                <option value="{{$rol->psis_code}}" >{{$rol->psis_value}}</option>                                              
-                                @endforeach                                                    
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label>Contraseña *</label>
+                            <label>Descripcion*</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5"><i data-feather="lock"></i></span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="password" class="form-control" id="password" name="name">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion">
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label>Confirmación Contraseña</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5"><i data-feather="lock"></i></span>
-                                </div>
-                                <input type="password" class="form-control" id="password_confirm" name="name">
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </form>
             <div class="row">
                 <div class="col-12">
-                    <span>(*)Datos Obligatorios - La contraseña solo es obligatoria cuando se va a crear un registro.</span>
+                    <span>(*) Datos Obligatorios.</span>
                 </div>
             </div>
 
@@ -82,7 +58,7 @@
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal"> <i data-feather="x-circle"></i> Cerrar</button>
             <button type="button" class="btn btn-primary btn-confirmar">Confirmar</button>
-            
+
         </div>
     </div>
     </div>

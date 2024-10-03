@@ -27,6 +27,7 @@
                                     <th>NOMBRE</th>
                                     <th>DESCRIPCION</th>
                                     <th>SALARIO BASE</th>
+                                    <th>OPCIONES</th>
                                 </tr>
                             </thead>
                             </table>

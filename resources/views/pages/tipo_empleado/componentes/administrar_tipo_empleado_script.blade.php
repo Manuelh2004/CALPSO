@@ -4,21 +4,20 @@ var crud = new crud_administracion();
 
 $(document).ready(function() {
 	crud.iniciar({
-        title: "cargo_empleado",
+        title: "tipo_empleado",
         fields: [
-            "id_cargo",
-            "nombre_cargo",
-            "descripcion",
-            "salario_base"
+            "id_tipo",
+             "nombre_tipo",
+             "descripcion"
         ],
         create_requiere : [],
-        pk: "id_cargo",
+        pk: "id_tipo",
         rutas : {
-            crear: "crud/cargo_empleado/create",
-            obtener_data: "crud/cargo_empleado/data",
-            guardar_data: "crud/cargo_empleado/update",
-            dar_baja: "crud/cargo_empleado/dar_baja",
-            dar_alta: "crud/cargo_empleado/dar_alta",
+            crear: "crud/tipo_empleado/create",
+            obtener_data: "crud/tipo_empleado/data",
+            guardar_data: "crud/tipo_empleado/update",
+            dar_baja: "crud/tipo_empleado/dar_baja",
+            dar_alta: "crud/tipo_empleado/dar_alta",
         }
     });
 
@@ -27,7 +26,7 @@ $(document).ready(function() {
     }
 
     crud.validation_before_update = function(){
-       return true; 
+        return true; 
     }
 
 	$("body").on("click", ".btn-editar", function () {

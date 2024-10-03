@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Costo *</label>
+                            <label>Costo (S/)*</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>

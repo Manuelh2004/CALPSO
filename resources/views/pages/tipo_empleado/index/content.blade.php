@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo','tipo_empleado')
+@section('titulo','TIPO EMPLEADOL')
 
 @include("pages.tipo_empleado.index.script")
 @include("pages.tipo_empleado.index.head")
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Unidades de Medición</h5>
+                        <h5 class="">TIPO EMPLEADO</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -23,11 +23,12 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID TIPO</th>
-                                    <th>NOMBRE TIPO</th>
+                                    <th>ID </th>
+                                    <th>NOMBRE</th>
                                     <th>DESCRIPCION</th>
+                                    <th>OPCIONES</th>
                                 </tr>
-                            </thead>  
+                            </thead>
                             </table>
                         </div>
                     </div>

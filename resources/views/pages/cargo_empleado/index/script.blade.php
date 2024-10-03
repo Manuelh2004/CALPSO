@@ -85,7 +85,14 @@
                 { data: 'id_cargo' },
                 { data: 'nombre_cargo' },
                 { data: 'descripcion' },
-                { data: 'salario_base' }
+                { data: 'salario_base' },
+                {
+					data: 'id_cargo',
+					render: function( data, type, row ) {
+						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
+						return boton_editar;
+					}
+				}
             ],
             "drawCallback": function( settings ) {
                 feather.replace();

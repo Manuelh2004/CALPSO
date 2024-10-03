@@ -26,6 +26,7 @@
                                     <th>ID</th>
                                     <th>NOMBRE</th>
                                     <th>DESCRIPCION</th>
+                                    <th>OPCIONES</th>
                                 </tr>
                             </thead>
                             </table>
