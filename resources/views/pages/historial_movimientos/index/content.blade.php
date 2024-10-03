@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo','historial_movimientos')
+@section('titulo','HISTORIAL DE MOVIMIENTOS')
 
 @include("pages.historial_movimientos.index.script")
 @include("pages.historial_movimientos.index.head")
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Historial_Movimientos</h5>
+                        <h5 class="">HISTORIAL DE MOVIMIENTOS</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -23,11 +23,18 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Historial_Movimientos</th>
-                                    <th>ID_Comprobante_Pago</th>
-                                    <th>Descripcion</th>
+                                    <th>ID</th>
+                                    <th>CLIENTE</th>
+                                    <th>EMPLEADO</th>
+                                    <th>SUCURSAL</th>
+                                    <th>METODO ENTREGA</th>
+                                    <th>TIPO COMPROBANTE</th>
+                                    <th>PROMOCION</th>
+                                    <th>FECHA</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>OPCIONES</th>
                                 </tr>
-                            </thead>  
+                            </thead>
                             </table>
                         </div>
                     </div>

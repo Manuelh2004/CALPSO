@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo','METODO ENTREGA')
+@section('titulo','METODO DE ENTREGA')
 
 @include("pages.metodo_entrega.index.script")
 @include("pages.metodo_entrega.index.head")
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Metodo Entrega</h5>
+                        <h5 class="">METODO DE ENTREGA</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>

@@ -16,14 +16,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         const tabla_ajax =  $('#tabla_lista').DataTable({
             processing: true,
             serverSide: true,
             // scrollX: true,
             // ajax: "venta_lista_ajax",
             ajax: {
-                "url": "lista_user_ajax",
+                "url": "crud/metodo_pago/lista_ajax",
                 "data": function (d) {
                         // d.tipo_comprobante_id = $("#tipo-comprobante").val()
                 },
@@ -85,7 +85,7 @@
                 { data: 'Id_metodo_pago' },
                 { data: 'nombre_metodo_pago' },
                 { data: 'descripcion' },
-                { 
+                {
                     data: 'user_status',
                     render: function( data, type, row ) {
                         switch (data) {
@@ -100,7 +100,7 @@
 					    }
                     }
                 },
-                { 
+                {
 					data: 'Id_metodo_pago',
 					render: function( data, type, row ) {
 						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
@@ -112,7 +112,7 @@
 						} else if(marca_estado == 0){
 							boton_estado = '<span title="Dar Alta" row_id="'+data+'" class="icon-option icon-option-activate btn-dar-alta"><i data-feather="check-circle"></i></span>';
 						}
-                        
+
 						return boton_editar+' '+boton_estado;
 					}
 				}
@@ -167,7 +167,7 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.metodo_pago.componentes.administrar_usuarios_script');
+        @include('pages.metodo_pago.componentes.administrar_metodo_pago_script');
 
     });
 

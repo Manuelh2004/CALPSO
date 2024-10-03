@@ -16,7 +16,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         const tabla_ajax =  $('#tabla_lista').DataTable({
             processing: true,
             serverSide: true,
@@ -84,12 +84,11 @@
             columns: [
                 { data: 'id_promocion' },
                 { data: 'nombre_promocion' },
-                { data: 'descripcion_promocion' },
                 { data: 'fecha_inicio' },
                 { data: 'fecha_fin' },
-                { data: 'estado_promocion' },
-                { 
-                    data: 'user_status',
+                { data: 'descripcion_promocion' },
+                {
+                    data: 'estado_promocion',
                     render: function( data, type, row ) {
                         switch (data) {
                             case 1:
@@ -103,19 +102,19 @@
 					    }
                     }
                 },
-                { 
-					data: 'user_id',
+                {
+					data: 'id_promocion',
 					render: function( data, type, row ) {
 						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
 
-						let marca_estado = row["user_status"];
+						let marca_estado = row["estado_promocion"];
 						let boton_estado = "";
 						if(marca_estado == 1 ){
 							boton_estado = '<span title="Dar Baja" row_id="'+data+'" class="icon-option icon-option-delete btn-dar-baja"><i data-feather="x-circle"></i></span>';
 						} else if(marca_estado == 0){
 							boton_estado = '<span title="Dar Alta" row_id="'+data+'" class="icon-option icon-option-activate btn-dar-alta"><i data-feather="check-circle"></i></span>';
 						}
-                        
+
 						return boton_editar+' '+boton_estado;
 					}
 				}
@@ -170,7 +169,7 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.promocion.componentes.administrar_usuarios_script');
+        @include('pages.promocion.componentes.administrar_promocion_script');
 
     });
 

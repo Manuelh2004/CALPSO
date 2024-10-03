@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo','detalle_metodo_pago')
+@section('titulo','DETALLE METODO DE PAGO')
 
 @include("pages.detalle_metodo_pago.index.script")
 @include("pages.detalle_metodo_pago.index.head")
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Unidades de Medición</h5>
+                        <h5 class="">DETALLE METODO DE PAGO</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -23,12 +23,15 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID DETALLE METODO DE PAGO</th>
-                                    <th>ID METODO PAGO</th>
-                                    <th>ID COMPROBANTE DE PAGO</th>
+                                    <th>ID</th>
+                                    <th>CLIENTE</th>
+                                    <th>METODO DE PAGO</th>
+                                    <th>DESCUENTO</th>
                                     <th>MONTO</th>
+                                    <th>FECHA</th>
+                                    <th>OPCIONES</th>
                                 </tr>
-                            </thead>  
+                            </thead>
                             </table>
                         </div>
                     </div>

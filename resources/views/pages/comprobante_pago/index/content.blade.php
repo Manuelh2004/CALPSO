@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo','comprobante_pago')
+@section('titulo','COMPROBANTE DE PAGO')
 
 @include("pages.comprobante_pago.index.script")
 @include("pages.comprobante_pago.index.head")
@@ -34,7 +34,7 @@
                                     <th>Fecha_Comprobante</th>
                                     <th>Total</th>
                                 </tr>
-                            </thead>  
+                            </thead>
                             </table>
                         </div>
                     </div>

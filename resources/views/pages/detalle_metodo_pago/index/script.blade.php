@@ -16,14 +16,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         const tabla_ajax =  $('#tabla_lista').DataTable({
             processing: true,
             serverSide: true,
             // scrollX: true,
             // ajax: "venta_lista_ajax",
             ajax: {
-                "url": "lista_user_ajax", //"url": "crud/cliente/lista_ajax",
+                "url": "crud/detalle_metodo_pago/lista_ajax", //"url": "crud/cliente/lista_ajax",
                 "data": function (d) {
                         // d.tipo_comprobante_id = $("#tipo-comprobante").val()
                 },
@@ -86,37 +86,6 @@
                 { data: 'id_metodo_pago' },
                 { data: 'id_comprbante_pago' },
                 { data: 'monto' },
-                { 
-                    data: 'user_status',
-                    render: function( data, type, row ) {
-                        switch (data) {
-                            case 1:
-                                return '<span class="shadow-none badge badge-primary">Activo</span>';
-                            break;
-                            case 0:
-                                return '<span class="shadow-none badge badge-danger">Inactivo</span>';
-                            break;
-                            default:
-                                return '<span class="shadow-none badge badge-warning">No conocido</span>';
-					    }
-                    }
-                },
-                { 
-					data: 'user_id',
-					render: function( data, type, row ) {
-						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
-
-						let marca_estado = row["user_status"];
-						let boton_estado = "";
-						if(marca_estado == 1 ){
-							boton_estado = '<span title="Dar Baja" row_id="'+data+'" class="icon-option icon-option-delete btn-dar-baja"><i data-feather="x-circle"></i></span>';
-						} else if(marca_estado == 0){
-							boton_estado = '<span title="Dar Alta" row_id="'+data+'" class="icon-option icon-option-activate btn-dar-alta"><i data-feather="check-circle"></i></span>';
-						}
-                        
-						return boton_editar+' '+boton_estado;
-					}
-				}
             ],
             "drawCallback": function( settings ) {
                 feather.replace();
@@ -168,7 +137,7 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.detalle_metodo_pago.componentes.administrar_usuarios_script');
+        @include('pages.detalle_metodo_pago.componentes.administrar_detalle_metodo_pago_script');
 
     });
 

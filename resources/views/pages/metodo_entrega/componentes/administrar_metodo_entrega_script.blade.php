@@ -4,7 +4,7 @@ var crud = new crud_administracion();
 
 $(document).ready(function() {
 	crud.iniciar({
-        title: "metodo_entrega",
+        title: "metodo entrega",
         fields: [
             "id_metodo_entrega",
             "nombre_metodo_entrega",

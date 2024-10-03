@@ -16,7 +16,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         const tabla_ajax =  $('#tabla_lista').DataTable({
             processing: true,
             serverSide: true,
@@ -82,40 +82,9 @@
                 },
             ],
             columns: [
-                { data: 'id_cargo' },
+                { data: 'id_area' },
                 { data: 'nombre_area' },
-                { data: 'descripcion' },
-                { 
-                    data: 'user_status',
-                    render: function( data, type, row ) {
-                        switch (data) {
-                            case 1:
-                                return '<span class="shadow-none badge badge-primary">Activo</span>';
-                            break;
-                            case 0:
-                                return '<span class="shadow-none badge badge-danger">Inactivo</span>';
-                            break;
-                            default:
-                                return '<span class="shadow-none badge badge-warning">No conocido</span>';
-					    }
-                    }
-                },
-                { 
-					data: 'user_id',
-					render: function( data, type, row ) {
-						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
-
-						let marca_estado = row["user_status"];
-						let boton_estado = "";
-						if(marca_estado == 1 ){
-							boton_estado = '<span title="Dar Baja" row_id="'+data+'" class="icon-option icon-option-delete btn-dar-baja"><i data-feather="x-circle"></i></span>';
-						} else if(marca_estado == 0){
-							boton_estado = '<span title="Dar Alta" row_id="'+data+'" class="icon-option icon-option-activate btn-dar-alta"><i data-feather="check-circle"></i></span>';
-						}
-                        
-						return boton_editar+' '+boton_estado;
-					}
-				}
+                { data: 'descripcion' }
             ],
             "drawCallback": function( settings ) {
                 feather.replace();
@@ -167,7 +136,7 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.area_empleado.componentes.administrar_usuarios_script');
+        @include('pages.area_empleado.componentes.administrar_area_empleado_script');
 
     });
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo','detalle_entrega')
+@section('titulo','DETALLE DE ENTREGA')
 
 @include("pages.detalle_entrega.index.script")
 @include("pages.detalle_entrega.index.head")
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Detalle_Entrega</h5>
+                        <h5 class="">DETALLE DE ENTREGA</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -23,15 +23,16 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Detalle_Entrega</th>
-                                    <th>ID_Metodo_Entrega</th>
-                                    <th>Direccion_Entrega</th>
-                                    <th>Estado_Entrega</th>
-                                    <th>Comentarios</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
+                                    <th>ID</th>
+                                    <th>METODO DE ENTREGA</th>
+                                    <th>DIRECCION</th>
+                                    <th>COMENTARIO</th>
+                                    <th>FECHA</th>
+                                    <th>HORA</th>
+                                    <th>ESTADO</th>
+                                    <th>OPCIONES</th>
                                 </tr>
-                            </thead>  
+                            </thead>
                             </table>
                         </div>
                     </div>

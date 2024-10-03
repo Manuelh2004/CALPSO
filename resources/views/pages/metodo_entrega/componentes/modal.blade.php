@@ -38,7 +38,7 @@
             </form>
             <div class="row">
                 <div class="col-12">
-                    <span>(*)Datos Obligatorios - La contraseña solo es obligatoria cuando se va a crear un registro.</span>
+                    <span>(*) Datos Obligatorios.</span>
                 </div>
             </div>
 
