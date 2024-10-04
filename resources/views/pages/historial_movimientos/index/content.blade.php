@@ -23,9 +23,9 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Historial_Movimientos</th>
-                                    <th>ID_Comprobante_Pago</th>
-                                    <th>Descripcion</th>
+                                    <TH>ID_HISTORIAL_MOVIMIENTOS</TH>
+                                    <TH>ID_COMPROBANTE_PAGO</TH>
+                                    <TH>DESCRIPCION</TH>
                                 </tr>
                             </thead>  
                             </table>

@@ -23,13 +23,13 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Detalle_Entrega</th>
-                                    <th>ID_Metodo_Entrega</th>
-                                    <th>Direccion_Entrega</th>
-                                    <th>Estado_Entrega</th>
-                                    <th>Comentarios</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
+                                    <TH>ID_DETALLE_ENTREGA</TH>
+                                    <TH>ID_METODO_ENTREGA</TH>
+                                    <TH>DIRECCION_ENTREGA</TH>
+                                    <TH>ESTADO_ENTREGA</TH>
+                                    <TH>COMENTARIOS</TH>
+                                    <TH>FECHA</TH>
+                                    <TH>HORA</TH>
                                 </tr>
                             </thead>  
                             </table>

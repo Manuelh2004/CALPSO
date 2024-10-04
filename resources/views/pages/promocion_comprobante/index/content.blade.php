@@ -23,9 +23,9 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Promocion</th>
-                                    <th>ID_Comprobante_Pago</th>
-                                    <th>Monto_Descuento</th>
+                                    <TH>ID_PROMOCION</TH>
+                                    <TH>ID_COMPROBANTE_PAGO</TH>
+                                    <TH>MONTO_DESCUENTO</TH>
                                 </tr>
                             </thead>  
                             </table>

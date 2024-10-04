@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('titulo','comprobante_pago')
+@section('titulo','ORDEN')
 
-@include("pages.comprobante_pago.index.script")
-@include("pages.comprobante_pago.index.head")
+@include("pages.orden.index.script")
+@include("pages.orden.index.head")
 
 @section('content')
 
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">Comprobante_Pago</h5>
+                        <h5 class="">Orden</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -23,16 +23,13 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <TH>ID_COMPROBANTE_PAGO</TH>
-                                    <TH>ID_EMPLEADO</TH>
-                                    <TH>ID_SUCURSAL</TH>
-                                    <TH>ID_METODO_ENTREGA</TH>
-                                    <TH>ID_PROMOCION</TH>
-                                    <TH>ID_CLIENTE</TH>
-                                    <TH>ID_TIPO_COMPROBANTE</TH>
-                                    <TH>ID_ORDEN</TH>
-                                    <TH>FECHA_COMPROBANTE</TH>
-                                    <TH>TOTAL</TH>
+                                    <th>ID_ORDEN</th>
+                                    <th>ID_CLIENTE</th>
+                                    <th>ID_SUCURSAL</th>
+                                    <th>ID_EMPLEADO</th>
+                                    <th>FECHA_ORDEN</th>
+                                    <th>TOTAL_ORDEN</th>
+                                    <th>ESTADO</th>
                                 </tr>
                             </thead>  
                             </table>
@@ -45,6 +42,6 @@
 
     </div>
 
-    @include("pages.comprobante_pago.componentes.modal");
+    @include("pages.orden.componentes.modal");
 
 @endsection

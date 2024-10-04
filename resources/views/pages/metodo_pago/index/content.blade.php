@@ -23,9 +23,9 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombre_Metodo_Pago</th>
-                                    <th>Descripcion</th>
+                                    <TH>ID</TH>
+                                    <TH>NOMBRE_METODO_PAGO</TH>
+                                    <TH>DESCRIPCION</TH>
                                 </tr>
                             </thead>  
                             </table>

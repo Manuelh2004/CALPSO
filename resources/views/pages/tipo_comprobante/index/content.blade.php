@@ -23,9 +23,9 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID_Tipo_Comprobante</th>
-                                    <th>Nombre_Comprobante</th>
-                                    <th>Descripcion</th>
+                                <TH>ID_TIPO_COMPROBANTE</TH>
+                                    <TH>NOMBRE_COMPROBANTE</TH>
+                                    <TH>DESCRIPCION</TH>
                                 </tr>
                             </thead>  
                             </table>
