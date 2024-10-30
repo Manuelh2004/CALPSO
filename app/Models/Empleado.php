@@ -43,10 +43,13 @@ class Empleado extends Model
               	empleado_datos as (
 				select
 					e.id_empleado
-					,tp.nombre_tipo
+					,e.nombre_empleado
 					,ae.nombre_area
 					,ce.nombre_cargo
-					,e.nombre_empleado
+					,tp.nombre_tipo
+					,ds.nombre_distrito
+					,u.name
+					,u.password
 					,e.correo_electronico
 					,e.edad
 					,e.genero
@@ -56,6 +59,9 @@ class Empleado extends Model
 					JOIN tipo_empleado tp ON e.id_tipo = tp.id_tipo
 					JOIN area_empleado ae ON e.id_area = ae.id_area
 					JOIN cargo_empleado ce ON e.id_cargo = ce.id_cargo
+					JOIN sucursal s ON s.id_sucursal = e.id_sucursal
+					JOIN distrito_sucursal ds ON ds.id_distrito = s.id_distrito
+					JOIN usuario u ON u.usuario_id = e.usuario_id
                 ),
                 empleado_busqueda as (
                     select p.* , count(id_empleado) over() as totalrecordswithfilter
@@ -67,7 +73,7 @@ class Empleado extends Model
                     select
                     *
                     from empleado_busqueda
-                    --order by ".$columnName." ".$columnSortOrder."
+                    order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )

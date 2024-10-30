@@ -34,19 +34,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label>Rol *</label>
-                            <select class="form-control" name="user_rol" id="user_rol">
-                                <option value="" disabled>Elije un rol</option>                                                   
-                                @foreach ($psis_user_roles as $key => $rol)
-                                <option value="{{$rol->psis_code}}" >{{$rol->psis_value}}</option>                                              
-                                @endforeach                                                    
-                            </select>
-                        </div>
-                    </div>
-
                     <div class="col-12 col-md-4">
                         <div class="form-group">
                             <label>Contraseña *</label>
@@ -82,7 +69,7 @@
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal"> <i data-feather="x-circle"></i> Cerrar</button>
             <button type="button" class="btn btn-primary btn-confirmar">Confirmar</button>
-            
+
         </div>
     </div>
     </div>

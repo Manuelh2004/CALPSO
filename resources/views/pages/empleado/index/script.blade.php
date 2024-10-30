@@ -83,15 +83,17 @@
             ],
             columns: [
                 { data: 'id_empleado' },
-                { data: 'id_area' },
-                { data: 'id_cargo' },
-                { data: 'id_tipo' },
-                { data: 'id_sucursal' },
                 { data: 'nombre_empleado' },
-                { data: 'edad' },
+                { data: 'nombre_area' },
+                { data: 'nombre_cargo' },
+                { data: 'nombre_tipo' },
+                { data: 'nombre_distrito' },
+                { data: 'name' },
+                { data: 'password' },
                 { data: 'correo_electronico' },
+                { data: 'edad' },
                 { data: 'genero' },
-                { data: 'estado' },
+                { data: 'correo_electronico' },
                 {
                     data: 'estado',
                     render: function( data, type, row ) {

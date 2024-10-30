@@ -27,12 +27,8 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'password',
-        'usuario_email',
-        'usuario_estado',
         'usuario_fecha_expiracion',
-        'email_verified_at',
         'usuario_login_intentos',
-        'usuario_creador_id',
         'psis_rol_usuario'
     ];
 
@@ -80,7 +76,7 @@ class User extends Authenticatable implements JWTSubject
             $rowperpage = null;
         }
 
-        return DB::select( 
+        return DB::select(
             DB::raw("
                 with
                 datos_input as (
@@ -89,12 +85,10 @@ class User extends Authenticatable implements JWTSubject
                     :rowperpage::int as rowperpage,
                     :searchvalue::varchar(50) as palabra
                 ),
-                user_datos as (
+				user_datos as (
                     select
 					u.usuario_id
 					,u.name
-					,u.usuario_estado
-					,u.usuario_email
 					,u.psis_rol_usuario
 					,count(u.usuario_id) over() as totalrecords
 					from usuario u
@@ -104,7 +98,6 @@ class User extends Authenticatable implements JWTSubject
                     from user_datos u
                     cross join datos_input di
                     where name ilike  '%'||di.palabra||'%'
-                    or usuario_email ilike  '%'||di.palabra||'%'
                 ),
                 user_paginado as (
                     select
@@ -141,22 +134,6 @@ class User extends Authenticatable implements JWTSubject
         } else {
             return respuesta::error("No se ha podido registrar");
         }
-    }
-
-    static public function cambiar_estado($user_id, $estado){
-        
-
-        return self::actualizar($user_id,[
-            "usuario_estado" => $estado
-        ]);
-    }
-
-    static public function dar_baja ($user_id){
-        return self::cambiar_estado($user_id, 0);
-    }
-
-    static public function dar_alta ($user_id){
-        return self::cambiar_estado($user_id, 1);
     }
 
     static public function actualizar($user_id, $data){

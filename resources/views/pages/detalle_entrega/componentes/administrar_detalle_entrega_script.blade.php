@@ -6,27 +6,7 @@ $(document).ready(function() {
 	crud.iniciar({
         title: "Usuario",
         fields: [
-            "name",
-            {
-                name: "psis_user_role",
-                id_field: "user_rol"
-            },
-            {
-                name: "user_email",
-                id_field: "user-email",
-                requiere_create: true,
-                requiere_update: false,
-            },
-            {
-                name: "password",
-                requiere_create: true,
-                requiere_update: false,
-            },
-            {
-                name: "password_confirmation",
-                send: false,
-                requiere: false
-            }
+           
         ],
         create_requiere : ["name", "user-email", "password"],
         pk: "user_id",
@@ -40,7 +20,7 @@ $(document).ready(function() {
     });
 
     crud.validation_before_create = function(){
-        let password = $("#password").val(); 
+        let password = $("#password").val();
         let password_confirmation= $("#password_confirm").val();
         if(password == password_confirmation){
             return true;
@@ -51,7 +31,7 @@ $(document).ready(function() {
     }
 
     crud.validation_before_update = function(){
-        let password = $("#password").val(); 
+        let password = $("#password").val();
         let password_confirmation= $("#password_confirm").val();
         if(password == "" && password_confirmation == ""){
             return true;
@@ -68,14 +48,14 @@ $(document).ready(function() {
 		let row_id = $(this).attr("row_id");
         crud.modal_editar(row_id);
     });
-	
+
     $("body").on("click", ".btn-dar-baja", function () {
 		let row_id = $(this).attr("row_id");
         crud.dar_baja(row_id, ()=>{
             tabla_ajax.ajax.reload();
         });
     });
-    
+
     $("body").on("click", ".btn-dar-alta", function () {
 		let row_id = $(this).attr("row_id");
         crud.dar_alta(row_id, ()=>{

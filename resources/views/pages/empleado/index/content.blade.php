@@ -24,13 +24,15 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>NOMBRE EMPLEADO</th>
                                     <th>AREA</th>
                                     <th>CARGO</th>
                                     <th>TIPO</th>
                                     <th>SUCURSAL</th>
-                                    <th>NOMBRE EMPLEADO</th>
+                                    <th>NAME</th>
+                                    <th>PASSWORD</th>
+                                    <th>EMAIL</th>
                                     <th>EDAD</th>
-                                    <th>CORREO ELECTRONICO</th>
                                     <th>GENERO</th>
                                     <th>ESTADO</th>
                                     <th>OPCIONES</th>

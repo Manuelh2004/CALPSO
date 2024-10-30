@@ -14,6 +14,7 @@ use App\Models\ParameterSystem;
 use App\Models\TipoEmpleado;
 use App\Models\cargoEmpleado;
 use App\Models\areaEmpleado;
+use App\Models\User;
 
 class EmpleadoController extends Controller
 {
@@ -22,7 +23,7 @@ class EmpleadoController extends Controller
         $lista_cargo_empleado = cargoEmpleado::listar_cargo_empleado();
         $lista_area_empleado = areaEmpleado::listar_area_empleado();
 
-        return View::make('pages.cliente.index.content')
+        return View::make('pages.empleado.index.content')
             ->with("lista_tipo_empleado", $lista_tipo_empleado)
             ->with("lista_cargo_empleado", $lista_cargo_empleado)
             ->with("lista_area_empleado", $lista_area_empleado);
@@ -63,21 +64,9 @@ class EmpleadoController extends Controller
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
 
-        $id_cliente = $request->input("id_cliente", 0);
+        $id_empleado = $request->input("id_empleado", 0);
 
-        return Empleado::get($id_cliente);
-    }
-
-    public function update (Request $request){
-        $user_request = Auth::guard('web')->user();
-
-        if( $user_request["psis_rol_usuario"] != '000002' ){
-            return respuesta::error("No cuenta con permisos para realizar la acción.");
-        }
-        $id_cliente = $request->input("id_cliente", 0);
-        $data_request = $request->only(['nombre_tipo', 'nombre_cliente', 'genero','edad','telefono']);
-
-        return Empleado::actualizar($id_cliente, $data_request);
+        return Empleado::get($id_empleado);
     }
     public function create(Request $request)
     {
@@ -85,27 +74,50 @@ class EmpleadoController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $data_request = $request->only(['id_tipo_cliente', 'nombre_cliente', 'genero','edad','telefono']);
+        $data_request = $request->only(['nombre_empleado','nombre_area', 'nombre_cargo','nombre_tipo','nombre_distrito','name','correo_electronico','edad','genero']);
         $data_request["estado"] = 1;
+
+        //$usuario_id = $request->input("usuario_id");
+        //$name = User::
+
+
+        $data_request_user = [''];
+
+        //User::crear($data_request_user);
+
+
         return Empleado::crear($data_request);
+    }
+
+
+    public function update (Request $request){
+        $user_request = Auth::guard('web')->user();
+
+        if( $user_request["psis_rol_usuario"] != '000002' ){
+            return respuesta::error("No cuenta con permisos para realizar la acción.");
+        }
+        $id_empleado = $request->input("id_empleado", 0);
+        $data_request = $request->only(['id_area', 'id_cargo','id_tipo','id_sucursal','usuario_id','nombre_empleado','edad','correo_electronico','genero']);
+
+        return Empleado::actualizar($id_empleado, $data_request);
     }
     public function dar_baja (Request $request){
         $user_request = Auth::guard('web')->user();
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $id_cliente = $request->input("id_cliente", 0);
+        $id_empleado = $request->input("id_empleado", 0);
 
-        return Empleado::dar_baja($id_cliente);
+        return Empleado::dar_baja($id_empleado);
     }
     public function dar_alta (Request $request){
         $user_request = Auth::guard('web')->user();
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $id_cliente = $request->input("id_cliente", 0);
+        $id_empleado = $request->input("id_empleado", 0);
 
-        return Empleado::dar_alta($id_cliente);
+        return Empleado::dar_alta($id_empleado);
     }
 
 }
