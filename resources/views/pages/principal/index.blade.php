@@ -19,7 +19,7 @@
                             <!-- Plato 1 -->
                             <div class="col-md-4">
                                 <div class="card mb-4">
-                                    <img src="/assets/img/img_1.png" class="card-img-top" alt="Plato 1">
+                                    <img src="/assets/img/pollo.jpg" class="card-img-top" alt="Plato 1">
                                     <div class="card-body">
                                         <h5 class="card-title">Pollo a la Brasa</h5>
                                         <p class="card-text">Delicioso pollo a la brasa acompañado de papas fritas y ensalada fresca.</p>
@@ -30,7 +30,7 @@
                             <!-- Plato 2 -->
                             <div class="col-md-4">
                                 <div class="card mb-4">
-                                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="Plato 2">
+                                    <img src="/assets/img/lomo.jpg" class="card-img-top" alt="Plato 2">
                                     <div class="card-body">
                                         <h5 class="card-title">Lomo Saltado</h5>
                                         <p class="card-text">Carne salteada con cebolla, tomate y papas fritas, acompañado de arroz.</p>
@@ -41,7 +41,7 @@
                             <!-- Plato 3 -->
                             <div class="col-md-4">
                                 <div class="card mb-4">
-                                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="Plato 3">
+                                    <img src="/assets/img/ceviche.jpg" class="card-img-top" alt="Plato 3">
                                     <div class="card-body">
                                         <h5 class="card-title">Ceviche Mixto</h5>
                                         <p class="card-text">Fresco ceviche de pescado y mariscos, servido con camote y cancha.</p>

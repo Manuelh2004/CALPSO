@@ -19,22 +19,103 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <input type="text" class="form-control" id="nombre" name="nombre">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label>Correo electrónico *</label>
+                            <label>Apellido de usuario *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5">@</span>
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="user-email" name="name">
+                                <input type="text" class="form-control" id="apellido" name="apellido">
                             </div>
                         </div>
-                    </div>               
-
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Edad de usuario *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="edad" name="edad">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Correo de usuario *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="correo" name="correo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Name de usuario *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label>Género de usuario *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon6"><i data-feather="user"></i></span>
+                                </div>
+                                <select class="form-control" id="genero" name="genero">
+                                    <option value="">Seleccione género</option>
+                                    <option value="F">FEMENINO</option>
+                                    <option value="M">MASCULINO</option>
+                                    <option value="OTRO">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12" id="lista-tipo-cliente">
+                        <div class="form-group">
+                            <label>Area Usuario*</label>
+                            <select class="form-control" name="id_area" id="id_area">
+                                <option value="" disabled>Elije un area de usuario</option>
+                                @foreach ($lista_area_usuario as $key => $p)
+                                <option value="{{$p->id_area}}" >{{$p->nombre_area}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12" id="lista-tipo-cliente">
+                        <div class="form-group">
+                            <label>Cargo Usuario *</label>
+                            <select class="form-control" name="id_cargo" id="id_cargo">
+                                <option value="" disabled>Elije un cargo de usuario</option>
+                                @foreach ($lista_cargo_usuario as $key => $p)
+                                <option value="{{$p->id_cargo}}" >{{$p->nombre_cargo}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12" id="lista-tipo-cliente">
+                        <div class="form-group">
+                            <label>Tipo Usuario *</label>
+                            <select class="form-control" name="id_tipo" id="id_tipo">
+                                <option value="" disabled>Elije un tipo de usuario</option>
+                                @foreach ($lista_tipo_usuario as $key => $p)
+                                <option value="{{$p->id_tipo}}" >{{$p->nombre_tipo}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group">
                             <label>Contraseña *</label>
@@ -42,22 +123,11 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="lock"></i></span>
                                 </div>
-                                <input type="password" class="form-control" id="password" name="name">
+                                <input type="password" class="form-control" id="password" name="password">
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label>Confirmación Contraseña</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon5"><i data-feather="lock"></i></span>
-                                </div>
-                                <input type="password" class="form-control" id="password_confirm" name="name">
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </form>
             <div class="row">

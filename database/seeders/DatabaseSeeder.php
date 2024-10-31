@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PSIS_TIPOSeeder::class);
         $this->call(UsuariosIniciales::class);
         $this->call(DevTipoClienteSeeder::class);
+        $this->call(AreaUsuarioSeeder::class);
+        $this->call(CargoUsuarioSeeder::class);
+        $this->call(TipoUsuarioSeeder::class);
         //$this->call(DevClienteSeeder::class);
     }
 }

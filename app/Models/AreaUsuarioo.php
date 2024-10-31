@@ -95,13 +95,13 @@ class AreaUsuarioo extends Model
             return respuesta::error("No se ha encontrado data relacionada.");
         }
     }
-    static public function listar_area_empleado (){
+    static public function listar_area_usuario (){
         return DB::select(
             DB::raw("
             SELECT
-                    ae.id_area
-                    ,ae.nombre_area
-                FROM area_empleado ae
+                    au.id_area
+                    ,au.nombre_area
+                FROM area_usuario au
             "),
             [ ]
         );

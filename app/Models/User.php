@@ -25,19 +25,20 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
+        'id_area',
+        'id_cargo',
+        'id_tipo',
+        'id_sucursal',
+        'nombre',
+        'apellido',
+        'edad',
+        'correo',
+        'genero',
         'name',
         'password',
         'usuario_fecha_expiracion',
         'usuario_login_intentos',
         'psis_rol_usuario',
-        'id_area',
-        'id_cargo',
-        'id_tipo',
-        'id_sucursal',
-        'nombre_empleado',
-        'edad',
-        'correo_electronico',
-        'genero',
         'estado'
     ];
 
@@ -97,18 +98,23 @@ class User extends Authenticatable implements JWTSubject
               	usuario_datos as (
 				    select
 				        u.usuario_id,
-				        u.nombre_empleado,
+				        u.nombre,
+						au.nombre_area,
+						cu.nombre_cargo,
+						tu.nombre_tipo,
 				        u.name,
-				        u.password,
 				        u.estado,
 				        count(u.usuario_id) over() as totalrecords
 				    from usuario u
+					join tipo_usuario tu on u.id_tipo = tu.id_tipo
+					join cargo_usuario cu on u.id_cargo = cu.id_cargo
+					join area_usuario au on u.id_area = au.id_area
 				),
                 usuario_busqueda as (
                     select p.* , count(usuario_id) over() as totalrecordswithfilter
                     from usuario_datos p
                     cross join datos_input di
-                    where nombre_empleado ilike  '%'||di.palabra||'%'
+                    where nombre ilike  '%'||di.palabra||'%'
                 ),
                 usuario_paginado as (
                     select

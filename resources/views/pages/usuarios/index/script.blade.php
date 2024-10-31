@@ -23,7 +23,7 @@
             // scrollX: true,
             // ajax: "venta_lista_ajax",
             ajax: {
-                "url": "url": "crud/usuario/lista_ajax",
+                "url": "crud/usuario/lista_ajax",
                 "data": function (d) {
                         // d.tipo_comprobante_id = $("#tipo-comprobante").val()
                 },
@@ -82,10 +82,12 @@
                 },
             ],
             columns: [
-                { data: '' },
-                { data: 'nombre_empleado' },
+                { data: 'usuario_id' },
+                { data: 'nombre' },
+                { data: 'nombre_area' },
+                { data: 'nombre_cargo' },
+                { data: 'nombre_tipo' },
                 { data: 'name' },
-                { data: 'password' },
                 {
                     data: 'estado',
                     render: function( data, type, row ) {

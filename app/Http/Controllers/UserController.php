@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CargoUsuarioo;
+use App\Models\TipoUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,16 +12,21 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\respuesta;
 use App\Models\User;
-use App\Models\TipoEmpleado;
-use App\Models\CargoSubarid;
-use App\Models\areaUsuario;
+use App\Models\AreaUsuarioo;
 use App\Models\Sucursal;
 use App\Models\ParameterSystem;
 
 class UserController extends Controller
 {
     public function index() {
-        return View::make('pages.usuarios.index.content');
+        $lista_area_usuario = AreaUsuarioo::listar_area_usuario();
+        $lista_cargo_usuario = CargoUsuarioo::listar_cargo_usuario();
+        $lista_tipo_usuario = TipoUsuario::listar_tipo_usuario();
+
+        return View::make('pages.usuarios.index.content')
+            ->with("lista_area_usuario", $lista_area_usuario)
+            ->with("lista_cargo_usuario", $lista_cargo_usuario)
+            ->with("lista_tipo_usuario", $lista_tipo_usuario);
     }
 
     public function lista_ajax (Request $request){
@@ -70,13 +77,24 @@ class UserController extends Controller
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
 
-        $data_request = $request->only(['nombre_empleado','name','password']);
+        $data_request = $request->only(['usuario_id','id_area','id_cargo','id_tipo','id_sucursal','nombre','apellido','edad','correo ','genero','name','password']);
         $data_request["estado"] = 1;
 
         $data_request["name"] = strtolower($data_request['name']);
-        $data_request["password"] = Hash::make($request->input("password"));
 
-        return user::crear($data_request);
+        return User::crear($data_request);
+    }
+
+    public function update (Request $request){
+        $user_request = Auth::guard('web')->user();
+
+        if( $user_request["psis_rol_usuario"] != '000002' ){
+            return respuesta::error("No cuenta con permisos para realizar la acción.");
+        }
+        $usuario_id = $request->input("usuario_id", 0);
+        $data_request = $request->only(['id_area','id_cargo','id_tipo','id_sucursal','nombre','apellido','edad','correo ','genero','name','password']);
+
+        return User::actualizar($usuario_id, $data_request);
     }
 
 }

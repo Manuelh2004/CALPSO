@@ -98,13 +98,13 @@ class TipoUsuario extends Model
         }
     }
 
-    static public function listar_tipo_empleado (){
+    static public function listar_tipo_usuario (){
         return DB::select(
             DB::raw("
-            SELECT
-                    tc.id_tipo
-                    , tc.nombre_tipo
-                FROM tipo_empleado tc
+              SELECT
+                    tu.id_tipo
+                    , tu.nombre_tipo
+                FROM tipo_usuario tu
             "),
             [ ]
         );

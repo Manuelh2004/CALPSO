@@ -101,13 +101,13 @@ class CargoUsuarioo extends Model
         }
     }
 
-    static public function listar_cargo_empleado (){
+    static public function listar_cargo_usuario (){
         return DB::select(
             DB::raw("
-            SELECT
-                    ce.id_cargo
-                    , ce.nombre_cargo
-                FROM cargo_empleado ce
+           SELECT
+                    cu.id_cargo
+                    , cu.nombre_cargo
+                FROM cargo_usuario cu
             "),
             [ ]
         );

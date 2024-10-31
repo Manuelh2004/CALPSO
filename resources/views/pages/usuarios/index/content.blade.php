@@ -25,10 +25,12 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>NOMBRE</th>
+                                    <th>AREA</th>
+                                    <th>CARGO</th>
+                                    <th>TIPO</th>
                                     <th>NAME</th>
-                                    <th>PASSWORD</th>
                                     <th>ESTADO</th>
-                                    <th>Opciones</th>
+                                    <th>OPCIONES</th>
                                 </tr>
                             </thead>
                             </table>
