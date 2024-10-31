@@ -4,7 +4,7 @@ var crud = new crud_administracion();
 
 $(document).ready(function() {
 	crud.iniciar({
-        title: "cargo_empleado",
+        title: "cargo_usuario",
         fields: [
             "id_cargo",
             "nombre_cargo",
@@ -14,11 +14,11 @@ $(document).ready(function() {
         create_requiere : [],
         pk: "id_cargo",
         rutas : {
-            crear: "crud/cargo_empleado/create",
-            obtener_data: "crud/cargo_empleado/data",
-            guardar_data: "crud/cargo_empleado/update",
-            dar_baja: "crud/cargo_empleado/dar_baja",
-            dar_alta: "crud/cargo_empleado/dar_alta",
+            crear: "crud/cargo_usuario/create",
+            obtener_data: "crud/cargo_usuario/data",
+            guardar_data: "crud/cargo_usuario/update",
+            dar_baja: "crud/cargo_usuario/dar_baja",
+            dar_alta: "crud/cargo_usuario/dar_alta",
         }
     });
 
@@ -27,7 +27,7 @@ $(document).ready(function() {
     }
 
     crud.validation_before_update = function(){
-       return true; 
+       return true;
     }
 
 	$("body").on("click", ".btn-editar", function () {

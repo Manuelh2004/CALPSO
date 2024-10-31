@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orden', function (Blueprint $table) {
             $table->id('id_orden');
             $table->integer('id_cliente');
-            $table->integer('id_empleado');
+            $table->integer('usuario_id');
             $table->integer('id_sucursal');
             $table->date('fecha_orden');
             $table->decimal('total_orden', 10, 2);

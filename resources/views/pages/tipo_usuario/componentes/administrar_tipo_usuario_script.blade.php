@@ -4,7 +4,7 @@ var crud = new crud_administracion();
 
 $(document).ready(function() {
 	crud.iniciar({
-        title: "tipo_empleado",
+        title: "tipo_usuario",
         fields: [
             "id_tipo",
              "nombre_tipo",
@@ -13,11 +13,11 @@ $(document).ready(function() {
         create_requiere : [],
         pk: "id_tipo",
         rutas : {
-            crear: "crud/tipo_empleado/create",
-            obtener_data: "crud/tipo_empleado/data",
-            guardar_data: "crud/tipo_empleado/update",
-            dar_baja: "crud/tipo_empleado/dar_baja",
-            dar_alta: "crud/tipo_empleado/dar_alta",
+            crear: "crud/tipo_usuario/create",
+            obtener_data: "crud/tipo_usuario/data",
+            guardar_data: "crud/tipo_usuario/update",
+            dar_baja: "crud/tipo_usuario/dar_baja",
+            dar_alta: "crud/tipo_usuario/dar_alta",
         }
     });
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
     }
 
     crud.validation_before_update = function(){
-        return true; 
+        return true;
     }
 
 	$("body").on("click", ".btn-editar", function () {

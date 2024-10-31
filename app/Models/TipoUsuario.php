@@ -7,22 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\respuesta;
 
-class cargoEmpleado extends Model
+class TipoUsuario extends Model
 {
     use HasFactory;
-    protected $table = 'cargo_empleado';
-    protected $primaryKey = 'id_cargo';
-
+    protected $table = 'tipo_usuario';
+    protected $primaryKey = 'id_tipo';
     protected $fillable = [
-        'nombre_cargo',
-        'descripcion',
-        'salario_base'
+        'nombre_tipo',
+        'descripcion'
     ];
 
     static public function listado_datatable ($columnName, $columnSortOrder, $searchValue, $start, $rowperpage){
         if($rowperpage < 0){
             $rowperpage = null;
         }
+
         return DB::select(
             DB::raw("
                 with
@@ -32,41 +31,40 @@ class cargoEmpleado extends Model
                         :rowperpage::int as rowperpage,
                         :searchvalue::varchar(50) as palabra
                     ),
-              	cargo_empleado_datos as (
-				select
-					c.id_cargo
-					,c.nombre_cargo
-					,c.descripcion
-					,salario_base
-					,count(c.id_cargo) over() as totalrecords
-					from cargo_empleado c
+		        tipo_empleado_datos as (
+                    select
+                        te.id_tipo
+                        ,te.nombre_tipo
+                        ,te.descripcion
+                        ,count(te.id_tipo) over() as totalrecords
+                        from tipo_usuario te
                 ),
-                cargo_empleado_busqueda as (
-                    select p.* , count(id_cargo) over() as totalrecordswithfilter
-                    from cargo_empleado_datos p
+                tipo_empleado_busqueda as (
+                    select p.* , count(id_tipo) over() as totalrecordswithfilter
+                    from tipo_empleado_datos p
                     cross join datos_input di
-                    where nombre_cargo ilike  '%'||di.palabra||'%'
+                    where nombre_tipo ilike  '%'||di.palabra||'%'
                 ),
-                cargo_empleado_paginado as (
+                tipo_empleado_paginado as (
                     select
                     *
-                    from cargo_empleado_busqueda
+                    from tipo_empleado_busqueda
                     order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )
-                select * from cargo_empleado_paginado
+                select * from tipo_empleado_paginado
             "),
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );
     }
 
-    static public function actualizar($id_cargo, $data){
-        if(empty($id_cargo) || empty($data)){
+    static public function actualizar($id_tipo, $data){
+        if(empty($id_tipo) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
 
-        $res = self::where("id_cargo", $id_cargo)
+        $res = self::where("id_tipo", $id_tipo)
                 ->update($data);
 
         if(isset($res)){
@@ -75,7 +73,6 @@ class cargoEmpleado extends Model
             return respuesta::error("No se ha logrado hacer el cambio de informacion.");
         }
     }
-
 
     static public function crear($data){
         $res = self::create($data);
@@ -86,12 +83,12 @@ class cargoEmpleado extends Model
         }
     }
 
-    static public function get($id_cargo){
-        if(empty($id_cargo)){
+    static public function get($id_tipo){
+        if(empty($id_tipo)){
             return respuesta::error("Datos no validos para la busqueda.");
         }
 
-        $res = self::where("id_cargo", $id_cargo)
+        $res = self::where("id_tipo", $id_tipo)
                 ->first();
 
         if(isset($res)){
@@ -101,13 +98,13 @@ class cargoEmpleado extends Model
         }
     }
 
-    static public function listar_cargo_empleado (){
+    static public function listar_tipo_empleado (){
         return DB::select(
             DB::raw("
             SELECT
-                    ce.id_cargo
-                    , ce.nombre_tipo
-                FROM cargo_empleado ce
+                    tc.id_tipo
+                    , tc.nombre_tipo
+                FROM tipo_empleado tc
             "),
             [ ]
         );

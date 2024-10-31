@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\respuesta;
 
-
-class areaEmpleado extends Model
+class AreaUsuarioo extends Model
 {
     use HasFactory;
-    protected $table = 'area_empleado';
+    protected $table = 'area_usuario';
     protected $primaryKey = 'id_area';
 
     protected $fillable = [
@@ -32,29 +31,29 @@ class areaEmpleado extends Model
                         :rowperpage::int as rowperpage,
                         :searchvalue::varchar(50) as palabra
                     ),
-              				area_empleado_datos as (
+                area_usuario_datos as (
                     select
                         ae.id_area
                         ,ae.nombre_area
                         ,ae.descripcion
                         ,count(ae.id_area) over() as totalrecords
-                        from area_empleado ae
+                        from area_usuario ae
                 ),
-                area_empleado_busqueda as (
+                area_usuario_busqueda as (
                     select p.* , count(id_area) over() as totalrecordswithfilter
-                    from area_empleado_datos p
+                    from area_usuario p
                     cross join datos_input di
                     where nombre_area ilike  '%'||di.palabra||'%'
                 ),
-               area_empleado_paginado as (
+               area_usuario_paginado as (
                     select
                     *
-                    from area_empleado_busqueda
+                    from area_usuario_busqueda
                     order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )
-                select * from area_empleado_paginado
+                select * from area_usuario_paginado
             "),
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );

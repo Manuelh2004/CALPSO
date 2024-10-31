@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\respuesta;
-use App\Models\cargoEmpleado;
+use App\Models\CargoUsuarioo;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\ParameterSystem;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class CargoEmpleadoController extends Controller
 {
     public function index() {
-        return view('pages.cargo_empleado.index.content');
+        return view('pages.cargo_usuario.index.content');
     }
     public function lista_ajax (Request $request): bool|string{
        ## Read value
@@ -34,7 +34,7 @@ class CargoEmpleadoController extends Controller
        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
        $searchValue = (is_null($search_arr['value'])) ? '' : $search_arr['value']; // Search value
 
-       $lista = cargoEmpleado::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
+       $lista = CargoUsuarioo::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
 
        $totalRecords = (count($lista)>0)? $lista[0]->totalrecords: 0;
        $totalRecordswithFilter = (count($lista)>0)? $lista[0]->totalrecordswithfilter: 0;
@@ -55,7 +55,7 @@ class CargoEmpleadoController extends Controller
         }
         $id_cargo = $request->input("id_cargo", 0);
 
-        return cargoEmpleado::get($id_cargo);
+        return CargoUsuarioo::get($id_cargo);
     }
 
     public function update (Request $request){
@@ -67,7 +67,7 @@ class CargoEmpleadoController extends Controller
         $id_cargo = $request->input("id_cargo", 0);
         $data_request = $request->only(['nombre_cargo','descripcion','salario_base']);
 
-        return cargoEmpleado::actualizar($id_cargo, $data_request);
+        return CargoUsuarioo::actualizar($id_cargo, $data_request);
     }
     public function create(Request $request)
     {
@@ -77,6 +77,6 @@ class CargoEmpleadoController extends Controller
         }
         $data_request = $request->only(['nombre_cargo','descripcion','salario_base']);
 
-        return cargoEmpleado::crear($data_request);
+        return CargoUsuarioo::crear($data_request);
     }
 }

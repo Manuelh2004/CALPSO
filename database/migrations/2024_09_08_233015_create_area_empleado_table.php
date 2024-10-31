@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('area_empleado', function (Blueprint $table) {
+        Schema::create('area_usuario', function (Blueprint $table) {
             $table->id('id_area');
             $table->string('nombre_area', 50);
             $table->text('descripcion')->nullable();

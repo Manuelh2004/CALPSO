@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\ParameterSystem;
 use App\Models\TipoEmpleado;
-use App\Models\cargoEmpleado;
-use App\Models\areaEmpleado;
+use App\Models\CargoSubarid;
+use App\Models\areaUsuario;
+use App\Models\Sucursal;
 use App\Models\User;
 
 class EmpleadoController extends Controller
@@ -21,12 +22,14 @@ class EmpleadoController extends Controller
     public function index() {
         $lista_tipo_empleado = TipoEmpleado::listar_tipo_empleado();
         $lista_cargo_empleado = cargoEmpleado::listar_cargo_empleado();
-        $lista_area_empleado = areaEmpleado::listar_area_empleado();
+        $lista_area_empleado = areaUsuario::listar_area_empleado();
+        $lista_sucursal = Sucursal::listar_sucursal();
 
         return View::make('pages.empleado.index.content')
             ->with("lista_tipo_empleado", $lista_tipo_empleado)
             ->with("lista_cargo_empleado", $lista_cargo_empleado)
-            ->with("lista_area_empleado", $lista_area_empleado);
+            ->with("lista_area_empleado", $lista_area_empleado)
+            ->with("lista_sucursal", $lista_sucursal);
     }
     public function lista_ajax (Request $request){
         ## Read value
@@ -74,22 +77,14 @@ class EmpleadoController extends Controller
         if( $user_request["psis_rol_usuario"] != '000002' ){
             return respuesta::error("No cuenta con permisos para realizar la acción.");
         }
-        $data_request = $request->only(['nombre_empleado','nombre_area', 'nombre_cargo','nombre_tipo','nombre_distrito','name','correo_electronico','edad','genero']);
+        $data_request = $request->only(['id_area','id_cargo', 'id_tipo','id_sucursal','usuario_id','name','password']);
         $data_request["estado"] = 1;
 
-        //$usuario_id = $request->input("usuario_id");
-        //$name = User::
-
-
-        $data_request_user = [''];
-
-        //User::crear($data_request_user);
 
 
         return Empleado::crear($data_request);
     }
-
-
+    /*
     public function update (Request $request){
         $user_request = Auth::guard('web')->user();
 
@@ -101,6 +96,7 @@ class EmpleadoController extends Controller
 
         return Empleado::actualizar($id_empleado, $data_request);
     }
+    */
     public function dar_baja (Request $request){
         $user_request = Auth::guard('web')->user();
         if( $user_request["psis_rol_usuario"] != '000002' ){

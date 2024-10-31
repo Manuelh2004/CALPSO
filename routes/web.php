@@ -14,7 +14,6 @@ use App\Http\Controllers;
 |
 */
 
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\TipoClienteController; //TipoCliente
 use App\Http\Controllers\ClienteController; //Cliente
@@ -25,7 +24,7 @@ use App\Http\Controllers\MetodoEntregaController; //MetodoEntrega
 use App\Http\Controllers\AreaEmpleadoController; //AreaEmpleado
 use App\Http\Controllers\CargoEmpleadoController; //CargolEmpleado
 use App\Http\Controllers\TipoEmpleadoController; //TipoEmpleado
-use App\Http\Controllers\EmpleadoController; //Empleado
+use App\Http\Controllers\UserController; //Empleado
 
 Route::get('login',[Auth\LoginController::class, 'index'])->name('login');
 Route::get('registro',[Auth\RegisterController::class, 'index'])->name('registro');
@@ -43,7 +42,6 @@ Route::middleware(["auth:web"])->group(function(){
 
     Route::get('/inicio', function() { return view('pages.inicio.index.content'); })->name('inicio');
     Route::get('/logs', [LogController::class, 'index'])->name('logs');
-    Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::get('/lista_user_ajax', [UserController::class, 'lista_user_ajax']);
     Route::get('/tipo_cliente', [TipoClienteController::class, 'index'])->name('tipo_cliente');
     Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
@@ -51,10 +49,10 @@ Route::middleware(["auth:web"])->group(function(){
     Route::get('/sucursal',[SucursalController::class, 'index'])->name('sucursal');
     Route::get('/insumo',[InsumoController::class, 'index'])->name('insumo');
     Route::get('/metodo_entrega',[MetodoEntregaController::class, 'index'])->name('metodo_entrega');
-    Route::get('/area_empleado',[AreaEmpleadoController::class, 'index'])->name('area_empleado');
-    Route::get('/cargo_empleado',[CargoEmpleadoController::class, 'index'])->name('cargo_empleado');
-    Route::get('/tipo_empleado',[TipoEmpleadoController::class, 'index'])->name('tipo_empleado');
-    Route::get('/empleado',[EmpleadoController::class, 'index'])->name('empleado');
+    Route::get('/area_usuario',[AreaEmpleadoController::class, 'index'])->name('area_usuario');
+    Route::get('/cargo_usuario',[CargoEmpleadoController::class, 'index'])->name('cargo_usuario');
+    Route::get('/tipo_usuario',[TipoEmpleadoController::class, 'index'])->name('tipo_usuario');
+    Route::get('/usuario',[UserController::class, 'index'])->name('usuario');
 
 
 
@@ -66,19 +64,19 @@ Route::middleware(["auth:web"])->group(function(){
 });
 
 Route::group([
-    'prefix' => 'crud/empleado',
+    'prefix' => 'crud/usuario',
     'middleware' => 'auth:web'
 ], function () {
 
-    Route::get('lista_ajax', [EmpleadoController::class, 'lista_ajax']);
-    Route::post('data', [EmpleadoController::class, 'data']);
-    Route::post('update', [EmpleadoController::class, 'update']);
-    Route::post('dar_baja', [EmpleadoController::class, 'dar_baja']);
-    Route::post('dar_alta', [EmpleadoController::class, 'dar_alta']);
-    Route::post('create', [EmpleadoController::class, 'create']);
+    Route::get('lista_ajax', [UserController::class, 'lista_ajax']);
+    Route::post('data', [UserController::class, 'data']);
+    Route::post('update', [UserController::class, 'update']);
+    Route::post('dar_baja', [UserController::class, 'dar_baja']);
+    Route::post('dar_alta', [UserController::class, 'dar_alta']);
+    Route::post('create', [UserController::class, 'create']);
 });
 Route::group([
-    'prefix' => 'crud/area_empleado',
+    'prefix' => 'crud/area_usuario',
     'middleware' => 'auth:web'
 ], function () {
 
@@ -88,7 +86,7 @@ Route::group([
     Route::post('create', [AreaEmpleadoController::class, 'create']);
 });
 Route::group([
-    'prefix' => 'crud/cargo_empleado',
+    'prefix' => 'crud/cargo_usuario',
     'middleware' => 'auth:web'
 ], function () {
 
@@ -98,7 +96,7 @@ Route::group([
     Route::post('create', [CargoEmpleadoController::class, 'create']);
 });
 Route::group([
-    'prefix' => 'crud/tipo_empleado',
+    'prefix' => 'crud/tipo_usuario',
     'middleware' => 'auth:web'
 ], function () {
 

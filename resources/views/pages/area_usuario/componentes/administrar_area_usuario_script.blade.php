@@ -4,27 +4,20 @@ var crud = new crud_administracion();
 
 $(document).ready(function() {
 	crud.iniciar({
-        title: "Empleado",
+        title: "area_usuario",
         fields: [
-            "id_empleado"
-            "nombre_empleado",
             "id_area",
-            "id_cargo",
-            "id_tipo",
-            "id_sucursal",
-            "usuario_id",
-            "correo_electronico ",
-            "edad",
-            "genero"
+            "nombre_area",
+            "descripcion"
         ],
         create_requiere : [],
-        pk: "id_emplado",
+        pk: "id_area",
         rutas : {
-            crear: "crud/empleado/create",
-            obtener_data: "crud/empleado/data",
-            guardar_data: "crud/empleado/update",
-            dar_baja: "crud/empleado/dar_baja",
-            dar_alta: "crud/empleado/dar_alta",
+            crear: "crud/area_usuario/create",
+            obtener_data: "crud/area_usuario/data",
+            guardar_data: "crud/area_usuario/update",
+            dar_baja: "crud/area_usuario/dar_baja",
+            dar_alta: "crud/area_usuario/dar_alta",
         }
     });
 

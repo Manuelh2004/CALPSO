@@ -29,7 +29,16 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'usuario_fecha_expiracion',
         'usuario_login_intentos',
-        'psis_rol_usuario'
+        'psis_rol_usuario',
+        'id_area',
+        'id_cargo',
+        'id_tipo',
+        'id_sucursal',
+        'nombre_empleado',
+        'edad',
+        'correo_electronico',
+        'genero',
+        'estado'
     ];
 
     /**
@@ -79,46 +88,48 @@ class User extends Authenticatable implements JWTSubject
         return DB::select(
             DB::raw("
                 with
-                datos_input as (
-                    select
-                    :skip::int as start,
-                    :rowperpage::int as rowperpage,
-                    :searchvalue::varchar(50) as palabra
-                ),
-				user_datos as (
-                    select
-					u.usuario_id
-					,u.name
-					,u.psis_rol_usuario
-					,count(u.usuario_id) over() as totalrecords
-					from usuario u
-                ),
-                user_busqueda as (
-                    select u.* , count(usuario_id) over() as totalrecordswithfilter
-                    from user_datos u
+                    datos_input as (
+                        select
+                        :skip::int as start,
+                        :rowperpage::int as rowperpage,
+                        :searchvalue::varchar(50) as palabra
+                    ),
+              	usuario_datos as (
+				    select
+				        u.usuario_id,
+				        u.nombre_empleado,
+				        u.name,
+				        u.password,
+				        u.estado,
+				        count(u.usuario_id) over() as totalrecords
+				    from usuario u
+				),
+                usuario_busqueda as (
+                    select p.* , count(usuario_id) over() as totalrecordswithfilter
+                    from usuario_datos p
                     cross join datos_input di
-                    where name ilike  '%'||di.palabra||'%'
+                    where nombre_empleado ilike  '%'||di.palabra||'%'
                 ),
-                user_paginado as (
+                usuario_paginado as (
                     select
                     *
-                    from user_busqueda
+                    from usuario_busqueda
                     order by ".$columnName." ".$columnSortOrder."
                     offset (select start from datos_input)
                     limit (select rowperpage from datos_input)
                 )
-                select * from user_paginado
+                select * from usuario_paginado
             "),
             ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
         );
     }
 
-    static public function get($user_id){
-        if(empty($user_id)){
+    static public function get($usuario_id){
+        if(empty($usuario_id)){
             return respuesta::error("Datos no validos para la busqueda.");
         }
 
-        $res = self::where("usuario_id", $user_id)
+        $res = self::where("usuario_id", $usuario_id)
                 ->first();
         if(isset($res)){
             return respuesta::ok($res);
@@ -136,12 +147,12 @@ class User extends Authenticatable implements JWTSubject
         }
     }
 
-    static public function actualizar($user_id, $data){
-        if(empty($user_id) || empty($data)){
+    static public function actualizar($usuario_id, $data){
+        if(empty($usuario_id) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
         }
 
-        $res = self::where("usuario_id", $user_id)
+        $res = self::where("usuario_id", $usuario_id)
                 ->update($data);
 
         if(isset($res)){

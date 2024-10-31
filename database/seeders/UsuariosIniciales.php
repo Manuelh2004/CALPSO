@@ -28,6 +28,10 @@ class UsuariosIniciales extends Seeder
                 'name' => 'admin',
                 'password' => '$2y$10$zESdiGWxQC6A2GF7aS2VXu8tM1v7lVDB.fROSy0zTyXeWeo2M0GKe',//admin
                 'psis_rol_usuario' => '000002',
+                'id_area' => 1,
+                'id_cargo' => 1,
+                'id_tipo' => 1,
+                'id_sucursal' => 1,
                 'created_at' => $now,
                 'updated_at' => $now
             ],[
@@ -35,6 +39,10 @@ class UsuariosIniciales extends Seeder
                 'name' => 'jota',
                 'password' => '$2y$10$zESdiGWxQC6A2GF7aS2VXu8tM1v7lVDB.fROSy0zTyXeWeo2M0GKe',//admin
                 'psis_rol_usuario' => '000001',
+                'id_area' => 1,
+                'id_cargo' => 1,
+                'id_tipo' => 1,
+                'id_sucursal' => 1,
                 'created_at' => $now,
                 'updated_at' => $now
             ]
@@ -43,6 +51,10 @@ class UsuariosIniciales extends Seeder
                 'name' => 'manu',
                 'password' => '$2y$10$zESdiGWxQC6A2GF7aS2VXu8tM1v7lVDB.fROSy0zTyXeWeo2M0GKe',//admin
                 'psis_rol_usuario' => '000002',
+                'id_area' => 1,
+                'id_cargo' => 1,
+                'id_tipo' => 1,
+                'id_sucursal' => 1,
                 'created_at' => $now,
                 'updated_at' => $now
             ]

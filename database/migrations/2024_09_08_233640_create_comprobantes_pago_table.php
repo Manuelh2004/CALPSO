@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('comprobantes_pago', function (Blueprint $table) {
             $table->id('id_comprobante_pago');
-            $table->integer('id_empleado');
+            $table->integer('usuario_id');
             $table->integer('id_sucursal');
             $table->integer('id_metodo_entrega');
             $table->integer('id_promocion');

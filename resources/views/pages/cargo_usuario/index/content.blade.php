@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('titulo','CARGO EMPLEADO')
+@section('titulo','CARGO USUARIO')
 
-@include("pages.cargo_empleado.index.script")
-@include("pages.cargo_empleado.index.head")
+@include("pages.cargo_usuario.index.script")
+@include("pages.cargo_usuario.index.head")
 
 @section('content')
 
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">CARGO EMPLEADO</h5>
+                        <h5 class="">CARGO USUARIO</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -37,6 +37,6 @@
             </div>
         </div>
     </div>
-    @include("pages.cargo_empleado.componentes.modal");
+    @include("pages.cargo_usuario.componentes.modal");
 
 @endsection

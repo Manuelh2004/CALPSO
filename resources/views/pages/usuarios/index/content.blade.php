@@ -24,13 +24,13 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Rol</th>
-                                    <th>Estatus</th>
+                                    <th>NOMBRE</th>
+                                    <th>NAME</th>
+                                    <th>PASSWORD</th>
+                                    <th>ESTADO</th>
                                     <th>Opciones</th>
                                 </tr>
-                            </thead>  
+                            </thead>
                             </table>
                         </div>
                     </div>

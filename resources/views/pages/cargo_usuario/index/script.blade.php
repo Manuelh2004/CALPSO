@@ -23,7 +23,7 @@
             // scrollX: true,
             // ajax: "venta_lista_ajax",
             ajax: {
-                "url": "url": "crud/empleado/lista_ajax",
+                "url": "crud/cargo_usuario/lista_ajax", //"url": "crud/cliente/lista_ajax",
                 "data": function (d) {
                         // d.tipo_comprobante_id = $("#tipo-comprobante").val()
                 },
@@ -82,47 +82,15 @@
                 },
             ],
             columns: [
-                { data: 'id_empleado' },
-                { data: 'nombre_empleado' },
-                { data: 'nombre_area' },
+                { data: 'id_cargo' },
                 { data: 'nombre_cargo' },
-                { data: 'nombre_tipo' },
-                { data: 'nombre_distrito' },
-                { data: 'name' },
-                { data: 'password' },
-                { data: 'correo_electronico' },
-                { data: 'edad' },
-                { data: 'genero' },
-                { data: 'correo_electronico' },
+                { data: 'descripcion' },
+                { data: 'salario_base' },
                 {
-                    data: 'estado',
-                    render: function( data, type, row ) {
-                        switch (data) {
-                            case 1:
-                                return '<span class="shadow-none badge badge-primary">Activo</span>';
-                            break;
-                            case 0:
-                                return '<span class="shadow-none badge badge-danger">Inactivo</span>';
-                            break;
-                            default:
-                                return '<span class="shadow-none badge badge-warning">No conocido</span>';
-					    }
-                    }
-                },
-                {
-					data: 'id_empleado',
+					data: 'id_cargo',
 					render: function( data, type, row ) {
 						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
-
-						let marca_estado = row["estado"];
-						let boton_estado = "";
-						if(marca_estado == 1 ){
-							boton_estado = '<span title="Dar Baja" row_id="'+data+'" class="icon-option icon-option-delete btn-dar-baja"><i data-feather="x-circle"></i></span>';
-						} else if(marca_estado == 0){
-							boton_estado = '<span title="Dar Alta" row_id="'+data+'" class="icon-option icon-option-activate btn-dar-alta"><i data-feather="check-circle"></i></span>';
-						}
-
-						return boton_editar+' '+boton_estado;
+						return boton_editar;
 					}
 				}
             ],
@@ -176,7 +144,8 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.empleado.componentes.administrar_empleado_script');
+        @include('pages.cargo_usuario.componentes.administrar_cargo_usuario_script');
+
     });
 
 

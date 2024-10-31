@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('titulo','EMPLEADO')
+@section('titulo','TIPO USUARIO')
 
-@include("pages.empleado.index.script")
-@include("pages.empleado.index.head")
+@include("pages.tipo_usuario.index.script")
+@include("pages.tipo_usuario.index.head")
 
 @section('content')
 
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
                     <div class="widget-heading">
-                        <h5 class="">EMPLEADO</h5>
+                        <h5 class="">TIPO USUARIO</h5>
                         <button class="btn btn-success mb-2 mr-2 btn-registrar"><i data-feather="plus-circle"></i> Crear</button>
 
                     </div>
@@ -23,18 +23,9 @@
                             <table id="tabla_lista" class="table table-bordered mb-4">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>NOMBRE EMPLEADO</th>
-                                    <th>AREA</th>
-                                    <th>CARGO</th>
-                                    <th>TIPO</th>
-                                    <th>SUCURSAL</th>
-                                    <th>NAME</th>
-                                    <th>PASSWORD</th>
-                                    <th>EMAIL</th>
-                                    <th>EDAD</th>
-                                    <th>GENERO</th>
-                                    <th>ESTADO</th>
+                                    <th>ID </th>
+                                    <th>NOMBRE</th>
+                                    <th>DESCRIPCION</th>
                                     <th>OPCIONES</th>
                                 </tr>
                             </thead>
@@ -48,6 +39,6 @@
 
     </div>
 
-    @include("pages.empleado.componentes.modal");
+    @include("pages.tipo_usuario.componentes.modal");
 
 @endsection

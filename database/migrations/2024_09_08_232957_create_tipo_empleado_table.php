@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_empleado', function (Blueprint $table) {
+        Schema::create('tipo_usuario', function (Blueprint $table) {
             $table->id('id_tipo');
             $table->string('nombre_tipo',50);
             $table->text('descripcion')->nullable(); //Permitir valores nulos

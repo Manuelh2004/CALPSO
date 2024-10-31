@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\respuesta;
-use App\Models\TipoEmpleado;
+use App\Models\TipoUsuario;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\ParameterSystem;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class TipoEmpleadoController extends Controller
 {
     public function index() {
-        return view('pages.tipo_empleado.index.content');
+        return view('pages.tipo_usuario.index.content');
     }
     public function lista_ajax (Request $request): bool|string{
        ## Read value
@@ -34,7 +34,7 @@ class TipoEmpleadoController extends Controller
        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
        $searchValue = (is_null($search_arr['value'])) ? '' : $search_arr['value']; // Search value
 
-       $lista = TipoEmpleado::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
+       $lista = TipoUsuario::listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage );
 
        $totalRecords = (count($lista)>0)? $lista[0]->totalrecords: 0;
        $totalRecordswithFilter = (count($lista)>0)? $lista[0]->totalrecordswithfilter: 0;
@@ -55,7 +55,7 @@ class TipoEmpleadoController extends Controller
         }
         $id_tipo = $request->input("id_tipo", 0);
 
-        return TipoEmpleado::get($id_tipo);
+        return TipoUsuario::get($id_tipo);
     }
 
     public function update (Request $request){
@@ -67,7 +67,7 @@ class TipoEmpleadoController extends Controller
         $id_tipo = $request->input("id_tipo", 0);
         $data_request = $request->only(['nombre_tipo','descripcion']);
 
-        return TipoEmpleado::actualizar($id_tipo, $data_request);
+        return TipoUsuario::actualizar($id_tipo, $data_request);
     }
     public function create(Request $request)
     {
@@ -77,6 +77,6 @@ class TipoEmpleadoController extends Controller
         }
         $data_request = $request->only(['nombre_tipo','descripcion']);
 
-        return TipoEmpleado::crear($data_request);
+        return TipoUsuario::crear($data_request);
     }
 }

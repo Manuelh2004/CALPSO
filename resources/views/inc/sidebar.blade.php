@@ -75,22 +75,22 @@
                 </a>
                  <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('empleado')}}"> Empleados </a>
+                        <a href="{{route('usuario')}}"> Usuario </a>
                     </li>
                 </ul>
                 <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('area_empleado')}}"> Area Empleado </a>
+                        <a href="{{route('area_usuario')}}"> Area Usuario </a>
                     </li>
                 </ul>
                 <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('cargo_empleado')}}"> Cargo Empleado </a>
+                        <a href="{{route('cargo_usuario')}}"> Cargo Usuario </a>
                     </li>
                 </ul>
                 <ul class="collapse submenu list-unstyled" id="componentes" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('tipo_empleado')}}"> Tipo Empleado </a>
+                        <a href="{{route('tipo_usuario')}}"> Tipo Usuario </a>
                     </li>
                 </ul>
             </li>

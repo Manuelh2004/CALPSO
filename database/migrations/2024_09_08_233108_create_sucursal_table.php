@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('sucursal', function (Blueprint $table) {
             $table->id('id_sucursal');
             $table->integer('id_distrito');
-            $table->string('direccion',255);
-            $table->string('telefono',9);
+            $table->string('direccion',255)->nullable();
+            $table->string('telefono',9)->nullable();
             $table->unsignedTinyInteger('estado')->nullable()->default(1);
             $table->timestamps();
         });

@@ -23,7 +23,7 @@
             // scrollX: true,
             // ajax: "venta_lista_ajax",
             ajax: {
-                "url": "crud/area_empleado/lista_ajax", //"url": "crud/cliente/lista_ajax",
+                "url": "crud/tipo_usuario/lista_ajax", //"url": "crud/cliente/lista_ajax",
                 "data": function (d) {
                         // d.tipo_comprobante_id = $("#tipo-comprobante").val()
                 },
@@ -82,11 +82,11 @@
                 },
             ],
             columns: [
-                { data: 'id_area' },
-                { data: 'nombre_area' },
+                { data: 'id_tipo' },
+                { data: 'nombre_tipo' },
                 { data: 'descripcion' },
                 {
-					data: 'id_area',
+					data: 'id_tipo',
 					render: function( data, type, row ) {
 						let boton_editar = '<span title="Editar" row_id="'+data+'" class="icon-option icon-option-primary btn-editar"><i data-feather="edit"></i></span>';
 						return boton_editar;
@@ -143,7 +143,7 @@
         }
 
         @include('inc.crud_administrador_script');
-        @include('pages.area_empleado.componentes.administrar_area_empleado_script');
+        @include('pages.tipo_usuario.componentes.administrar_tipo_usuario_script');
 
     });
 

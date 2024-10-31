@@ -10,8 +10,8 @@ use App\Http\Controllers\respuesta;
 class Empleado extends Model
 {
     use HasFactory;
-    protected $table ='empleado';
-    protected $primaryKey = 'id_empleado';
+    protected $table ='usuario';
+    protected $primaryKey = 'usuario_id';
 
     protected $fillable = [
         'id_area',
@@ -22,8 +22,7 @@ class Empleado extends Model
         'edad',
         'correo_electronico',
         'genero',
-        'estado',
-        'password'
+        'estado'
     ];
 
     static public function listado_datatable ($columnName, $columnSortOrder, $searchValue, $start, $rowperpage){
@@ -50,16 +49,13 @@ class Empleado extends Model
 					,ds.nombre_distrito
 					,u.name
 					,u.password
-					,e.correo_electronico
-					,e.edad
-					,e.genero
 					,e.estado
 					,count(e.id_empleado) over() as totalrecords
 					from empleado e
 					JOIN tipo_empleado tp ON e.id_tipo = tp.id_tipo
 					JOIN area_empleado ae ON e.id_area = ae.id_area
 					JOIN cargo_empleado ce ON e.id_cargo = ce.id_cargo
-					JOIN sucursal s ON s.id_sucursal = e.id_sucursal
+					JOIN sucursal s ON s.id_sucursal = e.id_empleado
 					JOIN distrito_sucursal ds ON ds.id_distrito = s.id_distrito
 					JOIN usuario u ON u.usuario_id = e.usuario_id
                 ),
