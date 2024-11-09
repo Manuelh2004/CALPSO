@@ -19,7 +19,12 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="nombre_tipo" name="nombre_tipo">
+                                <select class="form-control" id="nombre_tipo" name="nombre_tipo" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="FRECUENTE">Cliente Frecuente</option>
+                                    <option value="NUEVO">Cliente Nuevo</option>
+                                    <option value="IMPACIENTE">Cliente Impaciente</option>
+                                </select>
                             </div>
                         </div>
                     </div>

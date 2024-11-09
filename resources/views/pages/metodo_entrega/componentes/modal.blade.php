@@ -19,10 +19,15 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon5"><i data-feather="clipboard"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="nombre_metodo_entrega" name="nombre_metodo_entrega">
+                                <select class="form-control" id="nombre_metodo_entrega" name="nombre_metodo_entrega" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="TIENDA">Tienda</option>
+                                    <option value="DELIVERY">Delivery</option>
+                                </select>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label>Costo (S/)*</label>
