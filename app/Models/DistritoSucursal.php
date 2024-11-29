@@ -16,46 +16,60 @@ class DistritoSucursal extends Model
     protected $fillable = [
         'nombre_distrito'
     ];
-    static public function listado_datatable ($columnName, $columnSortOrder, $searchValue, $start, $rowperpage){
-        if($rowperpage < 0){
-            $rowperpage = null;
-        }
+    static public function listado_datatable($columnName, $columnSortOrder, $searchValue, $start, $rowperpage)
+{
+    // Ajustar valores de paginación
+    $rowperpage = $rowperpage < 0 ? null : $rowperpage;
 
-        return DB::select(
-            DB::raw("
-                with
-                    datos_input as (
-                        select
-                        :skip::int as start,
-                        :rowperpage::int as rowperpage,
-                        :searchvalue::varchar(50) as palabra
-                    ),
-                             distrito_sucursal_datos as (
-                    select
-                        ds.id_distrito
-                        ,ds.nombre_distrito
-                        ,count(ds.id_distrito) over() as totalrecords
-                        from distrito_sucursal ds
-                ),
-                distrito_sucursal_busqueda as (
-                    select p.* , count(id_distrito) over() as totalrecordswithfilter
-                    from distrito_sucursal_datos p
-                    cross join datos_input di
-                    where nombre_distrito ilike  '%'||di.palabra||'%'
-                ),
-                distrito_sucursal_paginado as (
-                    select
-                    *
-                    from distrito_sucursal_busqueda
-                    order by ".$columnName." ".$columnSortOrder."
-                    offset (select start from datos_input)
-                    limit (select rowperpage from datos_input)
-                )
-                select * from distrito_sucursal_paginado
-            "),
-            ["searchvalue"=>$searchValue, "skip"=> $start, "rowperpage"=>$rowperpage ]
-        );
-    }
+    // Realizar la consulta
+    return DB::select(
+        DB::raw("
+            WITH datos_input AS (
+            SELECT
+                :skip AS start,
+                :rowperpage AS rowperpage,
+                :searchvalue AS palabra
+        ),
+        distrito_sucursal_datos AS (
+            SELECT
+                ds.id_distrito,
+                ds.nombre_distrito,
+                COUNT(ds.id_distrito) OVER() AS totalrecords
+            FROM
+                distrito_sucursal ds
+        ),
+        distrito_sucursal_busqueda AS (
+            SELECT
+                p.*,
+                (
+                    SELECT
+                        COUNT(*)
+                    FROM
+                        distrito_sucursal_datos
+                    WHERE
+                        nombre_distrito LIKE CONCAT('%', di.palabra, '%')
+                ) AS totalrecordswithfilter
+            FROM
+                distrito_sucursal_datos p
+                CROSS JOIN datos_input di
+            WHERE
+                p.nombre_distrito LIKE CONCAT('%', di.palabra, '%')
+        )
+        SELECT *
+        FROM distrito_sucursal_busqueda
+        ORDER BY id_distrito DESC
+        LIMIT :rowperpage OFFSET :skip;
+
+        "),
+        [
+            "searchvalue" => $searchValue,
+            "start" => $start,
+            "rowperpage" => $rowperpage
+        ]
+    );
+}
+
+
     static public function actualizar($id_distrito, $data){
         if(empty($id_distrito) || empty($data)){
             return respuesta::error("Datos no validos para realizar el cambio de informacion.");
